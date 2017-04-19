@@ -1,0 +1,28 @@
+{
+  "name": "encog-js",
+  "version": "1.0.0",
+  "description": "Encog-JS is a NodeJS ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redsoul/encog-js.git"
+  },
+  "keywords": [
+    "encog",
+    "machine",
+    "learning",
+    "neural",
+    "network",
+    "artificial",
+    "intelligence"
+  ],
+  "author": "redsoul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/redsoul/encog-js/issues"
+  },
+  "homepage": "https://github.com/redsoul/encog-js#readme"
+}
