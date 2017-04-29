@@ -37,7 +37,6 @@ class RangeRandomizer extends BasicRandomizer {
                     this.randomizeNetworkLayer(network, i);
                 }
             } else {
-
                 return this.nextDouble(this.min, this.max);
             }
         } else {
