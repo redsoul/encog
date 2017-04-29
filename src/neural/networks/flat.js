@@ -211,10 +211,12 @@ class FlatNetwork {
         const limitY = inputIndex + inputSize;
 
         // weight values
+        let sum;
         for (let x = outputIndex; x < limitX; x++) {
-            let sum = 0;
+            sum = 0;
             for (let y = inputIndex; y < limitY; y++) {
-                sum += this.weights[index++] * this.layerOutput[y] * (1 - dropoutRate);
+                sum += this.weights[index] * this.layerOutput[y];
+                index++;
             }
             this.layerSums[x] = sum;
             this.layerOutput[x] = sum;

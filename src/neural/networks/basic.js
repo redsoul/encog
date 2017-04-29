@@ -43,7 +43,7 @@ class BasicNetwork {
      * @param fromLayer {number} The from layer.
      * @param fromNeuron {number} The from neuron.
      * @param toNeuron {number} The to neuron.
-     * @param value {float} The value to add.
+     * @param value {number} The value to add.
      */
     addWeight(fromLayer, fromNeuron, toNeuron, value) {
         const old = this.getWeight(fromLayer, fromNeuron, toNeuron);
@@ -55,7 +55,7 @@ class BasicNetwork {
      * @param fromLayer {number} The from layer.
      * @param fromNeuron {number} The from neuron.
      * @param toNeuron {number} The to neuron.
-     * @return {float} The weight value.
+     * @return {number} The weight value.
      */
     getWeight(fromLayer, fromNeuron, toNeuron) {
         this.structure.requireFlat();
@@ -68,7 +68,7 @@ class BasicNetwork {
      * @param fromLayer {number} The from layer.
      * @param fromNeuron {number} The from neuron.
      * @param toNeuron {number} The to neuron.
-     * @param value {float} The to value.
+     * @param value {number} The to value.
      */
     setWeight(fromLayer, fromNeuron, toNeuron, value) {
         this.structure.requireFlat();
@@ -76,9 +76,7 @@ class BasicNetwork {
         const toLayerNumber = fromLayerNumber - 1;
 
         if (toLayerNumber < 0) {
-            throw new NeuralNetworkError(
-                "The specified layer is not connected to another layer: "
-                + fromLayer);
+            throw new NeuralNetworkError("The specified layer is not connected to another layer: " + fromLayer);
         }
 
         const weightBaseIndex = this.structure.flat.weightIndex[toLayerNumber];

@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
-    "gulp-jasmine-phantom": "^3.0.0"
+    "gulp-jasmine-phantom": "^3.0.0",
+    "ml-dataset-iris": "^1.0.0"
   }
 }

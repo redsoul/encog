@@ -121,16 +121,9 @@ class Propagation {
      */
     learn() {
         const weights = this.currentFlatNetwork.weights;
-        if (this.dropoutRate > 0) {
-            for (let i = 0; i < this.gradients.length; i++) {
-                weights[i] += this.updateWeight(this.gradients, this.lastGradient, i, this.dropoutRate);
-                this.gradients[i] = 0;
-            }
-        } else {
-            for (let i = 0; i < this.gradients.length; i++) {
-                weights[i] += this.updateWeight(this.gradients, this.lastGradient, i);
-                this.gradients[i] = 0;
-            }
+        for (let i = 0; i < this.gradients.length; i++) {
+            weights[i] += this.updateWeight(this.gradients, this.lastGradient, i, this.dropoutRate);
+            this.gradients[i] = 0;
         }
     }
 
@@ -143,24 +136,13 @@ class Propagation {
     learnLimited() {
         const limit = this.currentFlatNetwork.connectionLimit;
         const weights = this.currentFlatNetwork.weights;
-        if (this.dropoutRate > 0) {
-            for (let i = 0; i < this.gradients.length; i++) {
-                if (Math.abs(weights[i]) < limit) {
-                    weights[i] = 0;
-                } else {
-                    weights[i] += this.updateWeight(this.gradients, this.lastGradient, i, this.dropoutRate);
-                }
-                this.gradients[i] = 0;
+        for (let i = 0; i < this.gradients.length; i++) {
+            if (Math.abs(weights[i]) < limit) {
+                weights[i] = 0;
+            } else {
+                weights[i] += this.updateWeight(this.gradients, this.lastGradient, i, this.dropoutRate);
             }
-        } else {
-            for (let i = 0; i < this.gradients.length; i++) {
-                if (Math.abs(weights[i]) < limit) {
-                    weights[i] = 0;
-                } else {
-                    weights[i] += this.updateWeight(this.gradients, this.lastGradient, i);
-                }
-                this.gradients[i] = 0;
-            }
+            this.gradients[i] = 0;
         }
     }
 
@@ -235,7 +217,6 @@ class Propagation {
      */
     iteration(count = 1) {
 
-        // try {
         for (let i = 0; i < count; i++) {
 
             this.preIteration();
@@ -268,10 +249,6 @@ class Propagation {
         }
 
         EncogLog.print();
-// } catch (ex) {
-//     EncogValidate.validateNetworkForTraining(this.network, getTraining());
-//     throw new EncogError(ex);
-// }
     }
 
     /**
