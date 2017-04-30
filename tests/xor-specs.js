@@ -44,7 +44,6 @@ describe('XOR', function () {
                 // console.log("Epoch #" + epoch + " Error:" + train.error);
                 epoch++;
             } while (train.error > 0.01);
-            // } while (epoch < 10);
             train.finishTraining();
 
             // test the neural network
@@ -69,7 +68,6 @@ describe('XOR', function () {
                 // console.log("Epoch #" + epoch + " Error:" + train.error);
                 epoch++;
             } while (train.error > 0.01);
-            // } while (epoch < 100);
             train.finishTraining();
 
             // test the neural network

@@ -21,10 +21,10 @@ class ArrayUtils {
      * @param sz {number} The size of the array to create.
      * @return {Array}
      */
-    static newFloatArray(sz) {
+    static newFloatArray(sz, defaultValue = 0.0) {
         let result = [];
         while (sz > 0) {
-            result.push(0.0);
+            result.push(defaultValue);
             sz -= 1;
         }
         return result;
@@ -35,10 +35,10 @@ class ArrayUtils {
      * @param sz {number} The size of the array to create.
      * @return {Array}
      */
-    static newIntArray(sz) {
+    static newIntArray(sz, defaultValue = 0) {
         let result = [];
         while ((sz -= 1) > 0) {
-            result.push(0);
+            result.push(defaultValue);
         }
         return result;
     };

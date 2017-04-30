@@ -62,9 +62,9 @@ describe('Iris flower dataset', function () {
 
             do {
                 train.iteration();
-                console.log("Epoch #" + epoch + " Error:" + train.error);
+                // console.log("Epoch #" + epoch + " Error:" + train.error);
                 epoch++;
-            } while (train.error > 0.01);
+            } while (train.error > 0.01 && epoch < 30);
             // } while (epoch < 10);
             train.finishTraining();
 
@@ -88,7 +88,7 @@ describe('Iris flower dataset', function () {
                 train.iteration();
                 // console.log("Epoch #" + epoch + " Error:" + train.error);
                 epoch++;
-            } while (train.error > 0.01);
+            } while (train.error > 0.01 && epoch < 30);
             // } while (epoch < 10);
             train.finishTraining();
 
@@ -102,7 +102,7 @@ describe('Iris flower dataset', function () {
             }
         });
 
-        fit('ResilientPropagation', function () {
+        it('ResilientPropagation', function () {
             // train the neural network
             const train = new ResilientPropagation(network, trainDatasetInput, trainDatasetOutput);
 
@@ -112,8 +112,7 @@ describe('Iris flower dataset', function () {
                 train.iteration();
                 // console.log("Epoch #" + epoch + " Error:" + train.error);
                 epoch++;
-            // } while (train.error > 0.01);
-            } while (epoch < 100);
+            } while (train.error > 0.01 && epoch < 30);
             train.finishTraining();
 
             // test the neural network

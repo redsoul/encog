@@ -23,7 +23,7 @@ var layers = requireDir(__LAYERS);
 var networks = requireDir(__NETWORKS);
 var patterns = requireDir(__PATTERNS);
 var trainers = requireDir(__TRAINERS);
-var examples = requireDir('./examples');
+// var examples = requireDir('./examples');
 
 module.exports = {
     activationFunctions,
@@ -32,5 +32,5 @@ module.exports = {
     networks,
     patterns,
     trainers,
-    examples
+    // examples
 };

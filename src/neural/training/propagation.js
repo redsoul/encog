@@ -38,7 +38,7 @@ class Propagation {
         this.output = output;
         this.numThreads = 0;
         this.reportedException = null;
-        this.shouldFixFlatSpot = true;
+        this.shouldFixFlatSpot = false;
         this.iterationCount = 0;
 
         this.l1 = null;
@@ -46,7 +46,12 @@ class Propagation {
 
         this.flatSpot = [];
         this.finalized = false;
-        this.batchSize = 0;
+        /**
+         * The batch size. Specify 1 for pure online training. Specify 0 for pure
+         * batch training (complete training set in one batch). Otherwise specify
+         * the batch size for batch training.
+         */
+        this.batchSize = 1;
         this.ef = new LinearErrorFunction();
         this.totalError = 0;
         this.error = null;
@@ -88,7 +93,7 @@ class Propagation {
                 }
             }
         } else {
-            Array.fill(this.flatSpot, 0);
+            ArrayUtils.fillArray(this.flatSpot, 0);
         }
 
 
@@ -110,8 +115,8 @@ class Propagation {
             this,
             this.input,
             this.output,
-            null,
-            null,
+            0,
+            this.input.length - 1,
             this.flatSpot,
             this.ef));
     }
@@ -329,7 +334,6 @@ class Propagation {
         }
 
         this.error = this.workers[0].errorCalculation.calculate();
-
     }
 
     /**

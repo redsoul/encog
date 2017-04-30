@@ -102,17 +102,12 @@ class ResilientPropagation extends Propagation {
     constructor(network, input, output, initialUpdate = DEFAULT_INITIAL_UPDATE, maxStep = DEFAULT_MAX_STEP) {
         super(network, input, output);
 
-        this.updateValues = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length);
-        this.lastDelta = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length);
+        this.updateValues = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length, initialUpdate);
+        this.lastDelta = ArrayUtils.newIntArray(this.currentFlatNetwork.weights.length);
         this.lastWeightChange = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length);
         this.zeroTolerance = DEFAULT_ZERO_TOLERANCE;
         this.maxStep = maxStep;
         this.rpropType = RPROPType.RPROPp;
-
-        for (let i = 0; i < this.updateValues.length; i++) {
-            this.updateValues[i] = initialUpdate;
-            this.lastDelta[i] = 0;
-        }
 
         /**
          * The value error at the beginning of the previous training iteration.
