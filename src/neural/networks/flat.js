@@ -473,7 +473,7 @@ class FlatNetwork {
                 "Incompatible weight sizes, can't assign length="
                 + data.length + " to length=" + this.weights.length);
         }
-        this.weights = _.clone(data);
+        this.weights = ArrayUtils.arrayClone(data);
     }
 
     /**
@@ -485,6 +485,13 @@ class FlatNetwork {
      */
     encodeNetwork() {
         return this.weights;
+    }
+
+    /**
+     * @return {number} The length of the array the network would encode to.
+     */
+    getEncodeLength() {
+        return this.weights.length;
     }
 }
 

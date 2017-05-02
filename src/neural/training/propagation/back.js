@@ -1,6 +1,6 @@
 const Propagation = require('../propagation');
-const SmartMomentum = require(__STRATAGIES + 'smartMomentum');
-const SmartLearningRate = require(__STRATAGIES + 'smartLearningRate');
+const SmartMomentum = require(__STRATEGIES + 'smartMomentum');
+const SmartLearningRate = require(__STRATEGIES + 'smartLearningRate');
 const ArrayUtils = require(__UTILS + 'array');
 
 /**

@@ -1,4 +1,4 @@
-const Strategy = require(__STRATAGIES + '../strategy');
+const Strategy = require(__STRATEGIES + '../strategy');
 /**
  * Attempt to automatically set a momentum in a training algorithm that supports
  * momentum.

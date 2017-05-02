@@ -108,6 +108,16 @@ class NeuralStructure {
     set flat(flat) {
         this[_flat] = flat
     }
+
+    /**
+     * Calculate the size that an array should be to hold all of the weights and
+     * bias values.
+     *
+     * @return {number} The size of the calculated array.
+     */
+    calculateSize() {
+        return this.network.encodedArrayLength();
+    }
 }
 
 module.exports = NeuralStructure;

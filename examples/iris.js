@@ -2,9 +2,9 @@ require('../index');
 const BasicNetwork = require(__NETWORKS + 'basic');
 const BasicLayer = require(__LAYERS + 'basic');
 const ActivationSigmoid = require(__ACTIVACTION_FUNCTIONS + 'sigmoid');
-const BackPropagation = require(__TRAINERS + 'back');
-const ManhattanPropagation = require(__TRAINERS + 'manhattan');
-const ResilientPropagation = require(__TRAINERS + 'resilient');
+const BackPropagation = require(__PROPAGATION + 'back');
+const ManhattanPropagation = require(__PROPAGATION + 'manhattan');
+const ResilientPropagation = require(__PROPAGATION + 'resilient');
 let irisDataset = require('ml-dataset-iris').getDataset();
 const _ = require('lodash');
 

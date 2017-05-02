@@ -256,6 +256,14 @@ class BasicNetwork {
     reset() {
         this.getRandomizer().randomize(this);
     }
+
+    /**
+     * @return {number} The length of an encoded array.
+     */
+    encodedArrayLength() {
+        this.structure.requireFlat();
+        return this.structure.flat.getEncodeLength();
+    }
 }
 
 module.exports = BasicNetwork;

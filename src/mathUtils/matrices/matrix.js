@@ -1,0 +1,178 @@
+const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
+
+/**
+ * This class implements a mathematical matrix. Matrix math is very important to
+ * neural network processing. Many of the neural network classes make use of the
+ * matrix classes in this package.
+ */
+class Matrix {
+    /**
+     * Create a blank array with the specified number of rows and columns.
+     *
+     * @param rows {number}
+     *            How many rows in the matrix.
+     * @param cols {number}
+     *            How many columns in the matrix.
+     * @param defaultValue {number}
+     */
+    constructor(rows, cols, defaultValue = 0) {
+        this.matrix = [];
+        if (arguments.length == 1) {
+            this.setMatrix(arguments[0])
+        } else {
+            for (var i = 0; i < cols; i++) {
+                this.matrix[i] = [];
+                for (var j = 0; j < rows; j++) {
+                    this.matrix[i][j] = defaultValue;
+                }
+            }
+        }
+    }
+
+    /**
+     * @param M {Array}
+     */
+    setMatrix(M) {
+        for (let i = 0; i < M.length; i++) {
+            this.matrix[i] = [];
+            for (let j = 0; j < M[0].length; j++) {
+                this.matrix[i][j] = M[i][j];
+            }
+        }
+    }
+
+    /**
+     * Set all rows and columns to zero.
+     */
+    clear() {
+        for (let r = 0; r < this.getRows(); r++) {
+            for (let c = 0; c < this.getCols(); c++) {
+                this.matrix[r][c] = 0;
+            }
+        }
+    }
+
+    /**
+     * Read the specified cell in the matrix.
+     *
+     * @param row {Number}
+     *            The row to read.
+     * @param col {Number}
+     *            The column to read.
+     * @return {Number} The value at the specified row and column.
+     */
+    get(row, col) {
+        this._validate(row, col);
+        return this.matrix[row][col];
+    }
+
+    /**
+     * Set an individual cell in the matrix to the specified value.
+     *
+     * @param row {Number}
+     *            The row to set.
+     * @param col {Number}
+     *            The column to set.
+     * @param value {Number}
+     *            The value to be set.
+     */
+    set(row, col, value) {
+        this._validate(row, col);
+        this.matrix[row][col] = value;
+    }
+
+    /**
+     * Increment an individual cell in the matrix with the specified value.
+     *
+     * @param row {Number}
+     *            The row to set.
+     * @param col {Number}
+     *            The column to set.
+     * @param value {Number}
+     *            The value to be set.
+     */
+    inc(row, col, value) {
+        this._validate(row, col);
+        this.matrix[row][col] += value;
+    }
+
+    /**
+     * Get the columns in the matrix.
+     *
+     * @return {Number} The number of columns in the matrix.
+     */
+    getCols() {
+        return this.matrix[0].length;
+    }
+
+    /**
+     * @return {Array} Get the 2D matrix array.
+     */
+    getData() {
+        return this.matrix;
+    }
+
+    /**
+     * Get the number of rows in the matrix.
+     *
+     * @return {Number} The number of rows in the matrix.
+     */
+    getRows() {
+        return this.matrix.length;
+    }
+
+    /**
+     * Get the size of the array. This is the number of elements it would take
+     * to store the matrix as a packed array.
+     *
+     * @return {number} The size of the matrix.
+     */
+    size() {
+        return this.getCols() * this.getRows();
+    }
+
+    /**
+     * Is the matrix non singular?
+     *
+     * @return {boolean}
+     */
+    isNonSingular() {
+        for (let j = 0; j < this.getCols(); j++) {
+            if (this.matrix[j][j] == 0)
+                return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param M {Matrix}
+     * */
+    add(M) {
+        for (let row = 0; row < this.matrix.length; row++) {
+            for (let col = 0; col < this.matrix[row].length; col++) {
+                this.matrix[row][col] += M.get(row, col);
+            }
+        }
+    }
+
+    /**
+     * Validate that the specified row and column are within the required
+     * ranges. Otherwise throw a MatrixError exception.
+     *
+     * @param row {Number}
+     *            The row to check.
+     * @param col {Number}
+     *            The column to check.
+     */
+    _validate(row, col) {
+        if ((row >= this.getRows()) || (row < 0)) {
+            throw new NeuralNetworkError("The row:" + row + " is out of range:" + this.getRows());
+        }
+
+        if ((col >= this.getCols()) || (col < 0)) {
+            throw new NeuralNetworkError("The col:" + col + " is out of range:" + this.getCols());
+        }
+    }
+}
+
+module.exports = Matrix;

@@ -1,4 +1,4 @@
-const Strategy = require(__STRATAGIES + '../strategy');
+const Strategy = require(__STRATEGIES + '../strategy');
 /**
  * Attempt to automatically set the learning rate in a learning method that
  * supports a learning rate.
@@ -38,7 +38,7 @@ class SmartLearningRate extends Strategy {
             if (this.train.error > this.lastError) {
                 this.currentLearningRate *= this.LEARNING_DECAY;
                 this.train.learningRate = this.currentLearningRate;
-                EncogLog.debug("Adjusting learning rate to {}" + this.currentLearningRate).print();
+                EncogLog.debug("Adjusting learning rate to " + this.currentLearningRate).print();
             }
         } else {
             this.ready = true;

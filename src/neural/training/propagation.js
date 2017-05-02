@@ -1,7 +1,8 @@
 const LinearErrorFunction = require(__ERROR_FUNCTIONS + 'linear');
-const GradientWorker = require(__TRAINERS + '../gradientWorker');
+const GradientWorker = require(__TRAINING + 'gradientWorker');
 const ArrayUtils = require(__UTILS + 'array');
 const EncogError = require(__UTILS + 'encogError');
+const BasicTraining = require(__TRAINING + 'basic');
 /**
  * Implements basic functionality that is needed by each of the propagation
  * methods. The specifics of each of the propagation methods is implemented
@@ -10,7 +11,7 @@ const EncogError = require(__UTILS + 'encogError');
  * @author jheaton
  *
  */
-class Propagation {
+class Propagation extends BasicTraining {
 
     /**
      * Construct a propagation object.
@@ -23,7 +24,8 @@ class Propagation {
      *            The input training set.
      */
     constructor(network, input, output) {
-        this.strategies = [];
+        super();
+
         this.dropoutRate = 0;
 
         this.workers = [];
@@ -162,54 +164,6 @@ class Propagation {
      */
     updateWeight(gradients, lastGradient, index, dropoutRate) {
 
-    }
-
-    /**
-     * Training strategies can be added to improve the training results. There
-     * are a number to choose from, and several can be used at once.
-     *
-     * @param {Strategy} strategy
-     *            The strategy to add.
-     */
-    addStrategy(strategy) {
-        strategy.init(this);
-        this.strategies.push(strategy);
-    }
-
-    /**
-     * @return {boolean} if training can progress no further.
-     */
-    isTrainingDone() {
-        for (let strategy of this.strategies) {
-            if (strategy.constructor.name == 'EndTrainingStrategy') {
-                if (strategy.shouldStop()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Call the strategies after an iteration.
-     */
-    postIteration() {
-        for (let strategy of this.strategies) {
-            strategy.postIteration();
-        }
-    }
-
-    /**
-     * Call the strategies before an iteration.
-     */
-    preIteration() {
-
-        this.iterationCount++;
-
-        for (let strategy of this.strategies) {
-            strategy.preIteration();
-        }
     }
 
     /**

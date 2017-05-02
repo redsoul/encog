@@ -1,0 +1,1 @@
+EncogLog.options.logLevel = 'error';

@@ -74,6 +74,14 @@ class ArrayUtils {
             }
         }
     }
+
+    /**
+     * @param source {Array}
+     * @return {Array}
+     * */
+    static arrayClone(source) {
+        return _.clone(source);
+    }
 }
 
 module.exports = ArrayUtils;
