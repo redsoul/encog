@@ -2,7 +2,7 @@ const ActivationLinear = require(__ACTIVACTION_FUNCTIONS + 'linear');
 const ActivationTanh = require(__ACTIVACTION_FUNCTIONS + 'tanh');
 const ActivationSigmoid = require(__ACTIVACTION_FUNCTIONS + 'sigmoid');
 const FlatLayer = require(__LAYERS + 'flat');
-const ErrorCalculation = require(__MATHUTILS + 'errorCalculation');
+const ErrorCalculation = require(__ERROR_CALCULATION + 'errorCalculation');
 const _ = require('lodash');
 const ArrayUtils = require(__UTILS + 'array');
 const EncogError = require(__UTILS + 'encogError');
@@ -341,23 +341,31 @@ class FlatNetwork {
 
     /**
      * Perform a simple randomization of the weights of the neural network
+     * between -1 and 1.
+     */
+    randomize() {
+        if (arguments.length == 0) {
+            this._randomize(1, -1);
+        } else if (arguments.length == 2) {
+            this._randomize(arguments[0], arguments[1]);
+        }
+
+    }
+
+    /**
+     * Perform a simple randomization of the weights of the neural network
      * between the specified hi and lo.
      *
-     * @param hi {float}
+     * @param hi
      *            The network high.
-     * @param lo {float}
+     * @param lo
      *            The network low.
      */
-    // randomize(hi, lo) {
-    //     if (arguments.length === 0) {
-    //         hi = 1;
-    //         lo = -1;
-    //     }
-    //
-    //     for (let i = 0; i < this.weights.length; i++) {
-    //         this.weights[i] = (Math.random() * (hi - lo)) + lo;
-    //     }
-    // }
+    _randomize(hi, lo) {
+        for (let i = 0; i < this.weights.length; i++) {
+            this.weights[i] = (Math.random() * (hi - lo)) + lo;
+        }
+    }
 
     /**
      * Get the weight between the two layers.

@@ -1,4 +1,5 @@
 const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
+const ArrayUtils = require(__UTILS + 'array');
 
 /**
  * This class implements a mathematical matrix. Matrix math is very important to
@@ -9,7 +10,7 @@ class Matrix {
     /**
      * Create a blank array with the specified number of rows and columns.
      *
-     * @param rows {number}
+     * @param rows {number} || {Matrix}
      *            How many rows in the matrix.
      * @param cols {number}
      *            How many columns in the matrix.
@@ -50,6 +51,15 @@ class Matrix {
                 this.matrix[r][c] = 0;
             }
         }
+    }
+
+    /**
+     * Create a copy of the matrix.
+     *
+     * @return {Matrix} A colne of the matrix.
+     */
+    clone() {
+        return new Matrix(this.matrix);
     }
 
     /**
@@ -153,6 +163,48 @@ class Matrix {
                 this.matrix[row][col] += M.get(row, col);
             }
         }
+    }
+
+    /**
+     * Read one entire column from the matrix as a sub-matrix.
+     *
+     * @param col {Number}
+     *            The column to read.
+     * @return {Matrix} The column as a sub-matrix.
+     */
+    getCol(col) {
+        if (col > this.getCols()) {
+            throw new NeuralNetworkError("Can't get column #" + col + " because it does not exist.");
+        }
+
+        let newMatrix = ArrayUtils.newIntArray(this.getRows(), new Array(1));
+
+        for (let row = 0; row < this.getRows(); row++) {
+            newMatrix[row][0] = this.matrix[row][col];
+        }
+
+        return new Matrix(newMatrix);
+    }
+
+    /**
+     * Get the specified row as a sub-matrix.
+     *
+     * @param row {Number}
+     *            The row to get.
+     * @return {Matrix} A matrix.
+     */
+    getRow(row) {
+        if (row > this.getRows()) {
+            throw new NeuralNetworkError("Can't get row #" + row + " because it does not exist.");
+        }
+
+        let newMatrix = ArrayUtils.newIntArray(this.getCols());
+
+        for (let col = 0; col < this.getCols(); col++) {
+            newMatrix[0][col] = this.matrix[row][col];
+        }
+
+        return new Matrix(newMatrix);
     }
 
     /**

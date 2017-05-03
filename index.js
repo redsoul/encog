@@ -5,6 +5,7 @@ global.__CONSTANTS = require(__SRC + 'constants.js');
 global.__ACTIVACTION_FUNCTIONS = __SRC + 'activation/functions/';
 global.__ERROR_FUNCTIONS = __SRC + 'neural/error/functions/';
 global.__LAYERS = __SRC + 'neural/layers/';
+global.__SCORE = __SRC + 'neural/scores/';
 global.__NETWORKS = __SRC + 'neural/networks/';
 global.__PATTERNS = __SRC + 'patterns/';
 global.__TRAINING = __SRC + 'neural/training/';
@@ -15,8 +16,10 @@ global.__MATRICES = __SRC + 'mathUtils/matrices/';
 global.__HESSIAN = __MATHUTILS + 'matrices/hessian/';
 global.__DECOMPOSITION = __MATHUTILS + 'matrices/decomposition/';
 global.__UTILS = __SRC + 'utils/';
+global.__ERROR_CALCULATION = __UTILS + 'error/';
 global.__RANDOMIZERS = __MATHUTILS + 'randomizers/';
 global.__GENERATORS = __MATHUTILS + 'generators/';
+global.__ML = __SRC + 'ml/';
 
 global.__TEST_HELPERS = __TESTS + 'helpers/';
 

@@ -29,7 +29,7 @@ xdescribe('Levenberg Marquardt Training', function () {
         const train = new LevenbergMarquardt(network, inputDataset.train, outputDataset.train);
 
         NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-        const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test)
+        const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
 
         expect(accuracy >= 90).toBe(true);
     });

@@ -1,6 +1,7 @@
-describe('ResilientPropagation', function () {
-    const ResilientPropagation = require(__PROPAGATION + 'resilient');
+xdescribe('Neural Simulated Annealing Training', function () {
+    const NeuralSimulatedAnnealing = require(__TRAINING + 'neuralSimulatedAnnealing');
     const NetworkUtil = require(__TEST_HELPERS + 'networkUtil');
+    const TrainingSetScore = require(__SCORE + 'trainingSet');
 
     beforeEach(function () {
 
@@ -10,7 +11,8 @@ describe('ResilientPropagation', function () {
         // train the neural network
         const dataset = NetworkUtil.getXORDataset();
         const network = NetworkUtil.createXORNetwork();
-        const train = new ResilientPropagation(network, dataset.input, dataset.output);
+        const score = new TrainingSetScore(dataset.input, dataset.output);
+        const train = new NeuralSimulatedAnnealing(network, score, 10, 2, 100);
 
         NetworkUtil.trainNetwork(train);
         const accuracy = NetworkUtil.validateNetwork(network, dataset.input, dataset.output);
@@ -26,7 +28,8 @@ describe('ResilientPropagation', function () {
         let inputDataset = NetworkUtil.trainTestSpit(dataset.input);
         let outputDataset = NetworkUtil.trainTestSpit(dataset.output);
 
-        const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
+        const score = new TrainingSetScore(inputDataset.train, outputDataset.train);
+        const train = new NeuralSimulatedAnnealing(network, score, 10, 2, 100);
 
         NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
         const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);

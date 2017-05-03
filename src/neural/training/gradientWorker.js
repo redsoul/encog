@@ -1,4 +1,4 @@
-const ErrorCalculation = require(__MATHUTILS + 'errorCalculation');
+const ErrorCalculation = require(__ERROR_CALCULATION + 'errorCalculation');
 const ArrayUtils = require(__UTILS + 'array');
 
 /**
