@@ -1,5 +1,5 @@
-const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
-const ArrayUtils = require(__UTILS + 'array');
+const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const ArrayUtils = require(PATHS.UTILS + 'array');
 
 /**
  * This class implements a mathematical matrix. Matrix math is very important to

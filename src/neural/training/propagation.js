@@ -1,8 +1,8 @@
-const LinearErrorFunction = require(__ERROR_FUNCTIONS + 'linear');
-const GradientWorker = require(__TRAINING + 'gradientWorker');
-const ArrayUtils = require(__UTILS + 'array');
-const EncogError = require(__UTILS + 'encogError');
-const BasicTraining = require(__TRAINING + 'basic');
+const LinearErrorFunction = require(PATHS.ERROR_FUNCTIONS + 'linear');
+const GradientWorker = require(PATHS.TRAINING + 'gradientWorker');
+const ArrayUtils = require(PATHS.UTILS + 'array');
+const EncogError = require(PATHS.UTILS + 'encogError');
+const BasicTraining = require(PATHS.TRAINING + 'basic');
 /**
  * Implements basic functionality that is needed by each of the propagation
  * methods. The specifics of each of the propagation methods is implemented

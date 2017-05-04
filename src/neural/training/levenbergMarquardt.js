@@ -1,9 +1,9 @@
-const BasicTraining = require(__TRAINING + 'basic');
-const ArrayUtils = require(__UTILS + 'array');
-const HessionCR = require(__HESSIAN + 'hessianCR');
-const ErrorCalculation = require(__ERROR_CALCULATION + 'errorCalculation');
+const BasicTraining = require(PATHS.TRAINING + 'basic');
+const ArrayUtils = require(PATHS.UTILS + 'array');
+const HessionCR = require(PATHS.HESSIAN + 'hessianCR');
+const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const mathjs = require('mathjs');
-const Matrix = require(__MATRICES + 'matrix');
+const Matrix = require(PATHS.MATRICES + 'matrix');
 /**
  * The amount to scale the lambda by.
  */

@@ -1,12 +1,12 @@
-const ActivationLinear = require(__ACTIVACTION_FUNCTIONS + 'linear');
-const ActivationTanh = require(__ACTIVACTION_FUNCTIONS + 'tanh');
-const ActivationSigmoid = require(__ACTIVACTION_FUNCTIONS + 'sigmoid');
-const FlatLayer = require(__LAYERS + 'flat');
-const ErrorCalculation = require(__ERROR_CALCULATION + 'errorCalculation');
+const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
+const ActivationTanh = require(PATHS.ACTIVATION_FUNCTIONS + 'tanh');
+const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
+const FlatLayer = require(PATHS.LAYERS + 'flat');
+const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const _ = require('lodash');
-const ArrayUtils = require(__UTILS + 'array');
-const EncogError = require(__UTILS + 'encogError');
-const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
+const ArrayUtils = require(PATHS.UTILS + 'array');
+const EncogError = require(PATHS.UTILS + 'encogError');
+const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
 
 /**
  * Implements a flat (vector based) neural network in the Encog Engine. This is

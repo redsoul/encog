@@ -1,4 +1,4 @@
-const ErrorCalculation = require(__ERROR_CALCULATION + 'errorCalculation');
+const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 
 class CalculateRegressionError {
     /**

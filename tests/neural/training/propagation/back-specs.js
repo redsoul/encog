@@ -1,6 +1,6 @@
 describe('BackPropagation', function () {
-    const BackPropagation = require(__PROPAGATION + 'back');
-    const NetworkUtil = require(__TEST_HELPERS + 'networkUtil');
+    const BackPropagation = require(PATHS.PROPAGATION + 'back');
+    const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
     let network;
 
     beforeEach(function () {

@@ -1,8 +1,8 @@
-const NeuralStructure = require(__NETWORKS + '../structure');
+const NeuralStructure = require(PATHS.NETWORKS + '../structure');
 const _ = require('lodash');
-const NguyenWidrowRandomizer = require(__RANDOMIZERS + 'nguyenWidrow');
-const RangeRandomizer = require(__RANDOMIZERS + 'range');
-const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
+const NguyenWidrowRandomizer = require(PATHS.RANDOMIZERS + 'nguyenWidrow');
+const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
+const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
 
 /**
  * This class implements a neural network. This class works in conjunction the

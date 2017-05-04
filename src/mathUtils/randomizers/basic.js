@@ -1,4 +1,4 @@
-const MersenneTwisterGenerateRandom = require(__GENERATORS + 'mersenneTwister');
+const MersenneTwisterGenerateRandom = require(PATHS.GENERATORS + 'mersenneTwister');
 /**
  * Provides basic functionality that most randomizers will need.
  *

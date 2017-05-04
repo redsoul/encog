@@ -1,6 +1,6 @@
 describe('ResilientPropagation', function () {
-    const ResilientPropagation = require(__PROPAGATION + 'resilient');
-    const NetworkUtil = require(__TEST_HELPERS + 'networkUtil');
+    const ResilientPropagation = require(PATHS.PROPAGATION + 'resilient');
+    const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
 
     beforeEach(function () {
 

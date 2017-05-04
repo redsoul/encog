@@ -1,4 +1,4 @@
-const BasicRandomizer = require(__RANDOMIZERS + 'basic');
+const BasicRandomizer = require(PATHS.RANDOMIZERS + 'basic');
 /**
  * Implementation of <i>Nguyen-Widrow</i> weight initialization. This is the
  * default weight initialization used by Encog, as it generally provides the

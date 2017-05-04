@@ -1,5 +1,5 @@
-const BasicTraining = require(__TRAINING + 'basic');
-const SimulatedAnnealing = require(__ML + 'simulatedAnnealing');
+const BasicTraining = require(PATHS.TRAINING + 'basic');
+const SimulatedAnnealing = require(PATHS.ML + 'simulatedAnnealing');
 /**
  * The cutoff for random data.
  */

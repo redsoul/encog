@@ -1,5 +1,5 @@
-const ArrayUtils = require(__UTILS + 'array');
-const Matrix = require(__MATRICES + 'matrix');
+const ArrayUtils = require(PATHS.UTILS + 'array');
+const Matrix = require(PATHS.MATRICES + 'matrix');
 /**
  * Some basic code used to calculate Hessian matrixes.
  */

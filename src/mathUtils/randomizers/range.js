@@ -1,4 +1,4 @@
-const BasicRandomizer = require(__RANDOMIZERS + 'basic');
+const BasicRandomizer = require(PATHS.RANDOMIZERS + 'basic');
 /**
  * A randomizer that will create random weight and bias values that are between
  * a specified range.

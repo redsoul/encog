@@ -1,5 +1,4 @@
 const ActivationFunction = require('../activationFunction');
-const CONSTANTS = require(__SRC + 'constants');
 
 /**
  * The softmax activation function.
@@ -22,7 +21,7 @@ class ActivationSoftmax extends ActivationFunction {
             x[i] = Math.exp(x[i]);
             sum += x[i];
         }
-        if (isNaN(sum) || sum < CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
+        if (isNaN(sum) || sum < PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
             for (i = start; i < start + size; i++) {
                 x[i] = 1.0 / size;
             }

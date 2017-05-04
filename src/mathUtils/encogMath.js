@@ -150,7 +150,7 @@ class EncogMath {
      * @return {number} -1 if less than zero, 1 if greater, or 0 if zero.
      */
     static sign(value) {
-        if (Math.abs(value) < __CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
+        if (Math.abs(value) < PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
             return 0;
         } else if (value > 0) {
             return 1;

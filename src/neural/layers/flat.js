@@ -27,7 +27,7 @@ class FlatLayer {
      * @return {boolean} the bias
      */
     hasBias() {
-        return Math.abs(this.biasActivation) > __CONSTANTS.DEFAULT_DOUBLE_EQUAL;
+        return Math.abs(this.biasActivation) > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL;
     }
 
     /**

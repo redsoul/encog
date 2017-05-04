@@ -1,5 +1,5 @@
-const FlatLayer = require(__LAYERS + 'flat');
-const ActivationSigmoid = require(__ACTIVACTION_FUNCTIONS + 'sigmoid');
+const FlatLayer = require(PATHS.LAYERS + 'flat');
+const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 
 /**
  * Basic functionality that most of the neural layers require. The basic layer

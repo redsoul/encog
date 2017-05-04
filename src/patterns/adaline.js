@@ -1,9 +1,9 @@
-const BasicLayer = require(__LAYERS + 'basic');
-const BasicNetwork = require(__NETWORKS + 'basic');
-const NeuralNetworkPattern = require(__PATTERNS + 'neuralNetwork');
-const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
-const ActivationLinear = require(__ACTIVACTION_FUNCTIONS + 'linear');
-const RangeRandomizer = require(__RANDOMIZERS + 'range');
+const BasicLayer = require(PATHS.LAYERS + 'basic');
+const BasicNetwork = require(PATHS.NETWORKS + 'basic');
+const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
+const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
+const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
 
 /**
  * Construct an ADALINE neural network.

@@ -1,7 +1,7 @@
 const Propagation = require('../propagation');
-const SmartMomentum = require(__STRATEGIES + 'smartMomentum');
-const SmartLearningRate = require(__STRATEGIES + 'smartLearningRate');
-const ArrayUtils = require(__UTILS + 'array');
+const SmartMomentum = require(PATHS.STRATEGIES + 'smartMomentum');
+const SmartLearningRate = require(PATHS.STRATEGIES + 'smartLearningRate');
+const ArrayUtils = require(PATHS.UTILS + 'array');
 
 /**
  * This class implements a backpropagation training algorithm for feed forward

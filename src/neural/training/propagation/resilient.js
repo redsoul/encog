@@ -1,7 +1,7 @@
 const Propagation = require('../propagation');
-const ArrayUtils = require(__UTILS + 'array');
-const EncogMath = require(__MATHUTILS + 'encogMath');
-const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
+const ArrayUtils = require(PATHS.UTILS + 'array');
+const EncogMath = require(PATHS.MATH_UTILS + 'encogMath');
+const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
 
 /**
  * The default zero tolerance.

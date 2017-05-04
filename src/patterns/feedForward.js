@@ -1,6 +1,6 @@
-const BasicLayer = require(__LAYERS + 'basic');
-const BasicNetwork = require(__NETWORKS + 'basic');
-const NeuralNetworkPattern = require(__PATTERNS + 'neuralNetwork');
+const BasicLayer = require(PATHS.LAYERS + 'basic');
+const BasicNetwork = require(PATHS.NETWORKS + 'basic');
+const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
 
 /**
  * Used to create feedforward neural networks. A feedforward network has an

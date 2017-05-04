@@ -1,8 +1,8 @@
-const BasicNetwork = require(__NETWORKS + 'basic');
-const BasicLayer = require(__LAYERS + 'basic');
-const ActivationSigmoid = require(__ACTIVACTION_FUNCTIONS + 'sigmoid');
+const BasicNetwork = require(PATHS.NETWORKS + 'basic');
+const BasicLayer = require(PATHS.LAYERS + 'basic');
+const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 const _ = require('lodash');
-const NeuralNetworkError = require(__NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
 
 class NetworkUtil {
 

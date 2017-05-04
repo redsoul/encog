@@ -4,7 +4,7 @@
  */
 class ErrorCalculation {
     constructor() {
-        this.mode = __CONSTANTS.ERROR_CALCULATION_MODES.MSE;
+        this.mode = PATHS.CONSTANTS.ERROR_CALCULATION_MODES.MSE;
 
         this.reset();
     }
@@ -65,11 +65,11 @@ class ErrorCalculation {
         }
 
         switch (this.mode) {
-            case __CONSTANTS.ERROR_CALCULATION_MODES.RMS:
+            case PATHS.CONSTANTS.ERROR_CALCULATION_MODES.RMS:
                 return this.calculateRMS();
-            case __CONSTANTS.ERROR_CALCULATION_MODES.MSE:
+            case PATHS.CONSTANTS.ERROR_CALCULATION_MODES.MSE:
                 return this.calculateMSE();
-            case __CONSTANTS.ERROR_CALCULATION_MODES.ESS:
+            case PATHS.CONSTANTS.ERROR_CALCULATION_MODES.ESS:
                 return this.calculateESS();
             // case CONSTANTS.ERROR_CALCULATION_MODES.LOGLOSS:
             // case CONSTANTS.ERROR_CALCULATION_MODES.HOT_LOGLOSS:

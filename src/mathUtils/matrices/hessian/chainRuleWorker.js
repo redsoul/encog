@@ -1,5 +1,5 @@
-const ArrayUtils = require(__UTILS + 'array');
-const Matrix = require(__MATRICES + 'matrix');
+const ArrayUtils = require(PATHS.UTILS + 'array');
+const Matrix = require(PATHS.MATRICES + 'matrix');
 /**
  * A threaded worker that is used to calculate the first derivatives of the
  * output of the neural network. These values are ultimatly used to calculate

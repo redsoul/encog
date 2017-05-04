@@ -1,5 +1,5 @@
-const ErrorCalculation = require(__ERROR_CALCULATION + 'errorCalculation');
-const ArrayUtils = require(__UTILS + 'array');
+const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
+const ArrayUtils = require(PATHS.UTILS + 'array');
 
 /**
  * Worker class for the mulithreaded training of flat networks.
@@ -76,8 +76,8 @@ class GradientWorker {
             this.flatSpot[0]);
 
         // Apply regularization, if requested.
-        if (this.owner.l1 > __CONSTANTS.DEFAULT_DOUBLE_EQUAL
-            || this.owner.l2 > __CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
+        if (this.owner.l1 > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL
+            || this.owner.l2 > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
             let lp = [];
 
             this.calculateRegularizationPenalty(lp);

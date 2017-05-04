@@ -1,6 +1,6 @@
-const BasicHessian = require(__HESSIAN + 'basic');
-const ChainRuleWorker = require(__HESSIAN + 'chainRuleWorker');
-const ArrayUtils = require(__UTILS + 'array');
+const BasicHessian = require(PATHS.HESSIAN + 'basic');
+const ChainRuleWorker = require(PATHS.HESSIAN + 'chainRuleWorker');
+const ArrayUtils = require(PATHS.UTILS + 'array');
 /**
  * Calculate the Hessian matrix using the chain rule method.
  */

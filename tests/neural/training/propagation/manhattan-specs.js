@@ -1,6 +1,6 @@
 describe('ManhattanPropagation', function () {
-    const ManhattanPropagation = require(__PROPAGATION + 'manhattan');
-    const NetworkUtil = require(__TEST_HELPERS + 'networkUtil');
+    const ManhattanPropagation = require(PATHS.PROPAGATION + 'manhattan');
+    const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
 
     beforeEach(function () {
 

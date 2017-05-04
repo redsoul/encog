@@ -1,5 +1,5 @@
-const CalculateScore = require(__SCORE + 'calculate');
-const CalculateRegressionError = require(__ERROR_CALCULATION + 'calculateRegression');
+const CalculateScore = require(PATHS.SCORE + 'calculate');
+const CalculateRegressionError = require(PATHS.ERROR_CALCULATION + 'calculateRegression');
 
 /**
  * Calculate a score based on a training set. This class allows simulated

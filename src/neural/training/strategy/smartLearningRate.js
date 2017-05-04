@@ -1,4 +1,4 @@
-const Strategy = require(__STRATEGIES + '../strategy');
+const Strategy = require(PATHS.STRATEGIES + '../strategy');
 /**
  * Attempt to automatically set the learning rate in a learning method that
  * supports a learning rate.
