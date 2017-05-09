@@ -2,10 +2,9 @@ describe('ResilientPropagation', function () {
     const ResilientPropagation = require(PATHS.PROPAGATION + 'resilient');
     const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
     const Dataset = require(PATHS.DATASET + 'dataset');
-    let dataset;
 
     beforeEach(function () {
-        dataset = new Dataset();
+
     });
 
     it('XOR Dataset', function () {
@@ -25,8 +24,8 @@ describe('ResilientPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
+        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
 
         const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
 
@@ -41,11 +40,11 @@ describe('ResilientPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
+        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
 
-        dataset.normalizeData(inputDataset.train);
-        dataset.normalizeData(inputDataset.test);
+        Dataset.normalizeData(inputDataset.train);
+        Dataset.normalizeData(inputDataset.test);
 
         const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
 

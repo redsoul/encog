@@ -15,7 +15,7 @@ class DataSet {
      * @param dataset {Array}
      * @param testSize {Number}
      */
-    trainTestSpit(dataset, testSize = 0.2) {
+    static trainTestSpit(dataset, testSize = 0.2) {
         if (testSize >= 1 || testSize <= 0) {
             throw new NeuralNetworkError('Test size should be between 0 and 1');
         }
@@ -33,7 +33,7 @@ class DataSet {
      * @param ignoreColumns {Array} - optional
      * @returns {Promise}
      */
-    readTrainingCSV(file, outputColumns = [], ignoreColumns = []) {
+    static readTrainingCSV(file, outputColumns = [], ignoreColumns = []) {
         let deferred = Q.defer();
         let dataset = [];
         var stream = fs.createReadStream(file);
@@ -66,7 +66,7 @@ class DataSet {
         return deferred.promise;
     }
 
-    __calcMinMaxValues(values) {
+    static calcMinMaxValues(values) {
         let minMaxValuesObj = [];
 
         //init max values object with -1
@@ -91,7 +91,7 @@ class DataSet {
      * https://en.wikipedia.org/wiki/Feature_scaling
      *
      * */
-    __featureScalling(value, min, max, minRange = -1, maxRange = 1) {
+    static featureScalling(value, min, max, minRange = -1, maxRange = 1) {
         if (min >= max) {
             throw new NeuralNetworkError('Min should be smaller than Max');
         }
@@ -110,9 +110,9 @@ class DataSet {
      * @param minRange {Number} Default -1
      * @param maxRange {Number} Default 1
      * */
-    normalizeData(values, minRange = -1, maxRange = 1) {
+    static normalizeData(values, minRange = -1, maxRange = 1) {
         let normalizedArr = [];
-        let minMaxValues = this.__calcMinMaxValues(values);
+        let minMaxValues = DataSet.calcMinMaxValues(values);
         const that = this;
 
         _.each(values, function (row, rowIndex) {
@@ -122,7 +122,7 @@ class DataSet {
                     value = 0;
                 }
 
-                values[rowIndex][index] = that.__featureScalling(
+                values[rowIndex][index] = DataSet.featureScalling(
                     value,
                     minMaxValues[index].min,
                     minMaxValues[index].max,

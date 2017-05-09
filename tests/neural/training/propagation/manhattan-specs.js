@@ -3,7 +3,6 @@ describe('ManhattanPropagation', function () {
     const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
     const Dataset = require(PATHS.DATASET + 'dataset');
     let network;
-    let dataset = new Dataset();
     let train;
 
     beforeEach(function () {
@@ -28,8 +27,8 @@ describe('ManhattanPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
+        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
 
         train = new ManhattanPropagation(network, inputDataset.train, outputDataset.train, .03, .7);
 
@@ -44,11 +43,11 @@ describe('ManhattanPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
+        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
 
-        dataset.normalizeData(inputDataset.train);
-        dataset.normalizeData(inputDataset.test);
+        Dataset.normalizeData(inputDataset.train);
+        Dataset.normalizeData(inputDataset.test);
 
         train = new ManhattanPropagation(network, inputDataset.train, outputDataset.train, .03, .7);
 
