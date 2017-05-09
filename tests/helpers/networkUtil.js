@@ -2,7 +2,7 @@ const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const BasicLayer = require(PATHS.LAYERS + 'basic');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 const _ = require('lodash');
-const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
 class NetworkUtil {
 
@@ -80,22 +80,6 @@ class NetworkUtil {
         network.reset();
 
         return network;
-    }
-
-    /**
-     * @param dataset {Array}
-     * @param testSize {Number}
-     */
-    static trainTestSpit(dataset, testSize = 0.2) {
-        if (testSize >= 1 || testSize <= 0) {
-            throw new NeuralNetworkError('Test size should be between 0 and 1');
-        }
-
-        //split the dataset in train and test dataset
-        return {
-            train: dataset.slice(0, dataset.length * (1 - testSize)),
-            test: dataset.slice(-dataset.length * testSize)
-        };
     }
 
     /**

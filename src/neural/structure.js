@@ -1,7 +1,7 @@
 const FlatNetwork = require(PATHS.NETWORKS + 'flat');
 const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
-const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 /**
  * Holds "cached" information about the structure of the neural network. This is
  * a very good performance boost since the neural network does not need to

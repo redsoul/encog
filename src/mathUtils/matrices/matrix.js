@@ -1,4 +1,4 @@
-const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ArrayUtils = require(PATHS.UTILS + 'array');
 
 /**

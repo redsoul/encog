@@ -1,7 +1,7 @@
 const LinearErrorFunction = require(PATHS.ERROR_FUNCTIONS + 'linear');
 const GradientWorker = require(PATHS.TRAINING + 'gradientWorker');
 const ArrayUtils = require(PATHS.UTILS + 'array');
-const EncogError = require(PATHS.UTILS + 'encogError');
+const EncogError = require(PATHS.ERROR_HANDLING + 'encog');
 const BasicTraining = require(PATHS.TRAINING + 'basic');
 /**
  * Implements basic functionality that is needed by each of the propagation

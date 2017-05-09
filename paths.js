@@ -16,10 +16,12 @@ module.exports = (function () {
     const HESSIAN = MATH_UTILS + 'matrices/hessian/';
     const DECOMPOSITION = MATH_UTILS + 'matrices/decomposition/';
     const UTILS = SRC + 'utils/';
-    const ERROR_CALCULATION = UTILS + 'error/';
+    const ERROR_CALCULATION = UTILS + 'errorCalculation/';
+    const ERROR_HANDLING = UTILS + 'errorHandling/';
     const RANDOMIZERS = MATH_UTILS + 'randomizers/';
     const GENERATORS = MATH_UTILS + 'generators/';
     const ML = SRC + 'ml/';
+    const DATASET = UTILS + 'dataset/';
 
     const TESTS = BASE + '/tests/';
     const TEST_HELPERS = TESTS + 'helpers/';
@@ -45,8 +47,10 @@ module.exports = (function () {
         DECOMPOSITION,
         UTILS,
         ERROR_CALCULATION,
+        ERROR_HANDLING,
         RANDOMIZERS,
         GENERATORS,
-        ML
+        ML,
+        DATASET
     };
 })();

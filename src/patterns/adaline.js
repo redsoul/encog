@@ -1,7 +1,7 @@
 const BasicLayer = require(PATHS.LAYERS + 'basic');
 const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
-const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
 const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
 

@@ -1,4 +1,4 @@
-const EncogError = require(PATHS.UTILS + 'encogError');
+const EncogError = require(PATHS.ERROR_HANDLING + 'encog');
 /**
  * Used by the neural network classes to indicate an error.
  */

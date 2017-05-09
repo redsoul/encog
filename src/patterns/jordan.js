@@ -1,7 +1,7 @@
 const BasicLayer = require(PATHS.LAYERS + 'basic');
 const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
-const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 
 /**

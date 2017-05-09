@@ -6,6 +6,7 @@ module.exports = {
      * @final
      */
     precision: 1e-10,
+    roundPrecision: 8,
 
     /**
      * Default point at which two doubles are equal.

@@ -1,5 +1,5 @@
 const ArrayUtils = require(PATHS.UTILS + 'array');
-const NeuralNetworkError = require(PATHS.NETWORKS + '../neuralNetworkError');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
 class LUDecomposition {
     /**
