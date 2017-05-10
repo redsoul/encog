@@ -32,7 +32,7 @@
     "lodash": "^4.17.4",
     "mathjs": "^3.12.2",
     "q": "^1.5.0",
-    "require-dir": "^0.3.1"
+    "require-all": "^2.2.0"
   },
   "devDependencies": {
     "eslint": "^4.0.0-alpha.1",

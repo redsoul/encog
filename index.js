@@ -2,22 +2,44 @@ global.PATHS = require('./paths.js');
 
 const encogLog = require(PATHS.UTILS + 'encogLog');
 global.EncogLog = new encogLog();
-var requireDir = require('require-dir');
 
-var activationFunctions = requireDir(PATHS.ACTIVATION_FUNCTIONS);
-var errorFunctions = requireDir(PATHS.ERROR_FUNCTIONS);
-var layers = requireDir(PATHS.LAYERS);
-var networks = requireDir(PATHS.NETWORKS);
-var patterns = requireDir(PATHS.PATTERNS);
-var trainers = requireDir(PATHS.PROPAGATION);
-// var examples = requireDir('./examples');
+const requireAll = require('require-all');
+const requireDir = (dir)=> {
+    return requireAll({
+        dirname: dir,
+        filter: /(\w+).js$/,
+        map: (name, path)=> {
+            return name.replace(/^[a-z]/, function (match) {
+                return match.toUpperCase();
+            });
+        }
+    });
+};
+
+const ActivationFunctions = requireDir(PATHS.ACTIVATION_FUNCTIONS);
+const ErrorFunctions = requireDir(PATHS.ERROR_FUNCTIONS);
+const Layers = requireDir(PATHS.LAYERS);
+const Networks = requireDir(PATHS.NETWORKS);
+const Patterns = requireDir(PATHS.PATTERNS);
+const Training = {Propagation: requireDir(PATHS.PROPAGATION)};
+const Strategies = requireDir(PATHS.STRATEGIES);
+const MathUtils = requireDir(PATHS.MATH_UTILS);
+const ErrorCalculation = requireDir(PATHS.ERROR_CALCULATION);
+const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
+const DataSet = require(PATHS.DATASET + 'dataset');
+const Examples = requireDir(PATHS.EXAMPLES);
 
 module.exports = {
-    activationFunctions,
-    errorFunctions,
-    layers,
-    networks,
-    patterns,
-    trainers,
-    // examples
+    ActivationFunctions,
+    ErrorFunctions,
+    Layers,
+    Networks,
+    Patterns,
+    Training,
+    Strategies,
+    MathUtils,
+    ErrorCalculation,
+    NetworkUtil,
+    DataSet,
+    Examples
 };

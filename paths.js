@@ -1,6 +1,7 @@
 module.exports = (function () {
     const BASE = __dirname;
     const SRC = BASE + '/src/';
+    const EXAMPLES = BASE + '/examples/';
     const CONSTANTS = require(SRC + 'constants.js');
     const ACTIVATION_FUNCTIONS = SRC + 'activation/functions/';
     const ERROR_FUNCTIONS = SRC + 'neural/error/functions/';
@@ -29,6 +30,7 @@ module.exports = (function () {
     return {
         BASE,
         SRC,
+        EXAMPLES,
         TESTS,
         TEST_HELPERS,
         CONSTANTS,
