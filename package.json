@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
-    "preinstall": "node checkVersion.js"
+    "postinstall": "node checkVersion.js"
   },
   "repository": {
     "type": "git",

@@ -8,7 +8,7 @@ Based on the encog-java-core v3.4 - https://github.com/encog/encog-java-core
 # Example
 
 ```javascript
-const Encog = require('../index');
+const Encog = require('encog');
 const XORdataset = Encog.Utils.Network.getXORDataset();
 
 // create a neural network, without using a factory
