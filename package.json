@@ -1,7 +1,7 @@
 {
   "name": "encog",
   "version": "1.0.4",
-  "description": "Encog is a NodeJS ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton.",
+  "description": "Encog is a NodeJS ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton. Based on the encog-java-core v3.4",
   "main": "index.js",
   "scripts": {
     "test": "gulp test",
@@ -15,10 +15,22 @@
     "encog",
     "machine",
     "learning",
+    "machine learning",
     "neural",
     "network",
+    "neural network",
     "artificial",
-    "intelligence"
+    "intelligence",
+    "artificial intelligence",
+    "back propagation",
+    "manhattan propagation",
+    "resilient propagation",
+    "levenberg marquardt",
+    "neural simulated annealing",
+    "adaline neural network",
+    "elman neural network",
+    "feed forward neural network",
+    "jordan neural network"
   ],
   "author": "redsoul",
   "license": "Apache",

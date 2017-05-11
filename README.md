@@ -19,6 +19,7 @@ const Encog = require('encog');
 
 ## Unit Tests
 
+    npm install --only=dev
     gulp tests
 
 ## Example
