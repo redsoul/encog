@@ -1,6 +1,6 @@
 {
   "name": "encog",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Encog-JS is a NodeJS ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton.",
   "main": "index.js",
   "scripts": {
