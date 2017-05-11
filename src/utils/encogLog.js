@@ -15,7 +15,7 @@ class EncogLog {
         this.levelsColors[this.levels.error] = colors.yellow;
         this.levelsColors[this.levels.warn] = colors.cyan;
         this.levelsColors[this.levels.info] = colors.green;
-        this.levelsColors[this.levels.debug] = colors.black;
+        this.levelsColors[this.levels.debug] = colors.white;
 
         this.levelsInheritance = {};
         this.levelsInheritance[this.levels.fatal] = [];
