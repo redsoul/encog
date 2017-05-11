@@ -1,6 +1,6 @@
 xdescribe('Levenberg Marquardt Training', function () {
     const LevenbergMarquardt = require(PATHS.TRAINING + 'levenbergMarquardt');
-    const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
+    const NetworkUtil = require(PATHS.UTILS + 'network');
 
     beforeEach(function () {
 

@@ -2,13 +2,13 @@ const Q = require('q');
 const _ = require('lodash');
 const fs = require('fs');
 const csv = require('fast-csv');
-const DataCollection = require('data-collection');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
 const CONSTANTS = PATHS.CONSTANTS;
 
-class DataSet {
+class DataToolbox {
     constructor() {
+
     }
 
     /**
@@ -91,7 +91,7 @@ class DataSet {
      * https://en.wikipedia.org/wiki/Feature_scaling
      *
      * */
-    static featureScalling(value, min, max, minRange = -1, maxRange = 1) {
+    static featureScaling(value, min, max, minRange = -1, maxRange = 1) {
         if (min >= max) {
             throw new NeuralNetworkError('Min should be smaller than Max');
         }
@@ -112,7 +112,7 @@ class DataSet {
      * */
     static normalizeData(values, minRange = -1, maxRange = 1) {
         let normalizedArr = [];
-        let minMaxValues = DataSet.calcMinMaxValues(values);
+        let minMaxValues = DataToolbox.calcMinMaxValues(values);
         const that = this;
 
         _.each(values, function (row, rowIndex) {
@@ -122,7 +122,7 @@ class DataSet {
                     value = 0;
                 }
 
-                values[rowIndex][index] = DataSet.featureScalling(
+                values[rowIndex][index] = DataToolbox.featureScaling(
                     value,
                     minMaxValues[index].min,
                     minMaxValues[index].max,
@@ -136,4 +136,4 @@ class DataSet {
     }
 }
 
-module.exports = DataSet;
+module.exports = DataToolbox;

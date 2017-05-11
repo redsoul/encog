@@ -52,8 +52,6 @@ class NetworkUtil {
      * @return {BasicNetwork}
      */
     static createXORNetwork() {
-        // random matrix data.  However, it provides a constant starting point
-        // for the unit tests.
         const network = new BasicNetwork();
         network.addLayer(new BasicLayer(null, true, 2));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 4));
@@ -69,8 +67,6 @@ class NetworkUtil {
      * @return {BasicNetwork}
      */
     static createIrisNetwork() {
-        // random matrix data.  However, it provides a constant starting point
-        // for the unit tests.
         const network = new BasicNetwork();
         network.addLayer(new BasicLayer(null, true, 4));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 10));

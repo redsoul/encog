@@ -1,7 +1,7 @@
 describe('BackPropagation', function () {
     const BackPropagation = require(PATHS.PROPAGATION + 'back');
-    const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
-    const Dataset = require(PATHS.DATASET + 'dataset');
+    const NetworkUtil = require(PATHS.UTILS + 'network');
+    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
     let network;
     let train;
 
@@ -27,8 +27,8 @@ describe('BackPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
 
         train = new BackPropagation(network, inputDataset.train, outputDataset.train, .08, .1);
 
@@ -43,11 +43,11 @@ describe('BackPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
 
-        Dataset.normalizeData(inputDataset.train);
-        Dataset.normalizeData(inputDataset.test);
+        DataToolbox.normalizeData(inputDataset.train);
+        DataToolbox.normalizeData(inputDataset.test);
 
         train = new BackPropagation(network, inputDataset.train, outputDataset.train, .3, .3);
 

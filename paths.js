@@ -1,7 +1,6 @@
 module.exports = (function () {
     const BASE = __dirname;
     const SRC = BASE + '/src/';
-    const EXAMPLES = BASE + '/examples/';
     const CONSTANTS = require(SRC + 'constants.js');
     const ACTIVATION_FUNCTIONS = SRC + 'activation/functions/';
     const ERROR_FUNCTIONS = SRC + 'neural/error/functions/';
@@ -22,7 +21,6 @@ module.exports = (function () {
     const RANDOMIZERS = MATH_UTILS + 'randomizers/';
     const GENERATORS = MATH_UTILS + 'generators/';
     const ML = SRC + 'ml/';
-    const DATASET = UTILS + 'dataset/';
 
     const TESTS = BASE + '/tests/';
     const TEST_HELPERS = TESTS + 'helpers/';
@@ -30,7 +28,6 @@ module.exports = (function () {
     return {
         BASE,
         SRC,
-        EXAMPLES,
         TESTS,
         TEST_HELPERS,
         CONSTANTS,
@@ -52,7 +49,6 @@ module.exports = (function () {
         ERROR_HANDLING,
         RANDOMIZERS,
         GENERATORS,
-        ML,
-        DATASET
+        ML
     };
 })();

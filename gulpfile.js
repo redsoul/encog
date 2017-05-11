@@ -13,7 +13,7 @@ gulp.task('test', function () {
             'index.js',
             'src/**/*.js',
             'tests/before.js',
-            'tests/**/*-specs.js'
+            'tests/**/*.specs.js'
         ])
         .pipe(jasmine({
             includeStackTrace: true,

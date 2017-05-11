@@ -1,7 +1,7 @@
 describe('ResilientPropagation', function () {
     const ResilientPropagation = require(PATHS.PROPAGATION + 'resilient');
-    const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
-    const Dataset = require(PATHS.DATASET + 'dataset');
+    const NetworkUtil = require(PATHS.UTILS + 'network');
+    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
 
     beforeEach(function () {
 
@@ -24,8 +24,8 @@ describe('ResilientPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
 
         const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
 
@@ -40,11 +40,11 @@ describe('ResilientPropagation', function () {
         const irisDataset = NetworkUtil.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = Dataset.trainTestSpit(irisDataset.input);
-        let outputDataset = Dataset.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
 
-        Dataset.normalizeData(inputDataset.train);
-        Dataset.normalizeData(inputDataset.test);
+        DataToolbox.normalizeData(inputDataset.train);
+        DataToolbox.normalizeData(inputDataset.test);
 
         const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
 

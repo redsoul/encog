@@ -25,9 +25,7 @@ const Training = {Propagation: requireDir(PATHS.PROPAGATION)};
 const Strategies = requireDir(PATHS.STRATEGIES);
 const MathUtils = requireDir(PATHS.MATH_UTILS);
 const ErrorCalculation = requireDir(PATHS.ERROR_CALCULATION);
-const NetworkUtil = require(PATHS.TEST_HELPERS + 'networkUtil');
-const DataSet = require(PATHS.DATASET + 'dataset');
-const Examples = requireDir(PATHS.EXAMPLES);
+const Utils = requireDir(PATHS.UTILS);
 
 module.exports = {
     ActivationFunctions,
@@ -39,7 +37,5 @@ module.exports = {
     Strategies,
     MathUtils,
     ErrorCalculation,
-    NetworkUtil,
-    DataSet,
-    Examples
+    Utils
 };
