@@ -1,10 +1,11 @@
 {
-  "name": "encog-js",
+  "name": "encog",
   "version": "1.0.0",
-  "description": "Encog-JS is a NodeJS ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton. ",
+  "description": "Encog-JS is a NodeJS ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton.",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "preinstall": "node checkVersion.js"
   },
   "repository": {
     "type": "git",
@@ -31,7 +32,8 @@
     "lodash": "^4.17.4",
     "mathjs": "^3.12.2",
     "q": "^1.5.0",
-    "require-all": "^2.2.0"
+    "require-all": "^2.2.0",
+    "semver": "^5.3.0"
   },
   "devDependencies": {
     "eslint": "^4.0.0-alpha.1",
@@ -39,5 +41,8 @@
     "gulp-eslint": "^3.0.1",
     "gulp-jasmine-phantom": "^3.0.0",
     "ml-dataset-iris": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=6"
   }
 }
