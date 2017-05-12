@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/redsoul/encog-js.git"
+    "url": "git+https://github.com/redsoul/encog.git"
   },
   "keywords": [
     "encog",
@@ -35,9 +35,9 @@
   "author": "redsoul",
   "license": "Apache",
   "bugs": {
-    "url": "https://github.com/redsoul/encog-js/issues"
+    "url": "https://github.com/redsoul/encog/issues"
   },
-  "homepage": "https://github.com/redsoul/encog-js#readme",
+  "homepage": "https://github.com/redsoul/encog#readme",
   "dependencies": {
     "colors": "^1.1.2",
     "fast-csv": "^2.4.0",
