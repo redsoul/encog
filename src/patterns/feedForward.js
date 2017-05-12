@@ -13,6 +13,7 @@ const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
 
 class FeedForwardPattern extends NeuralNetworkPattern {
     constructor() {
+        super();
         this.hiddenLayers = [];
         this.activationOutput = null;
         this.activationHidden = null;

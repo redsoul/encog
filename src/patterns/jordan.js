@@ -21,9 +21,10 @@ const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 
 class JordanPattern extends NeuralNetworkPattern {
     constructor() {
-        this.inputNeurons = -1;
-        this.outputNeurons = -1;
-        this.hiddenNeurons = -1;
+        super();
+        this.inputNeurons = null;
+        this.outputNeurons = null;
+        this.hiddenNeurons = null;
     }
 
     /**
@@ -37,7 +38,7 @@ class JordanPattern extends NeuralNetworkPattern {
      * @inheritDoc
      */
     clear() {
-        this.hiddenLayers = -1;
+        this.hiddenNeurons = null;
     }
 
     /**
@@ -46,6 +47,10 @@ class JordanPattern extends NeuralNetworkPattern {
     generate() {
         if (!this.activation) {
             this.activation = new ActivationSigmoid();
+        }
+
+        if (!this.inputNeurons || !this.hiddenNeurons || !this.outputNeurons) {
+            throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
         }
 
         const network = new BasicNetwork();

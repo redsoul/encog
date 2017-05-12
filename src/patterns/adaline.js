@@ -11,6 +11,7 @@ const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
 
 class ADALINEPattern extends NeuralNetworkPattern {
     constructor() {
+        super();
     }
 
     /**

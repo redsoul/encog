@@ -1,10 +1,37 @@
+const ERROR_CALCULATION_MODES = {
+    /**
+     * Root mean square error.
+     */
+    RMS: 'RMS',
+
+        /**
+         * Mean square error.
+         */
+        MSE: 'MSE',
+
+        /**
+         * Sum of Squares error.
+         */
+        ESS: 'ESS',
+        /**
+         * Log loss (one-hot encoding/one-of-n encoding) Use for neural networks.
+         */
+        HOT_LOGLOSS: 'HOT_LOGLOSS',
+        /**
+         * Log loss (one-hot encoding/one-of-n encoding) Use for models other than neural networks.
+         */
+        LOGLOSS: 'LOGLOSS',
+        NRMSE_MEAN: 'NRMSE_MEAN',
+        NRMSE_RANGE: 'NRMSE_RANGE'
+};
+
 /**
  * Calculate the error of a neural network. Encog currently supports three error
  * calculation modes. See ErrorCalculationMode for more info.
  */
 class ErrorCalculation {
     constructor() {
-        this.mode = PATHS.CONSTANTS.ERROR_CALCULATION_MODES.MSE;
+        this.mode = ERROR_CALCULATION_MODES.MSE;
 
         this.reset();
     }
@@ -40,7 +67,7 @@ class ErrorCalculation {
         for (let j = 0; j < ideal.length; j += 1) {
             delta = (ideal[j] - actual[j]) * significance;
 
-            this.sum += ideal;
+            this.sum += ideal[j];
 
             if (this.setSize == 0) {
                 this.min = this.max = actual[j];
@@ -65,18 +92,18 @@ class ErrorCalculation {
         }
 
         switch (this.mode) {
-            case PATHS.CONSTANTS.ERROR_CALCULATION_MODES.RMS:
+            case ERROR_CALCULATION_MODES.RMS:
                 return this.calculateRMS();
-            case PATHS.CONSTANTS.ERROR_CALCULATION_MODES.MSE:
+            case ERROR_CALCULATION_MODES.MSE:
                 return this.calculateMSE();
-            case PATHS.CONSTANTS.ERROR_CALCULATION_MODES.ESS:
+            case ERROR_CALCULATION_MODES.ESS:
                 return this.calculateESS();
-            // case CONSTANTS.ERROR_CALCULATION_MODES.LOGLOSS:
-            // case CONSTANTS.ERROR_CALCULATION_MODES.HOT_LOGLOSS:
+            // case ERROR_CALCULATION_MODES.LOGLOSS:
+            // case ERROR_CALCULATION_MODES.HOT_LOGLOSS:
             //     return this.calculateLogLoss();
-            // case CONSTANTS.ERROR_CALCULATION_MODES.NRMSE_MEAN:
+            // case ERROR_CALCULATION_MODES.NRMSE_MEAN:
             //     return this.calculateMeanNRMSE();
-            // case CONSTANTS.ERROR_CALCULATION_MODES.NRMSE_RANGE:
+            // case ERROR_CALCULATION_MODES.NRMSE_RANGE:
             //     return this.calculateRangeNRMSE();
 
             default:

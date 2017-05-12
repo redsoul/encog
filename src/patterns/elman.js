@@ -21,6 +21,7 @@ const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 
 class ElmanPattern extends NeuralNetworkPattern {
     constructor() {
+        super();
         this.inputNeurons = -1;
         this.outputNeurons = -1;
         this.hiddenNeurons = -1;

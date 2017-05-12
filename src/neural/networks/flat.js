@@ -225,10 +225,10 @@ class FlatNetwork {
         this.activationFunctions[currentLayer - 1].activationFunction(this.layerOutput, outputIndex, outputSize);
 
         // update context values
-        const offset = this.contextTargetOffset[currentLayer];
         ArrayUtils.arrayCopy(
             this.layerOutput, outputIndex,
-            this.layerOutput, this.contextTargetOffset[currentLayer],
+            this.layerOutput,
+            this.contextTargetOffset[currentLayer],
             this.contextTargetSize[currentLayer]
         );
     }
