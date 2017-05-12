@@ -22,25 +22,31 @@ const Encog = require('encog');
     npm install --only=dev
     gulp tests
 
-## Example
+## Example using Iris Flower Data Set (https://en.wikipedia.org/wiki/Iris_flower_data_set)
 
 ```javascript
 const Encog = require('encog');
-const XORdataset = Encog.Utils.Network.getXORDataset();
+const irisDataset = Encog.Utils.Network.getIrisDataset();
+let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
+let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
 
 // create a neural network
-network = new Encog.Networks.Basic();
-network.addLayer(new Encog.Layers.Basic(null, true, 2));
-network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 4));
-network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
+const network = new Encog.Networks.Basic();
+network.addLayer(new Encog.Layers.Basic(null, true, 4));
+network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 10));
+network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 5));
+network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 3));
 network.structure.finalizeStructure();
 network.reset();
 
+Encog.Utils.DataToolbox.normalizeData(inputDataset.train);
+Encog.Utils.DataToolbox.normalizeData(inputDataset.test);
+
 // train the neural network
-const train = new Encog.Training.Propagation.Resilient(network, XORdataset.input, XORdataset.output);
+const train = new Encog.Training.Propagation.Resilient(network, inputDataset.train, outputDataset.train);
 
 Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5});
-const accuracy = Encog.Utils.Network.validateNetwork(network, XORdataset.input, XORdataset.output);
+const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
 console.log('Accuracy:', accuracy);
 ```
 
