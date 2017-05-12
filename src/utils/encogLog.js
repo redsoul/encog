@@ -35,7 +35,7 @@ class EncogLog {
                 return date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ' » ' + message;
             }
         };
-        this.options = _.merge(options, defaultOptions);
+        this.options = _.merge(defaultOptions, options);
         this.messages = {
             debug: [],
             info: [],

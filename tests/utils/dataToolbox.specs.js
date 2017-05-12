@@ -21,6 +21,11 @@ describe('DataSet', function () {
         });
     });
 
+    it('convertToArray', function () {
+        const temp=DataToolbox.convertToArray([{a: 1, b: 2, c: 3}, {a: 4, b: 5, c: 6}]);
+        expect(temp).toEqual([[1, 2, 3], [4, 5, 6]]);
+    });
+
     describe('trainTestSpit', function () {
         it('should use the default test size', function () {
             const trainingSet = DataToolbox.trainTestSpit(_.range(100));
@@ -103,7 +108,7 @@ describe('DataSet', function () {
         it('should return a normalized array, using a customized range', function () {
             DataToolbox.normalizeData(values, 0, 5);
 
-            expect(values).toEqual([ [ 2.14285714, 0 ], [ 5, 3.5 ], [ 0, 2.5 ], [ 2.14285714, 5 ] ]);
+            expect(values).toEqual([[2.14285714, 0], [5, 3.5], [0, 2.5], [2.14285714, 5]]);
         });
     });
 });

@@ -3,10 +3,10 @@ const _ = require('lodash');
 const fs = require('fs');
 const csv = require('fast-csv');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
-
 const CONSTANTS = PATHS.CONSTANTS;
 
 class DataToolbox {
+
     constructor() {
 
     }
@@ -31,14 +31,33 @@ class DataToolbox {
      * @param file {String}
      * @param outputColumns {Array} - optional
      * @param ignoreColumns {Array} - optional
+     * @param csvOptions {Object} - optional - full description on https://www.npmjs.com/package/fast-csv
+     *
      * @returns {Promise}
      */
-    static readTrainingCSV(file, outputColumns = [], ignoreColumns = []) {
+    static readTrainingCSV(file, outputColumns = [], ignoreColumns = [], csvOptions = {}) {
         let deferred = Q.defer();
         let dataset = [];
-        var stream = fs.createReadStream(file);
+        let defaultCsvOptions = {
+            headers: true,
+            ignoreEmpty: false,
+            discardUnmappedColumns: false,
+            delimiter: ',',
+            quote: '"',
+            escape: '"',
+            trim: false,
+            rtrim: false,
+            ltrim: false,
+            comment: null
+        };
 
-        csv.fromStream(stream, {headers: true})
+        //merge with default options
+        csvOptions = _.merge(defaultCsvOptions, csvOptions);
+        //objectMode must be true
+        csvOptions.objectMode = true;
+
+        EncogLog.debug('Reading ' + file);
+        const parser = csv(csvOptions)
             .on('data', function (data) {
                 dataset.push(data);
             })
@@ -63,13 +82,19 @@ class DataToolbox {
                 deferred.reject(error);
             });
 
+        fs.createReadStream(file, {encoding: 'utf-8'}).pipe(parser);
+
         return deferred.promise;
     }
 
+    /**
+     * @param values {Array}
+     * @returns {Array}
+     */
     static calcMinMaxValues(values) {
         let minMaxValuesObj = [];
 
-        //init max values object with -1
+        //init max and min values
         _.each(values[0], function (values, index) {
             minMaxValuesObj[index] = {max: Number.NEGATIVE_INFINITY, min: Number.POSITIVE_INFINITY};
         });
@@ -89,11 +114,17 @@ class DataToolbox {
 
     /**
      * https://en.wikipedia.org/wiki/Feature_scaling
+     * @param value {Number}
+     * @param min {Number}
+     * @param max {Number}
+     * @param minRange {Number}
+     * @param maxRange {Number}
      *
-     * */
+     * @returns {Number}
+     */
     static featureScaling(value, min, max, minRange = -1, maxRange = 1) {
         if (min >= max) {
-            throw new NeuralNetworkError('Min should be smaller than Max');
+            throw new NeuralNetworkError('Min value should be smaller than Max value');
         }
 
         if (minRange >= maxRange) {
@@ -104,6 +135,15 @@ class DataToolbox {
         return _.round(normValue, CONSTANTS.roundPrecision);
     }
 
+    /**
+     * @param datasetObject {Array}
+     * @returns {Array}
+     */
+    static convertToArray(datasetObject) {
+        return _.map(datasetObject, function (row) {
+            return _.values(row);
+        });
+    }
 
     /**
      * @param values {Array}
@@ -113,7 +153,6 @@ class DataToolbox {
     static normalizeData(values, minRange = -1, maxRange = 1) {
         let normalizedArr = [];
         let minMaxValues = DataToolbox.calcMinMaxValues(values);
-        const that = this;
 
         _.each(values, function (row, rowIndex) {
             // normalizedArr[rowIndex] = [];
