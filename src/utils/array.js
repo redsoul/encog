@@ -16,18 +16,22 @@ class ArrayUtils {
         }
     };
 
-    /**
-     * Create a new floating point array.
-     * @param sz {number} The size of the array to create.
-     * @return {Array}
-     */
-    static newFloatArray(sz, defaultValue = 0.0) {
+    static __allocateArray(sz, defaultValue){
         let result = [];
         while (sz > 0) {
             result.push(defaultValue);
             sz -= 1;
         }
         return result;
+    }
+
+    /**
+     * Create a new floating point array.
+     * @param sz {number} The size of the array to create.
+     * @return {Array}
+     */
+    static newFloatArray(sz, defaultValue = 0.0) {
+        return ArrayUtils.__allocateArray(sz, defaultValue);
     };
 
     /**
@@ -36,11 +40,7 @@ class ArrayUtils {
      * @return {Array}
      */
     static newIntArray(sz, defaultValue = 0) {
-        let result = [];
-        while ((sz -= 1) > 0) {
-            result.push(defaultValue);
-        }
-        return result;
+        return ArrayUtils.__allocateArray(sz, defaultValue);
     };
 
     /**

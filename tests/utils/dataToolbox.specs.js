@@ -22,7 +22,7 @@ describe('DataSet', function () {
     });
 
     it('convertToArray', function () {
-        const temp=DataToolbox.convertToArray([{a: 1, b: 2, c: 3}, {a: 4, b: 5, c: 6}]);
+        const temp = DataToolbox.convertToArray([{a: 1, b: 2, c: 3}, {a: 4, b: 5, c: 6}]);
         expect(temp).toEqual([[1, 2, 3], [4, 5, 6]]);
     });
 
@@ -64,7 +64,7 @@ describe('DataSet', function () {
         it('should throw an exception', function () {
             expect(()=> {
                 DataToolbox.featureScaling(5, 4, 3)
-            }).toThrow(new NeuralNetworkError('Min should be smaller than Max'));
+            }).toThrow(new NeuralNetworkError('Min value should be smaller than Max value'));
         });
 
         it('should throw an exception', function () {

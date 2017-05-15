@@ -24,8 +24,7 @@ const RPROPType = {
     RPROPm: 'RPROPm',
 
     /**
-     * iRPROP+ : New weight back tracking method, some consider this to be
-     * the most advanced RPROP.
+     * iRPROP+ : New weight back tracking method, some consider this to be the most advanced RPROP.
      */
     iRPROPp: 'iRPROPp',
 
@@ -107,7 +106,12 @@ class ResilientPropagation extends Propagation {
         this.lastWeightChange = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length);
         this.zeroTolerance = DEFAULT_ZERO_TOLERANCE;
         this.maxStep = maxStep;
-        this.rpropType = RPROPType.RPROPp;
+        this.rpropType = RPROPType.iRPROPp;
+
+        /**
+         * Denominator for ARPROP adaptive weight change
+         */
+        this.q = 1;
 
         /**
          * The value error at the beginning of the previous training iteration.
@@ -119,6 +123,20 @@ class ResilientPropagation extends Propagation {
          * Denominator for ARPROP adaptive weight change
          */
         this.q = 1;
+    }
+
+    /**
+     * @returns {Object}
+     */
+    static getResilientTypes() {
+        return RPROPType;
+    }
+
+    /**
+     * @param rpropType {String}
+     */
+    setResilientType(rpropType = RPROPType.iRPROPp) {
+        this.rpropType = rpropType;
     }
 
     /**
@@ -180,7 +198,7 @@ class ResilientPropagation extends Propagation {
             delta = this.updateValues[index] * NEGATIVE_ETA;
             delta = Math.max(delta, DELTA_MIN);
             this.updateValues[index] = delta;
-            weightChange = -this.lastWeightChange[index];
+            weightChange = this.lastWeightChange[index] * -1;
             // set the previous gradient to zero so that there will be no
             // adjustment the next iteration
             lastGradient[index] = 0;
@@ -345,11 +363,12 @@ class ResilientPropagation extends Propagation {
             weightChange = EncogMath.sign(gradients[index]) * delta;
             lastGradient[index] = gradients[index];
         }
+
         if (this.error > this.lastError) {
-            weightChange = (1 / (2 * q)) * delta;
-            q++;
+            weightChange = (1 / (2 * this.q)) * delta;
+            this.q++;
         } else {
-            q = 1;
+            this.q = 1;
         }
 
         // apply the weight change, if any

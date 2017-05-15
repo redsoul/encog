@@ -83,7 +83,7 @@ class BasicNetwork {
         const count = this.structure.flat.layerCounts[fromLayerNumber];
         const weightIndex = weightBaseIndex + fromNeuron + (toNeuron * count);
 
-        this.structure.flat.weights[weightIndex] = value;
+        this.structure.flat.setWeight(value, weightIndex);
     }
 
     /**

@@ -1,4 +1,4 @@
-xdescribe('Levenberg Marquardt Training', function () {
+xdescribe('Jordan Network', function () {
     const Encog = require('../../index');
     let JordanPattern;
 
@@ -23,7 +23,7 @@ xdescribe('Levenberg Marquardt Training', function () {
         // train the neural network
         const train = new Encog.Training.Propagation.Resilient(network, inputDataset.train, outputDataset.train);
 
-        Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5});
+        Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5, maxIterations: 50});
         const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
 
         console.log('Accuracy:', accuracy);

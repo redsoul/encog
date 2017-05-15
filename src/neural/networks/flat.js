@@ -363,7 +363,7 @@ class FlatNetwork {
      */
     _randomize(hi, lo) {
         for (let i = 0; i < this.weights.length; i++) {
-            this.weights[i] = (Math.random() * (hi - lo)) + lo;
+            this.setWeight((Math.random() * (hi - lo)) + lo, i);
         }
     }
 
@@ -388,7 +388,15 @@ class FlatNetwork {
         const count = this.layerCounts[fromLayerNumber];
         const weightIndex = weightBaseIndex + fromNeuron + (toNeuron * count);
 
-        return this.weights[weightIndex];
+        return this._weights[weightIndex];
+    }
+
+    /**
+     * @param weight {Number}
+     * @param index {Number}
+     */
+    setWeight(weight, index) {
+        this._weights[index] = weight;
     }
 
     /**
@@ -489,7 +497,7 @@ class FlatNetwork {
      * network weights. To read this into a neural network, use the
      * decodeNetwork method.
      *
-     * @return {array} The encoded network.
+     * @return {Array} The encoded network.
      */
     encodeNetwork() {
         return this.weights;
@@ -500,6 +508,20 @@ class FlatNetwork {
      */
     getEncodeLength() {
         return this.weights.length;
+    }
+
+    /**
+     * @returns {Array}
+     */
+    get weights(){
+        return this._weights;
+    }
+
+    /**
+     * @param weights {Array}
+     */
+    set weights(weights){
+        this._weights = weights;
     }
 }
 
