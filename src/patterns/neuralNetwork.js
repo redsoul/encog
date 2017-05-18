@@ -1,3 +1,4 @@
+const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 /**
  * Patterns are used to create common sorts of neural networks. Information
  * about the structure of the neural network is communicated to the pattern, and
@@ -7,19 +8,31 @@
  *
  */
 class NeuralNetworkPattern {
+
+    constructor() {
+        this.clear();
+    }
+
     /**
      * Add the specified hidden layer.
      *
-     * @param count {number}
-     *            The number of neurons in the hidden layer.
+     * @param neuronsCount {number} The number of neurons in the hidden layer.
+     * @param activationFunc {ActivationFunction} The Activation Function
      */
-    addHiddenLayer(count) {
+    addHiddenLayer(neuronsCount, activationFunc = new ActivationSigmoid()) {
+        this.hiddenLayers.push({
+            neurons: neuronsCount,
+            activationFunction: activationFunc
+        });
     }
 
     /**
      * Clear the hidden layers so that they can be redefined.
      */
     clear() {
+        this.hiddenLayers = [];
+        this.inputLayer = null;
+        this.outputLayer = null;
     }
 
     /**
@@ -28,6 +41,28 @@ class NeuralNetworkPattern {
      * @return {BasicNetwork} The resulting neural network.
      */
     generate() {
+    }
+
+    /**
+     * @param neuronsCount {number} The number of neurons in the hidden layer.
+     * @param activationFunc {ActivationFunction} The Activation Function
+     */
+    setInputLayer(neuronsCount, activationFunc = null) {
+        this.inputLayer = {
+            neurons: neuronsCount,
+            activationFunction: activationFunc
+        };
+    }
+
+    /**
+     * @param neuronsCount {number} The number of neurons in the hidden layer.
+     * @param activationFunc {ActivationFunction} The Activation Function
+     */
+    setOutputLayer(neuronsCount, activationFunc = new ActivationSigmoid()) {
+        this.outputLayer = {
+            neurons: neuronsCount,
+            activationFunction: activationFunc
+        };
     }
 }
 

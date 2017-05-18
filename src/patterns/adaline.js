@@ -17,16 +17,8 @@ class ADALINEPattern extends NeuralNetworkPattern {
     /**
      * @inheritDoc
      */
-    addHiddenLayer(count) {
+    addHiddenLayer() {
         throw new NeuralNetworkError("An ADALINE network has no hidden layers.");
-    }
-
-    /**
-     * @inheritDoc
-     */
-    clear() {
-        this.inputNeurons = 0;
-        this.outputNeurons = 0;
     }
 
     /**
@@ -35,14 +27,12 @@ class ADALINEPattern extends NeuralNetworkPattern {
     generate() {
         const network = new BasicNetwork();
 
-        const inputLayer = new BasicLayer(new ActivationLinear(), true, this.inputNeurons);
-        const outputLayer = new BasicLayer(new ActivationLinear(), false, this.outputNeurons);
+        const inputLayer = new BasicLayer(this.inputLayer.activationFunction, true, this.inputLayer.neurons);
+        const outputLayer = new BasicLayer(this.outputLayer.activationFunction, false, this.outputLayer.neurons);
 
         network.addLayer(inputLayer);
         network.addLayer(outputLayer);
         network.structure.finalizeStructure();
-
-        (new RangeRandomizer(-0.5, 0.5)).randomize(network);
 
         return network;
     }

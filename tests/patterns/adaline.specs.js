@@ -1,17 +1,16 @@
-describe('Jordan Network', function () {
+describe('ADALINE Network', function () {
     const Encog = require('../../index');
+    let AdalinePattern;
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
-    let JordanPattern;
 
     beforeEach(function () {
-        JordanPattern = new Encog.Patterns.Jordan();
+        AdalinePattern = new Encog.Patterns.Adaline();
     });
 
     it('Should throw and error when trying to add more than one hidden layer',function () {
-        JordanPattern.addHiddenLayer(10);
         expect(()=> {
-            JordanPattern.addHiddenLayer(10);
-        }).toThrow(new NeuralNetworkError("A Jordan neural network should have only one hidden layer."))
+            AdalinePattern.addHiddenLayer(10);
+        }).toThrow(new NeuralNetworkError("An ADALINE network has no hidden layers."))
     });
 
     it('Iris Flower Dataset', function () {
@@ -19,11 +18,10 @@ describe('Jordan Network', function () {
         let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
         let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
 
-        JordanPattern.setInputLayer(4);
-        JordanPattern.addHiddenLayer(10);
-        JordanPattern.setOutputLayer(3);
+        AdalinePattern.setInputLayer(4);
+        AdalinePattern.setOutputLayer(3);
 
-        const network = JordanPattern.generate();
+        const network = AdalinePattern.generate();
 
         Encog.Utils.DataToolbox.normalizeData(inputDataset.train);
         Encog.Utils.DataToolbox.normalizeData(inputDataset.test);
@@ -34,7 +32,6 @@ describe('Jordan Network', function () {
         Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5, maxIterations: 25});
         const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
 
-        //TODO: fix me
-        expect(accuracy >= 0).toBe(true);
+        expect(accuracy >= 60).toBe(true);
     });
 });

@@ -1,17 +1,17 @@
-describe('Jordan Network', function () {
+describe('Elman Network', function () {
     const Encog = require('../../index');
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
-    let JordanPattern;
+    let ElmanPattern;
 
     beforeEach(function () {
-        JordanPattern = new Encog.Patterns.Jordan();
+        ElmanPattern = new Encog.Patterns.Elman();
     });
 
     it('Should throw and error when trying to add more than one hidden layer',function () {
-        JordanPattern.addHiddenLayer(10);
+        ElmanPattern.addHiddenLayer(10);
         expect(()=> {
-            JordanPattern.addHiddenLayer(10);
-        }).toThrow(new NeuralNetworkError("A Jordan neural network should have only one hidden layer."))
+            ElmanPattern.addHiddenLayer(10);
+        }).toThrow(new NeuralNetworkError("An Elman neural network should have only one hidden layer."))
     });
 
     it('Iris Flower Dataset', function () {
@@ -19,11 +19,11 @@ describe('Jordan Network', function () {
         let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
         let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
 
-        JordanPattern.setInputLayer(4);
-        JordanPattern.addHiddenLayer(10);
-        JordanPattern.setOutputLayer(3);
+        ElmanPattern.setInputLayer(4);
+        ElmanPattern.addHiddenLayer(10);
+        ElmanPattern.setOutputLayer(3);
 
-        const network = JordanPattern.generate();
+        const network = ElmanPattern.generate();
 
         Encog.Utils.DataToolbox.normalizeData(inputDataset.train);
         Encog.Utils.DataToolbox.normalizeData(inputDataset.test);
