@@ -55,11 +55,11 @@ class JordanPattern extends NeuralNetworkPattern {
 
         const network = new BasicNetwork();
         const hidden = new BasicLayer(this.activation, true, this.hiddenNeurons);
-        const output = new BasicLayer(null, false, this.outputNeurons);
+        const output = new BasicLayer(this.activation, false, this.outputNeurons);
 
         hidden.contextFedBy = output;
 
-        network.addLayer(new BasicLayer(this.activation, true, this.inputNeurons));
+        network.addLayer(new BasicLayer(null, true, this.inputNeurons));
         network.addLayer(hidden);
         network.addLayer(output);
 

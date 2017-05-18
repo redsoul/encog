@@ -41,7 +41,7 @@ class FlatNetwork {
             this.init(arguments[0], false);
         } else if (arguments.length == 2 && typeof arguments[0] == 'object') {
             this.init(arguments[0], arguments[1]);
-        } else {
+        } else if (arguments.length >= 3) {
             const linearAct = new ActivationLinear();
             let layers = [];
             const act = tanh ? new ActivationTanh() : new ActivationSigmoid();
@@ -162,7 +162,7 @@ class FlatNetwork {
     /**
      * Calculate the output for the given input.
      *
-     * @param {float} input
+     * @param {Array} input
      *            The input.
      * @returns {Array}
      *            The Output
@@ -453,6 +453,7 @@ class FlatNetwork {
      */
     cloneFlatNetwork(result) {
         result.inputCount = this.inputCount;
+        result.outputCount = this.outputCount;
         result.layerCounts = _.clone(this.layerCounts);
         result.layerIndex = _.clone(this.layerIndex);
         result.layerOutput = _.clone(this.layerOutput);
@@ -462,7 +463,6 @@ class FlatNetwork {
         result.contextTargetSize = _.clone(this.contextTargetSize);
         result.layerContextCount = _.clone(this.layerContextCount);
         result.biasActivation = _.clone(this.biasActivation);
-        result.outputCount = this.outputCount;
         result.weightIndex = this.weightIndex;
         result.weights = this.weights;
         result.layerDropoutRates = _.clone(this.layerDropoutRates);
@@ -489,7 +489,7 @@ class FlatNetwork {
                 "Incompatible weight sizes, can't assign length="
                 + data.length + " to length=" + this.weights.length);
         }
-        this.weights = ArrayUtils.arrayClone(data);
+        this.weights = _.clone(data);
     }
 
     /**
@@ -513,14 +513,14 @@ class FlatNetwork {
     /**
      * @returns {Array}
      */
-    get weights(){
+    get weights() {
         return this._weights;
     }
 
     /**
      * @param weights {Array}
      */
-    set weights(weights){
+    set weights(weights) {
         this._weights = weights;
     }
 }

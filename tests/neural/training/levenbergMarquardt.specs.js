@@ -1,6 +1,7 @@
 xdescribe('Levenberg Marquardt Training', function () {
     const LevenbergMarquardt = require(PATHS.TRAINING + 'levenbergMarquardt');
     const NetworkUtil = require(PATHS.UTILS + 'network');
+    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
 
     beforeEach(function () {
 
@@ -23,8 +24,8 @@ xdescribe('Levenberg Marquardt Training', function () {
         const dataset = NetworkUtil.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = NetworkUtil.trainTestSpit(dataset.input);
-        let outputDataset = NetworkUtil.trainTestSpit(dataset.output);
+        let inputDataset = DataToolbox.trainTestSpit(dataset.input);
+        let outputDataset = DataToolbox.trainTestSpit(dataset.output);
 
         const train = new LevenbergMarquardt(network, inputDataset.train, outputDataset.train);
 

@@ -3,6 +3,7 @@ const ArrayUtils = require(PATHS.UTILS + 'array');
 const HessionCR = require(PATHS.HESSIAN + 'hessianCR');
 const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const mathjs = require('mathjs');
+const _ = require('lodash');
 const Matrix = require(PATHS.MATRICES + 'matrix');
 /**
  * The amount to scale the lambda by.
@@ -149,7 +150,7 @@ class LevenbergMarquardtTraining extends BasicTraining {
      * Update the weights in the neural network.
      */
     updateWeights() {
-        const w = ArrayUtils.arrayClone(this.weights);
+        const w = _.clone(this.weights);
 
         for (let i = 0; i < w.length; i++) {
             w[i] += this.deltas[i];

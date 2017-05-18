@@ -16,7 +16,7 @@ class ArrayUtils {
         }
     };
 
-    static __allocateArray(sz, defaultValue){
+    static __allocateArray(sz, defaultValue) {
         let result = [];
         while (sz > 0) {
             result.push(defaultValue);
@@ -44,15 +44,7 @@ class ArrayUtils {
     };
 
     /**
-     * Allocate an array of zeros of the specified size.
-     * @param x The size of the array.
-     */
-    static allocate1D(x) {
-        return _.fill(new Array(x), 0);
-    };
-
-    /**
-     * Copy an array of doubles.
+     * Copy an array
      *
      * @param source {Array}
      *            The source.
@@ -68,19 +60,11 @@ class ArrayUtils {
     static arrayCopy(source, sourcePos, target, targetPos, length) {
         if (arguments.length == 2) {
             ArrayUtils.arrayCopy(arguments[0], 0, arguments[1], 0, arguments[0].length);
-        } else {
+        } else if (sourcePos >= 0 && targetPos >= 0) {
             for (let index = 0; index < sourcePos + length; index++) {
                 target[targetPos + index] = source[index];
             }
         }
-    }
-
-    /**
-     * @param source {Array}
-     * @return {Array}
-     * */
-    static arrayClone(source) {
-        return _.clone(source);
     }
 }
 

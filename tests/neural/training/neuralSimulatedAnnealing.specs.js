@@ -2,6 +2,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
     const NeuralSimulatedAnnealing = require(PATHS.TRAINING + 'neuralSimulatedAnnealing');
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const TrainingSetScore = require(PATHS.SCORE + 'trainingSet');
+    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
 
     beforeEach(function () {
 
@@ -25,8 +26,8 @@ xdescribe('Neural Simulated Annealing Training', function () {
         const dataset = NetworkUtil.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = NetworkUtil.trainTestSpit(dataset.input);
-        let outputDataset = NetworkUtil.trainTestSpit(dataset.output);
+        let inputDataset = DataToolbox.trainTestSpit(dataset.input);
+        let outputDataset = DataToolbox.trainTestSpit(dataset.output);
 
         const score = new TrainingSetScore(inputDataset.train, outputDataset.train);
         const train = new NeuralSimulatedAnnealing(network, score, 10, 2, 100);

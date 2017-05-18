@@ -1,5 +1,6 @@
 const ArrayUtils = require(PATHS.UTILS + 'array');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+const _ = require('lodash');
 
 class LUDecomposition {
     /**
@@ -8,7 +9,7 @@ class LUDecomposition {
      * @param A {Array} Rectangular matrix
      * */
     constructor(A) {
-        this.LU = ArrayUtils.arrayClone(A);
+        this.LU = _.cloneDeep(A);
 
         this.m = A.length;
         this.n = A[0].length;
