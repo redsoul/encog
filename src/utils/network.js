@@ -48,6 +48,9 @@ class NetworkUtil {
         };
     }
 
+    /**
+     * @returns {Array}
+     */
     static getHopfieldPatterns() {
         return [
             [

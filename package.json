@@ -30,7 +30,8 @@
     "adaline neural network",
     "elman neural network",
     "feed forward neural network",
-    "jordan neural network"
+    "jordan neural network",
+    "hopfield network"
   ],
   "author": "redsoul",
   "license": "Apache",
