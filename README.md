@@ -71,7 +71,7 @@ const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test,
 console.log('Accuracy:', accuracy);
 ```
 
-## Hopfield Network example using Iris Flower Data Set (https://en.wikipedia.org/wiki/Iris_flower_data_set)
+## Hopfield Network example custom binary dataset
 
 ```javascript
 const Encog = require('encog');
