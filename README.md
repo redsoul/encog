@@ -22,7 +22,7 @@ const Encog = require('encog');
     npm install --only=dev
     gulp tests
 
-## Back Propagation example using Iris Flower Data Set (https://en.wikipedia.org/wiki/Iris_flower_data_set)
+## Back Propagation example using XOR Data Set
 
 ```javascript
 const Encog = require('encog');
