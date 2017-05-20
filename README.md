@@ -29,10 +29,10 @@ const Encog = require('encog');
 const XORdataset = Encog.Utils.Network.getXORDataset();
 
 // create a neural network
-const network = new BasicNetwork();
-network.addLayer(new BasicLayer(null, true, 2));
-network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 4));
-network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
+const network = new Encog.Networks.Basic();
+network.addLayer(new Encog.Layers.Basic(null, true, 2));
+network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 4));
+network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
 network.structure.finalizeStructure();
 network.reset();
 
