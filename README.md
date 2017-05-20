@@ -36,10 +36,10 @@ network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
 network.structure.finalizeStructure();
 network.reset();
 
-const train = new BackPropagation(network, XORdataset.input, XORdataset.output);
+const train = new Encog.Training.Propagation.BackPropagation(network, XORdataset.input, XORdataset.output);
 
 Encog.Utils.Network.trainNetwork(train, {maxIterations: 250});
-const accuracy = NetworkUtil.validateNetwork(network, XORdataset.input, XORdataset.output);
+const accuracy = Encog.Utils.Network.validateNetwork(network, XORdataset.input, XORdataset.output);
 console.log('Accuracy:', accuracy);
 ```
 
