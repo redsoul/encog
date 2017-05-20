@@ -7,6 +7,7 @@ module.exports = (function () {
     const LAYERS = SRC + 'neural/layers/';
     const SCORE = SRC + 'neural/scores/';
     const NETWORKS = SRC + 'neural/networks/';
+    const NEURAL = SRC + 'neural/';
     const PATTERNS = SRC + 'patterns/';
     const TRAINING = SRC + 'neural/training/';
     const PROPAGATION = TRAINING + 'propagation/';
@@ -36,6 +37,7 @@ module.exports = (function () {
         LAYERS,
         SCORE,
         NETWORKS,
+        NEURAL,
         PATTERNS,
         TRAINING,
         PROPAGATION,

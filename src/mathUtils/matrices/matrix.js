@@ -1,5 +1,5 @@
-const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ArrayUtils = require(PATHS.UTILS + 'array');
+const MatrixError = require(PATHS.ERROR_HANDLING + 'matrix');
 
 /**
  * This class implements a mathematical matrix. Matrix math is very important to
@@ -18,15 +18,24 @@ class Matrix {
      */
     constructor(rows, cols, defaultValue = 0) {
         this.matrix = [];
-        if (arguments.length == 1) {
+        if (arguments[0].constructor.name == 'Array') {
             this.setMatrix(arguments[0])
-        } else {
+        } else if ((
+            arguments.length === 3 &&
+            arguments[0].constructor.name == 'Number' &&
+            arguments[1].constructor.name == 'Number' &&
+            arguments[2].constructor.name == 'Number') || (
+            arguments.length === 2 &&
+            arguments[0].constructor.name == 'Number' &&
+            arguments[1].constructor.name == 'Number')) {
             for (var i = 0; i < cols; i++) {
                 this.matrix[i] = [];
                 for (var j = 0; j < rows; j++) {
                     this.matrix[i][j] = defaultValue;
                 }
             }
+        } else {
+            throw new MatrixError('Invalid Matrix arguments');
         }
     }
 
@@ -174,7 +183,7 @@ class Matrix {
      */
     getCol(col) {
         if (col > this.getCols()) {
-            throw new NeuralNetworkError("Can't get column #" + col + " because it does not exist.");
+            throw new MatrixError("Can't get column #" + col + " because it does not exist.");
         }
 
         let newMatrix = ArrayUtils.newIntArray(this.getRows(), new Array(1));
@@ -195,7 +204,7 @@ class Matrix {
      */
     getRow(row) {
         if (row > this.getRows()) {
-            throw new NeuralNetworkError("Can't get row #" + row + " because it does not exist.");
+            throw new MatrixError("Can't get row #" + row + " because it does not exist.");
         }
 
         let newMatrix = ArrayUtils.newIntArray(this.getCols());
@@ -218,11 +227,11 @@ class Matrix {
      */
     _validate(row, col) {
         if ((row >= this.getRows()) || (row < 0)) {
-            throw new NeuralNetworkError("The row:" + row + " is out of range:" + this.getRows());
+            throw new MatrixError("The row:" + row + " is out of range:" + this.getRows());
         }
 
         if ((col >= this.getCols()) || (col < 0)) {
-            throw new NeuralNetworkError("The col:" + col + " is out of range:" + this.getCols());
+            throw new MatrixError("The col:" + col + " is out of range:" + this.getCols());
         }
     }
 }

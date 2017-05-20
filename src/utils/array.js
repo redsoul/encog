@@ -27,7 +27,8 @@ class ArrayUtils {
 
     /**
      * Create a new floating point array.
-     * @param sz {number} The size of the array to create.
+     * @param sz {Number} The size of the array to create.
+     * @param defaultValue {Number} The default value
      * @return {Array}
      */
     static newFloatArray(sz, defaultValue = 0.0) {
@@ -36,11 +37,21 @@ class ArrayUtils {
 
     /**
      * Create a new int array.
-     * @param sz {number} The size of the array to create.
+     * @param sz {Number} The size of the array to create.
+     * @param defaultValue {Number} The default value
      * @return {Array}
      */
     static newIntArray(sz, defaultValue = 0) {
         return ArrayUtils.__allocateArray(sz, defaultValue);
+    };
+
+    /**
+     * Create a new boolean point array.
+     * @param sz {Number} The size of the array to create.
+     * @return {Array}
+     */
+    static newBooleanArray(sz) {
+        return ArrayUtils.__allocateArray(sz, false);
     };
 
     /**
@@ -65,6 +76,26 @@ class ArrayUtils {
                 target[targetPos + index] = source[index];
             }
         }
+    }
+
+    /**
+     * @param arr {Array}
+     * @param rowSize {Number}
+     */
+    static toStringAsMatrix(arr, rowSize) {
+        let str = "";
+        _.map(arr, (v, index)=> {
+            str += v;
+            if ((index + 1) % rowSize == 0) {
+                str += '\n'
+            } else {
+                str += ',';
+            }
+        });
+        str = _.trim(str);
+        str = _.trimEnd(str, ',');
+
+        return str;
     }
 }
 

@@ -7,7 +7,7 @@ describe('ADALINE Network', function () {
         AdalinePattern = new Encog.Patterns.Adaline();
     });
 
-    it('Should throw and error when trying to add more than one hidden layer',function () {
+    it('Should throw and error when trying to add hidden layers',function () {
         expect(()=> {
             AdalinePattern.addHiddenLayer(10);
         }).toThrow(new NeuralNetworkError("An ADALINE network has no hidden layers."))
