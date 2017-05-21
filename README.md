@@ -1,4 +1,4 @@
-# encog
+# encog [![Build Status](https://travis-ci.org/redsoul/encog.svg?branch=master)](https://travis-ci.org/redsoul/encog)
 Encog is a NodeJs ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton.
 
 All credits of the framework should go to Jeff Heaton - http://www.heatonresearch.com/encog/
