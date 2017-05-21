@@ -31,8 +31,6 @@ class FeedForwardPattern extends NeuralNetworkPattern {
 
         const output = new BasicLayer(this.outputLayer.activationFunction, false, this.outputLayer.neurons);
         network.addLayer(output);
-
-        network.structure.finalizeStructure();
         network.reset();
 
         return network;

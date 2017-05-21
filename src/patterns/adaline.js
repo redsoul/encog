@@ -32,7 +32,7 @@ class ADALINEPattern extends NeuralNetworkPattern {
 
         network.addLayer(inputLayer);
         network.addLayer(outputLayer);
-        network.structure.finalizeStructure();
+        network.reset();
 
         return network;
     }

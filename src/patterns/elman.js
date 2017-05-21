@@ -50,8 +50,6 @@ class ElmanPattern extends NeuralNetworkPattern {
         network.addLayer(input);
         network.addLayer(hidden);
         network.addLayer(new BasicLayer(this.outputLayer.activationFunction, false, this.outputLayer.neurons));
-
-        network.structure.finalizeStructure();
         network.reset();
 
         return network;

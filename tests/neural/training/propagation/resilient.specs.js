@@ -53,7 +53,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
             const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
 
-            expect(accuracy >= 80).toBe(true);
+            expect(accuracy >= 70).toBe(true);
         });
     });
 

@@ -9,7 +9,6 @@ network.addLayer(new Encog.Layers.Basic(null, true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 10));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 5));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 3));
-network.structure.finalizeStructure();
 network.reset();
 
 Encog.Utils.DataToolbox.normalizeData(inputDataset.train);

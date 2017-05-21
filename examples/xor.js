@@ -6,7 +6,6 @@ network = new Encog.Networks.Basic();
 network.addLayer(new Encog.Layers.Basic(null, true, 2));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
-network.structure.finalizeStructure();
 network.reset();
 
 // train the neural network

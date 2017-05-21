@@ -1,9 +1,11 @@
-# encog [![Build Status](https://travis-ci.org/redsoul/encog.svg?branch=master)](https://travis-ci.org/redsoul/encog)
+# encog 
 Encog is a NodeJs ES6 port of the popular Encog Machine Learning Framework by Jeff Heaton.
 
 All credits of the framework should go to Jeff Heaton - http://www.heatonresearch.com/encog/
 
 Based on the encog-java-core v3.4 - https://github.com/encog/encog-java-core
+
+[![Build Status](https://travis-ci.org/redsoul/encog.svg?branch=master)](https://travis-ci.org/redsoul/encog)
 
 ## Installation
 
@@ -33,7 +35,6 @@ const network = new Encog.Networks.Basic();
 network.addLayer(new Encog.Layers.Basic(null, true, 2));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
-network.structure.finalizeStructure();
 network.reset();
 
 const train = new Encog.Training.Propagation.BackPropagation(network, XORdataset.input, XORdataset.output);
@@ -57,7 +58,6 @@ network.addLayer(new Encog.Layers.Basic(null, true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 10));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 5));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 3));
-network.structure.finalizeStructure();
 network.reset();
 
 Encog.Utils.DataToolbox.normalizeData(inputDataset.train);

@@ -254,8 +254,11 @@ class BasicNetwork {
      *
      */
     reset() {
+        this.structure.finalizeStructure();
         this.getRandomizer().randomize(this);
     }
+
+
 
     /**
      * @return {number} The length of an encoded array.
