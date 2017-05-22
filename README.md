@@ -5,6 +5,8 @@ All credits of the framework should go to Jeff Heaton - http://www.heatonresearc
 
 Based on the encog-java-core v3.4 - https://github.com/encog/encog-java-core
 
+Full documentation and source code - https://github.com/redsoul/encog
+
 [![Build Status](https://travis-ci.org/redsoul/encog.svg?branch=master)](https://travis-ci.org/redsoul/encog)
 
 ## Installation
@@ -37,7 +39,7 @@ network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(),
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
 network.reset();
 
-const train = new Encog.Training.Propagation.BackPropagation(network, XORdataset.input, XORdataset.output);
+const train = new Encog.Training.Propagation.Back(network, XORdataset.input, XORdataset.output);
 
 Encog.Utils.Network.trainNetwork(train, {maxIterations: 250});
 const accuracy = Encog.Utils.Network.validateNetwork(network, XORdataset.input, XORdataset.output);
