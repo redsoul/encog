@@ -258,14 +258,53 @@ class BasicNetwork {
         this.getRandomizer().randomize(this);
     }
 
-
-
     /**
      * @return {number} The length of an encoded array.
      */
     encodedArrayLength() {
         this.structure.requireFlat();
         return this.structure.flat.getEncodeLength();
+    }
+
+    /**
+     * @returns {String}
+     */
+    toJSON() {
+        let result = "";
+        const now = (new Date()).getTime();
+        let af;
+        const NEWLINE = '\n';
+        const PLATFORM = 'ENCOG';
+
+        result += 'encog,BasicNetwork,' + PLATFORM + ',3.1.0,1,' + now + NEWLINE;
+        result += '[BASIC]' + NEWLINE;
+        result += '[BASIC:PARAMS]' + NEWLINE;
+        result += '[BASIC:NETWORK]' + NEWLINE;
+        result += 'beginTraining=' + this.beginTraining + NEWLINE;
+        result += 'connectionLimit=' + this.connectionLimit + NEWLINE;
+        result += 'contextTargetOffset=' + this.contextTargetOffset.join(',') + NEWLINE;
+        result += 'contextTargetSize=' + this.contextTargetSize.join(',') + NEWLINE;
+        result += 'endTraining=' + this.endTraining + NEWLINE;
+        result += 'hasContext=' + (this.hasContext ? 't' : 'f') + NEWLINE;
+        result += 'inputCount=' + this.inputCount + NEWLINE;
+        result += 'layerCounts=' + this.layerCounts.join(',') + NEWLINE;
+        result += 'layerFeedCounts=' + this.layerFeedCounts.join(',') + NEWLINE;
+        result += 'layerContextCount=' + this.layerContextCount.join(',') + NEWLINE;
+        result += 'layerIndex=' + this.layerIndex.join(',') + NEWLINE;
+        result += 'output=' + this.layerOutput.join(',') + NEWLINE;
+        result += 'outputCount=' + this.outputCount + NEWLINE;
+        result += 'weightIndex=' + this.weightIndex.join(',') + NEWLINE;
+        result += 'weights=' + this.weights.join(',') + NEWLINE;
+        result += 'biasActivation=' + this.biasActivation.join(',') + NEWLINE;
+        result += '[BASIC:ACTIVATION]' + NEWLINE;
+
+        for (let i = 0; i < this.activationFunctions.length; i += 1) {
+            af = this.activationFunctions[i];
+            result += '\"';
+            result += af.type;
+            result += '\"' + NEWLINE;
+        }
+        return result;
     }
 }
 
