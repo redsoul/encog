@@ -34,9 +34,9 @@ const Encog = require('encog');
   * Back Propagation
   * Manhattan Propagation
   * Resilient Propagation
-* **Patterns**
   * Levenberg Marquardt
   * Neural Simulated Annealing
+* **Patterns**
   * ADALINE
   * Feed Forward (Perceptron)
   * Elman Network
