@@ -1,16 +1,20 @@
 var ActivationFunction = require('../activationFunction');
 
 /**
- * Computationally efficient alternative to ActivationSigmoid.
- * Its output is in the range [0, 1], and it is derivable.
+ * An activation function based on the Gaussian function. The output range is
+ * between 0 and 1. This activation function is used mainly for the HyperNeat
+ * implementation.
  *
- * It will approach the 0 and 1 more slowly than Sigmoid so it
- * might be more suitable to classification tasks than predictions tasks.
+ * A derivative is provided, so this activation function can be used with
+ * propagation training.  However, its primary intended purpose is for
+ * HyperNeat.  The derivative was obtained with the R statistical package.
  *
- * Elliott, D.L. "A better activation function for artificial neural networks", 1993
- * http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.46.7204&rep=rep1&type=pdf
- * @constructor
- * @class ActivationGaussian
+ * If you are looking to implement a RBF-based neural network, see the
+ * RBFNetwork class.
+ *
+ * The idea for this activation function was developed by  Ken Stanley, of
+ * the University of Texas at Austin.
+ * http://www.cs.ucf.edu/~kstanley/
  */
 
 class ActivationGaussian extends ActivationFunction {

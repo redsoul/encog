@@ -24,9 +24,44 @@ const Encog = require('encog');
 ## Unit Tests
 
     npm install --only=dev
-    gulp tests
+    npm test
 
-## Back Propagation example using XOR Data Set
+## Implemented algorithms
+* **Networks**
+  * Basic Network
+  * Hopfield Network
+* **Training**
+  * Back Propagation
+  * Manhattan Propagation
+  * Resilient Propagation
+* **Patterns**
+  * Levenberg Marquardt
+  * Neural Simulated Annealing
+  * ADALINE
+  * Feed Forward (Perceptron)
+  * Elman Network
+  * Jordan Network
+  * Hopfield Network
+* **Activation Functions**
+  * Elliott
+  * Symmetric Elliott
+  * Gaussian
+  * Linear
+  * Ramp
+  * Sigmoid
+  * Softmax
+  * Steepened Sigmoid
+  * Hyperbolic tangent
+* **Error Functions**
+  * Arctangent
+  * Cross Entropy
+  * Linear
+  * Output
+    
+
+# Examples
+
+### Back Propagation example using XOR Data Set
 
 ```javascript
 const Encog = require('encog');
@@ -46,7 +81,7 @@ const accuracy = Encog.Utils.Network.validateNetwork(network, XORdataset.input, 
 console.log('Accuracy:', accuracy);
 ```
 
-## Resilient Propagation example using Iris Flower Data Set (https://en.wikipedia.org/wiki/Iris_flower_data_set)
+### Resilient Propagation example using Iris Flower Data Set (https://en.wikipedia.org/wiki/Iris_flower_data_set)
 
 ```javascript
 const Encog = require('encog');
@@ -73,7 +108,7 @@ const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test,
 console.log('Accuracy:', accuracy);
 ```
 
-## Hopfield Network example custom binary dataset
+### Hopfield Network example custom binary dataset
 
 ```javascript
 const Encog = require('encog');
@@ -114,6 +149,6 @@ Output:
 */
 ```
 
-## Node.js version compatibility
+# Node.js version compatibility
 
 6.0.0 or higher
