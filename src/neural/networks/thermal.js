@@ -171,6 +171,30 @@ class ThermalNetwork {
     setWeights(w) {
         this.weights = w;
     }
+
+    /**
+     * @returns {Object}
+     */
+    toJSON() {
+        let networkJSON = {
+            type : 'ThermaldNetwork',
+            weights: this.weights,
+            neuronCount: this.neuronCount,
+            currentState: this.currentState.getData()
+        };
+
+        return networkJSON;
+    }
+
+    /**
+     * @param obj {Object}
+     */
+    fromJSON(obj) {
+        this.weights = obj.weights;
+        this.neuronCount = obj.neuronCount;
+        this.currentState = new BiPolarNeuralData(obj.neuronCount);
+        this.currentState.setData(obj.currentState);
+    }
 }
 
 module.exports = ThermalNetwork;

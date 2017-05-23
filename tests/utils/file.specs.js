@@ -7,11 +7,11 @@ describe('File Utils', function () {
 
     FileUtils.__set__("fs", fsMock);
 
-    beforeEach(function () {
-        network = NetworkUtil.createXORNetwork();
-    });
-
     describe('saveNetwork method', function () {
+        beforeEach(function () {
+            network = NetworkUtil.createXORNetwork();
+        });
+
         it('', function () {
             spyOn(network, 'toJSON');
             FileUtils.saveNetwork(network, 'test.dat');
@@ -21,7 +21,11 @@ describe('File Utils', function () {
     });
 
     describe('loadNetwork method', function () {
-        it('', function () {
+        beforeEach(function () {
+            network = NetworkUtil.createXORNetwork();
+        });
+
+        it('BasicNetwork', function () {
             fsMock.readFileSync.and.returnValue(JSON.stringify(network));
             FileUtils.__set__("fs", fsMock);
             const newNetwork = FileUtils.loadNetwork('test.dat');

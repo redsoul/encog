@@ -150,6 +150,23 @@ class HopfieldNetwork extends ThermalNetwork {
 
         return cycle;
     }
+
+    /**
+     * @returns {Object}
+     */
+    toJSON() {
+        const networkJSON = super.toJSON();
+        networkJSON.type = 'HopfieldNetwork';
+
+        return networkJSON;
+    }
+
+    /**
+     * @param obj {Object}
+     */
+    fromJSON(obj) {
+        super.fromJSON(obj);
+    }
 }
 
 module.exports = HopfieldNetwork;
