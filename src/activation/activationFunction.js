@@ -31,6 +31,14 @@ class ActivationFunction {
     clone() {
         return new ActivationFunction();
     }
+
+    toJSON() {
+        return this.type;
+    }
+
+    toString() {
+        return this.type;
+    }
 }
 
 module.exports = ActivationFunction;

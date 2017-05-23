@@ -523,6 +523,58 @@ class FlatNetwork {
     set weights(weights) {
         this._weights = weights;
     }
+
+    /**
+     * @returns {Object}
+     */
+    toJSON() {
+        const now = (new Date()).getTime();
+        var packageJson = require(PATHS.BASE + '/package.json');
+
+        let result = {
+            type: 'FlatNetwork',
+            version: packageJson.version,
+            timestamp: now,
+            beginTraining: this.beginTraining,
+            contextTargetOffset: this.contextTargetOffset,
+            contextTargetSize: this.contextTargetSize,
+            endTraining: this.endTraining,
+            hasContext: !!this.hasContext,
+            inputCount: this.inputCount,
+            layerCounts: this.layerCounts,
+            layerSums: this.layerSums,
+            layerFeedCounts: this.layerFeedCounts,
+            layerContextCount: this.layerContextCount,
+            layerIndex: this.layerIndex,
+            layerOutput: this.layerOutput,
+            outputCount: this.outputCount,
+            weightIndex: this.weightIndex,
+            weights: this.weights,
+            biasActivation: this.biasActivation,
+        };
+
+        result.activationFunctions = [];
+        for (let i = 0; i < this.activationFunctions.length; i += 1) {
+            result.activationFunctions.push(this.activationFunctions[i].type);
+        }
+
+        return result;
+    }
+
+    /**
+     * @param obj {Object}
+     */
+    fromJSON(obj){
+        this.weights = obj.weights;
+        this.weightIndex = obj.weightIndex;
+        this.hasContext = obj.hasContext;
+        this.layerOutput = obj.layerOutput;
+        this.layerCounts = obj.layerCounts;
+        this.layerSums = obj.layerSums;
+        this.layerContextCount = obj.layerContextCount;
+        this.contextTargetSize = obj.contextTargetSize;
+        this.contextTargetOffset = obj.contextTargetOffset;
+    }
 }
 
 module.exports = FlatNetwork;

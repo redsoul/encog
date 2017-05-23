@@ -3,6 +3,9 @@ const _ = require('lodash');
 const NguyenWidrowRandomizer = require(PATHS.RANDOMIZERS + 'nguyenWidrow');
 const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+const BasicLayer = require(PATHS.LAYERS + 'basic');
+const requireAll = require('require-all');
+const ActivationFunctions = requireAll(PATHS.ACTIVATION_FUNCTIONS);
 
 /**
  * This class implements a neural network. This class works in conjunction the
@@ -258,14 +261,40 @@ class BasicNetwork {
         this.getRandomizer().randomize(this);
     }
 
-
-
     /**
      * @return {number} The length of an encoded array.
      */
     encodedArrayLength() {
         this.structure.requireFlat();
         return this.structure.flat.getEncodeLength();
+    }
+
+    /**
+     * @returns {Object}
+     */
+    toJSON() {
+        let flatNetworkJSON = this.structure.flat.toJSON();
+        flatNetworkJSON.type = 'BasicNetwork';
+
+        return flatNetworkJSON;
+    }
+
+    /**
+     * @param obj {Object}
+     */
+    fromJSON(obj) {
+        let activationFunc;
+        let funcName;
+        this.structure = new NeuralStructure(this);
+        const that = this;
+
+        _.eachRight(obj.layerFeedCounts, function (neuronCount, index) {
+            funcName = _.toLower(_.trimStart(obj.activationFunctions[index], 'Activation'));
+            activationFunc = new ActivationFunctions[funcName]();
+            that.addLayer(new BasicLayer(activationFunc, obj.biasActivation[index], neuronCount))
+        });
+        this.reset();
+        this.getFlat().fromJSON(obj);
     }
 }
 

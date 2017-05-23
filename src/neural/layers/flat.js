@@ -77,27 +77,36 @@ class FlatLayer {
     /**
      * @return {String}
      */
-    toString() {
-        let result = "[";
-        result += this.constructor.name;
-        result += ": count=" + this.count;
-        result += ",bias=";
+    // toString() {
+    //     let result = "[";
+    //     result += this.constructor.name;
+    //     result += ": count=" + this.count;
+    //     result += ",bias=";
+    //
+    //     if (hasBias()) {
+    //         result += this.biasActivation;
+    //     } else {
+    //         result += "false";
+    //     }
+    //     if (this.contextFedBy != null) {
+    //         result += ",contextFed=";
+    //         if (this.contextFedBy == this) {
+    //             result += "itself";
+    //         } else {
+    //             result += this.contextFedBy;
+    //         }
+    //     }
+    //     result += "]";
+    //     return result;
+    // }
 
-        if (hasBias()) {
-            result += this.biasActivation;
-        } else {
-            result += "false";
-        }
-        if (this.contextFedBy != null) {
-            result += ",contextFed=";
-            if (this.contextFedBy == this) {
-                result += "itself";
-            } else {
-                result += this.contextFedBy;
-            }
-        }
-        result += "]";
-        return result;
+    toJSON() {
+        let jsonObj = {};
+        Object.keys(this).map((key) => {
+            jsonObj[key] = this[key];
+        });
+        jsonObj.activation = this.activation.name;
+        return jsonObj;
     }
 }
 
