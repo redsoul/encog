@@ -3,6 +3,9 @@ const _ = require('lodash');
 const NguyenWidrowRandomizer = require(PATHS.RANDOMIZERS + 'nguyenWidrow');
 const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+const BasicLayer = require(PATHS.LAYERS + 'basic');
+const requireAll = require('require-all');
+const ActivationFunctions = requireAll(PATHS.ACTIVATION_FUNCTIONS);
 
 /**
  * This class implements a neural network. This class works in conjunction the
@@ -267,44 +270,31 @@ class BasicNetwork {
     }
 
     /**
-     * @returns {String}
+     * @returns {Object}
      */
     toJSON() {
-        let result = "";
-        const now = (new Date()).getTime();
-        let af;
-        const NEWLINE = '\n';
-        const PLATFORM = 'ENCOG';
+        let flatNetworkJSON = this.structure.flat.toJSON();
+        flatNetworkJSON.type = 'BasicNetwork';
 
-        result += 'encog,BasicNetwork,' + PLATFORM + ',3.1.0,1,' + now + NEWLINE;
-        result += '[BASIC]' + NEWLINE;
-        result += '[BASIC:PARAMS]' + NEWLINE;
-        result += '[BASIC:NETWORK]' + NEWLINE;
-        result += 'beginTraining=' + this.beginTraining + NEWLINE;
-        result += 'connectionLimit=' + this.connectionLimit + NEWLINE;
-        result += 'contextTargetOffset=' + this.contextTargetOffset.join(',') + NEWLINE;
-        result += 'contextTargetSize=' + this.contextTargetSize.join(',') + NEWLINE;
-        result += 'endTraining=' + this.endTraining + NEWLINE;
-        result += 'hasContext=' + (this.hasContext ? 't' : 'f') + NEWLINE;
-        result += 'inputCount=' + this.inputCount + NEWLINE;
-        result += 'layerCounts=' + this.layerCounts.join(',') + NEWLINE;
-        result += 'layerFeedCounts=' + this.layerFeedCounts.join(',') + NEWLINE;
-        result += 'layerContextCount=' + this.layerContextCount.join(',') + NEWLINE;
-        result += 'layerIndex=' + this.layerIndex.join(',') + NEWLINE;
-        result += 'output=' + this.layerOutput.join(',') + NEWLINE;
-        result += 'outputCount=' + this.outputCount + NEWLINE;
-        result += 'weightIndex=' + this.weightIndex.join(',') + NEWLINE;
-        result += 'weights=' + this.weights.join(',') + NEWLINE;
-        result += 'biasActivation=' + this.biasActivation.join(',') + NEWLINE;
-        result += '[BASIC:ACTIVATION]' + NEWLINE;
+        return flatNetworkJSON;
+    }
 
-        for (let i = 0; i < this.activationFunctions.length; i += 1) {
-            af = this.activationFunctions[i];
-            result += '\"';
-            result += af.type;
-            result += '\"' + NEWLINE;
-        }
-        return result;
+    /**
+     * @param obj {Object}
+     */
+    fromJSON(obj) {
+        let activationFunc;
+        let funcName;
+        this.structure = new NeuralStructure(this);
+        const that = this;
+
+        _.eachRight(obj.layerFeedCounts, function (neuronCount, index) {
+            funcName = _.toLower(_.trimStart(obj.activationFunctions[index], 'Activation'));
+            activationFunc = new ActivationFunctions[funcName]();
+            that.addLayer(new BasicLayer(activationFunc, obj.biasActivation[index], neuronCount))
+        });
+        this.reset();
+        this.getFlat().fromJSON(obj);
     }
 }
 
