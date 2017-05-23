@@ -18,4 +18,13 @@ Encog.Utils.DataToolbox.normalizeData(inputDataset.test);
 const train = new Encog.Training.Propagation.Resilient(network, inputDataset.train, outputDataset.train);
 
 Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5});
-const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
+let accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
+console.log('accuracy: ', accuracy);
+
+Encog.Utils.File.saveNetwork(network, 'iris.dat');
+
+const newNetwork = Encog.Utils.File.loadNetwork('iris.dat');
+
+// retrain the neural network
+accuracy = Encog.Utils.Network.validateNetwork(newNetwork, inputDataset.test, outputDataset.test);
+console.log('accuracy: ', accuracy);
