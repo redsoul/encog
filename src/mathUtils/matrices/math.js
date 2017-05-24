@@ -97,7 +97,7 @@ class MatrixMath {
      * @return {Matrix} The matrix transposed.
      */
     static transpose(input) {
-        const transposeMatrix = new Matrix(input.getRows(), input.getCols());
+        const transposeMatrix = new Matrix(input.getCols(), input.getRows());
         for (let r = 0; r < input.getRows(); r++) {
             for (let c = 0; c < input.getCols(); c++) {
                 transposeMatrix.set(c, r, input.get(r, c));

@@ -28,9 +28,9 @@ class Matrix {
             arguments.length === 2 &&
             arguments[0].constructor.name == 'Number' &&
             arguments[1].constructor.name == 'Number')) {
-            for (var i = 0; i < cols; i++) {
+            for (var i = 0; i < rows; i++) {
                 this.matrix[i] = [];
-                for (var j = 0; j < rows; j++) {
+                for (var j = 0; j < cols; j++) {
                     this.matrix[i][j] = defaultValue;
                 }
             }
@@ -172,6 +172,21 @@ class Matrix {
                 this.matrix[row][col] += M.get(row, col);
             }
         }
+    }
+
+    /**
+     * Add a value to one cell in the matrix.
+     *
+     * @param row {Number}
+     *            The row to add to.
+     * @param col {Number}
+     *            The column to add to.
+     * @param value {Number}
+     *            The value to add to the matrix.
+     */
+    addValue(row, col, value) {
+        this._validate(row, col);
+        this.matrix[row][col] += value;
     }
 
     /**
