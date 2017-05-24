@@ -30,6 +30,7 @@ const Encog = require('encog');
 * **Networks**
   * Basic Network
   * Hopfield Network
+  * BAM (Bidirectional associative memory) Network
 * **Training**
   * Back Propagation
   * Manhattan Propagation
@@ -42,6 +43,7 @@ const Encog = require('encog');
   * Elman Network
   * Jordan Network
   * Hopfield Network
+  * BAM Network
 * **Activation Functions**
   * Elliott
   * Symmetric Elliott
