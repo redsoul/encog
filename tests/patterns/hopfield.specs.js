@@ -1,4 +1,4 @@
-describe('Hopfield Network', function () {
+describe('Hopfield Pattern', function () {
     const Encog = require('../../index');
     const _ = require('lodash');
     const ArrayUtils = require(PATHS.UTILS + 'array');
@@ -13,7 +13,7 @@ describe('Hopfield Network', function () {
     });
 
     it('Should throw and error when trying to set the output layer', function () {
-        expect(()=>HopfieldPattern.setOutputLayper(10)).toThrow()
+        expect(()=>HopfieldPattern.setOutputLayer(10)).toThrow()
     });
 
     it('Should throw and error when add a pattern with different size than the neuron count', function () {
