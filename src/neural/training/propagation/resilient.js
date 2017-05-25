@@ -2,16 +2,8 @@ const Propagation = require('../propagation');
 const ArrayUtils = require(PATHS.UTILS + 'array');
 const EncogMath = require(PATHS.MATH_UTILS + 'encogMath');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+const RPROPConst = require('../resilientConst');
 
-/**
- * The default zero tolerance.
- */
-const DEFAULT_ZERO_TOLERANCE = 0.00000000000000001;
-const POSITIVE_ETA = 1.2;
-const NEGATIVE_ETA = 0.5;
-const DELTA_MIN = 1e-6;
-const DEFAULT_INITIAL_UPDATE = 0.1;
-const DEFAULT_MAX_STEP = 50;
 const RPROPType = {
     /**
      * RPROP+ : The classic RPROP algorithm.  Uses weight back tracking.
@@ -98,13 +90,13 @@ class ResilientPropagation extends Propagation {
      * @param maxStep
      *            The maximum that a delta can reach.
      */
-    constructor(network, input, output, initialUpdate = DEFAULT_INITIAL_UPDATE, maxStep = DEFAULT_MAX_STEP) {
+    constructor(network, input, output, initialUpdate = RPROPConst.DEFAULT_INITIAL_UPDATE, maxStep = RPROPConst.DEFAULT_MAX_STEP) {
         super(network, input, output);
 
         this.updateValues = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length, initialUpdate);
         this.lastDelta = ArrayUtils.newIntArray(this.currentFlatNetwork.weights.length);
         this.lastWeightChange = ArrayUtils.newFloatArray(this.currentFlatNetwork.weights.length);
-        this.zeroTolerance = DEFAULT_ZERO_TOLERANCE;
+        this.zeroTolerance = RPROPConst.DEFAULT_ZERO_TOLERANCE;
         this.maxStep = maxStep;
         this.rpropType = RPROPType.iRPROPp;
 
@@ -188,15 +180,15 @@ class ResilientPropagation extends Propagation {
         // if the gradient has retained its sign, then we increase the
         // delta so that it will converge faster
         if (change > 0) {
-            delta = this.updateValues[index] * POSITIVE_ETA;
+            delta = this.updateValues[index] * RPROPConst.POSITIVE_ETA;
             delta = Math.min(delta, this.maxStep);
             weightChange = EncogMath.sign(gradients[index]) * delta;
             this.updateValues[index] = delta;
             lastGradient[index] = gradients[index];
         } else if (change < 0) {
             // if change<0, then the sign has changed, and the last delta was too big
-            delta = this.updateValues[index] * NEGATIVE_ETA;
-            delta = Math.max(delta, DELTA_MIN);
+            delta = this.updateValues[index] * RPROPConst.NEGATIVE_ETA;
+            delta = Math.max(delta, RPROPConst.DELTA_MIN);
             this.updateValues[index] = delta;
             weightChange = this.lastWeightChange[index] * -1;
             // set the previous gradient to zero so that there will be no
@@ -229,13 +221,13 @@ class ResilientPropagation extends Propagation {
         // if the gradient has retained its sign, then we increase the
         // delta so that it will converge faster
         if (change > 0) {
-            delta = this.lastDelta[index] * POSITIVE_ETA;
+            delta = this.lastDelta[index] * RPROPConst.POSITIVE_ETA;
             delta = Math.min(delta, this.maxStep);
         } else {
             // if change<0, then the sign has changed, and the last
             // delta was too big
-            delta = this.lastDelta[index] * NEGATIVE_ETA;
-            delta = Math.max(delta, DELTA_MIN);
+            delta = this.lastDelta[index] * RPROPConst.NEGATIVE_ETA;
+            delta = Math.max(delta, RPROPConst.DELTA_MIN);
         }
 
         lastGradient[index] = gradients[index];
@@ -262,7 +254,7 @@ class ResilientPropagation extends Propagation {
         // if the gradient has retained its sign, then we increase the
         // delta so that it will converge faster
         if (change > 0) {
-            delta = this.updateValues[index] * POSITIVE_ETA;
+            delta = this.updateValues[index] * RPROPConst.POSITIVE_ETA;
             delta = Math.min(delta, this.maxStep);
             weightChange = EncogMath.sign(gradients[index]) * delta;
             this.updateValues[index] = delta;
@@ -270,8 +262,8 @@ class ResilientPropagation extends Propagation {
         } else if (change < 0) {
             // if change<0, then the sign has changed, and the last
             // delta was too big
-            delta = this.updateValues[index] * NEGATIVE_ETA;
-            delta = Math.max(delta, DELTA_MIN);
+            delta = this.updateValues[index] * RPROPConst.NEGATIVE_ETA;
+            delta = Math.max(delta, RPROPConst.DELTA_MIN);
             this.updateValues[index] = delta;
 
             if (this.error > this.lastError) {
@@ -308,13 +300,13 @@ class ResilientPropagation extends Propagation {
         // if the gradient has retained its sign, then we increase the
         // delta so that it will converge faster
         if (change > 0) {
-            delta = this.lastDelta[index] * POSITIVE_ETA;
+            delta = this.lastDelta[index] * RPROPConst.POSITIVE_ETA;
             delta = Math.min(delta, this.maxStep);
         } else {
             // if change<0, then the sign has changed, and the last
             // delta was too big
-            delta = this.lastDelta[index] * NEGATIVE_ETA;
-            delta = Math.max(delta, DELTA_MIN);
+            delta = this.lastDelta[index] * RPROPConst.NEGATIVE_ETA;
+            delta = Math.max(delta, RPROPConst.DELTA_MIN);
             lastGradient[index] = 0;
         }
 
@@ -342,7 +334,7 @@ class ResilientPropagation extends Propagation {
         // delta so that it will converge faster
         let delta = this.updateValues[index];
         if (change > 0) {
-            delta = this.updateValues[index] * POSITIVE_ETA;
+            delta = this.updateValues[index] * RPROPConst.POSITIVE_ETA;
             delta = Math.min(delta, this.maxStep);
             weightChange = EncogMath.sign(gradients[index]) * delta;
             this.updateValues[index] = delta;
@@ -350,8 +342,8 @@ class ResilientPropagation extends Propagation {
         } else if (change < 0) {
             // if change<0, then the sign has changed, and the last
             // delta was too big
-            delta = this.updateValues[index] * NEGATIVE_ETA;
-            delta = Math.max(delta, DELTA_MIN);
+            delta = this.updateValues[index] * RPROPConst.NEGATIVE_ETA;
+            delta = Math.max(delta, RPROPConst.DELTA_MIN);
             this.updateValues[index] = delta;
             weightChange = -this.lastWeightChange[index];
             // set the previous gradient to zero so that there will be no

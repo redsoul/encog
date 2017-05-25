@@ -103,6 +103,13 @@ class NeuralStructure {
     }
 
     /**
+     * @returns {FlatNetwork}
+     */
+    getFlat() {
+        return this.flat;
+    }
+
+    /**
      * @param flat {FlatNetwork}
      */
     set flat(flat) {

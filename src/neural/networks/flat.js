@@ -525,6 +525,20 @@ class FlatNetwork {
     }
 
     /**
+     * @return {Number} The number of input neurons.
+     */
+    getInputCount() {
+        return this.inputCount;
+    }
+
+    /**
+     * @return {Number} The number of output neurons.
+     */
+    getOutputCount() {
+        return this.outputCount;
+    }
+
+    /**
      * @returns {Object}
      */
     toJSON() {
@@ -564,7 +578,7 @@ class FlatNetwork {
     /**
      * @param obj {Object}
      */
-    fromJSON(obj){
+    fromJSON(obj) {
         this.weights = obj.weights;
         this.weightIndex = obj.weightIndex;
         this.hasContext = obj.hasContext;

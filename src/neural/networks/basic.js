@@ -262,6 +262,51 @@ class BasicNetwork {
     }
 
     /**
+     * Determine if the specified layer is biased.
+     * @param l {Number} The layer number.
+     * @return {Boolean} True, if the layer is biased.
+     */
+    isLayerBiased(l) {
+        this.structure.requireFlat();
+        const layerNumber = this.getLayerCount() - l - 1;
+        return this.structure.flat.layerCounts[layerNumber] != this.structure.flat.layerFeedCounts[layerNumber];
+    }
+
+    /**
+     * Get the bias activation for the specified layer.
+     * @param l {Number} The layer.
+     * @return {Number} The bias activation.
+     */
+    getLayerBiasActivation(l) {
+        if (!this.isLayerBiased(l)) {
+            throw new NeuralNetworkError("Error, the specified layer does not have a bias: " + l);
+        }
+
+        this.structure.requireFlat();
+        const layerNumber = this.getLayerCount() - l - 1;
+
+        const layerOutputIndex = this.structure.getFlat().layerIndex[layerNumber];
+        const count = this.structure.getFlat().layerCounts[layerNumber];
+        return this.structure.getFlat().layerOutput[layerOutputIndex + count - 1];
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    getInputCount() {
+        this.structure.requireFlat();
+        return this.structure.getFlat().getInputCount();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    getOutputCount() {
+        this.structure.requireFlat();
+        return this.structure.getFlat().getOutputCount();
+    }
+
+    /**
      * @return {number} The length of an encoded array.
      */
     encodedArrayLength() {

@@ -24,26 +24,21 @@ class BasicTraining {
     }
 
     /**
-     * Should be called after training has completed and the iteration method
-     * will not be called any further.
+     * Should be called once training is complete and no more iterations are
+     * needed. Calling iteration again will simply begin the training again, and
+     * require finishTraining to be called once the new training session is
+     * complete.
+     *
+     * It is particularly important to call finishTraining for multithreaded
+     * training techniques.
      */
     finishTraining() {
     }
 
     /**
-     * @return {boolean} if training can progress no further.
+     * @return {Boolean} True if the training can be paused, and later continued.
      */
-    // isTrainingDone() {
-    //     for (let strategy of this.strategies) {
-    //         if (strategy.constructor.name == 'EndTrainingStrategy') {
-    //             if (strategy.shouldStop()) {
-    //                 return true;
-    //             }
-    //         }
-    //     }
-    //
-    //     return false;
-    // }
+    canContinue(){}
 
     /**
      * Call the strategies after an iteration.
@@ -76,6 +71,50 @@ class BasicTraining {
      *            The number of training iterations.
      */
     iteration(count = 1) {
+    }
+
+    /**
+     * @return {Number}
+     *         Returns the training error. This value is calculated as the
+     *         training data is evaluated by the iteration function. This has
+     *         two important ramifications. First, the value returned by
+     *         getError() is meaningless prior to a call to iteration. Secondly,
+     *         the error is calculated BEFORE training is applied by the call to
+     *         iteration. The timing of the error calculation is done for
+     *         performance reasons.
+     */
+    getError() {
+        return this.error;
+    }
+
+    /**
+     * @param error {Number}
+     *            Set the current error rate. This is usually used by training
+     *            strategies.
+     */
+    setError(error) {
+        this.error = error;
+    }
+
+    /**
+     * @return {TrainingImplementationType} The training implementation type.
+     */
+    getImplementationType() {
+    }
+
+    /**
+     * @return {Number} The current training iteration.
+     */
+    getIteration() {
+    }
+
+    /**
+     * Set the current training iteration.
+     *
+     * @param iteration {Number}
+     *            Iteration.
+     */
+    setIteration(iteration) {
     }
 }
 
