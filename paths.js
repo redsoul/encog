@@ -8,6 +8,7 @@ module.exports = (function () {
     const SCORE = SRC + 'neural/scores/';
     const NETWORKS = SRC + 'neural/networks/';
     const NEURAL = SRC + 'neural/';
+    const FREEFORM = NEURAL + 'freeform/';
     const PATTERNS = SRC + 'patterns/';
     const TRAINING = SRC + 'neural/training/';
     const PROPAGATION = TRAINING + 'propagation/';
@@ -38,6 +39,7 @@ module.exports = (function () {
         SCORE,
         NETWORKS,
         NEURAL,
+        FREEFORM,
         PATTERNS,
         TRAINING,
         PROPAGATION,
