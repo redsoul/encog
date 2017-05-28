@@ -5,6 +5,9 @@ const BasicActivationSummation = require(PATHS.FREEFORM + 'basic/activationSumma
 const BasicFreeformConnection = require(PATHS.FREEFORM + 'basic/connection');
 const BasicFreeformLayer = require(PATHS.FREEFORM + 'basic/layer');
 const FreeformContextNeuron = require(PATHS.FREEFORM + 'contextNeuron');
+const ErrorUtil = require(PATHS.UTILS + 'error');
+const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
+const ArrayUtils = require(PATHS.UTILS + 'array');
 /**
  * Implements a freefrom neural network. A freeform neural network can represent
  * much more advanced structures than the flat networks that the Encog
@@ -18,32 +21,6 @@ const FreeformContextNeuron = require(PATHS.FREEFORM + 'contextNeuron');
 class FreeformNetwork {
 
 
-    /**
-     * Construct an Elmann recurrent neural network.
-     *
-     * @param input {Number}
-     *            The input count.
-     * @param hidden1 {Number}
-     *            The hidden count.
-     * @param output {Number}
-     *            The output count.
-     * @param af {ActivationFunction}
-     *            The activation function.
-     * @return {FreeformNetwork} The newly created network.
-     */
-    static createElman(input, hidden1, output, af) {
-        const network = new FreeformNetwork();
-        const inputLayer = network.createInputLayer(input);
-        const hiddenLayer1 = network.createLayer(hidden1);
-        const outputLayer = network.createOutputLayer(output);
-
-        network.connectLayers(inputLayer, hiddenLayer1, af, 1.0, false);
-        network.connectLayers(hiddenLayer1, outputLayer, af, 1.0, false);
-        network.createContext(hiddenLayer1, hiddenLayer1);
-        network.reset();
-
-        return network;
-    }
 
     /**
      * Create a feedforward freeform neural network.
@@ -183,7 +160,7 @@ class FreeformNetwork {
      */
     compute(input) {
         // Allocate result
-        const result = ArrayUtils.newFloatArray(this.outputLayer.length);
+        const result = ArrayUtils.newFloatArray(this.outputLayer.size());
 
         // Copy the input
         for (let i = 0; i < input.length; i++) {
@@ -191,7 +168,7 @@ class FreeformNetwork {
         }
 
         // Request calculation of outputs
-        for (let i = 0; i < this.outputLayer.length; i++) {
+        for (let i = 0; i < this.outputLayer.size(); i++) {
             const outputNeuron = this.outputLayer.getNeurons()[i];
             outputNeuron.performCalculation();
             result[i] = outputNeuron.getActivation();
@@ -230,7 +207,7 @@ class FreeformNetwork {
         }
 
         // create connections
-        for (let targetNeuron in target.getNeurons()) {
+        for (let targetNeuron of target.getNeurons()) {
             // create the summation for the target
             let summation = targetNeuron.getInputSummation();
 
@@ -241,7 +218,7 @@ class FreeformNetwork {
             }
 
             // connect the source neurons to the target neuron
-            for (let sourceNeuron in source.getNeurons()) {
+            for (let sourceNeuron of source.getNeurons()) {
                 const connection = new BasicFreeformConnection(sourceNeuron, targetNeuron);
                 sourceNeuron.addOutput(connection);
                 targetNeuron.addInput(connection);
@@ -298,9 +275,9 @@ class FreeformNetwork {
      */
     createContext(source, target) {
         const biasActivation = 0.0;
-        let activatonFunction = null;
+        let activatonFunction;
 
-        if (source.getNeurons()[0].getOutputs().size() < 1) {
+        if (source.getNeurons()[0].getOutputs().length < 1) {
             throw new FreeformNetworkError(
                 "A layer cannot have a context layer connected if there are no other outbound connections from the source layer." +
                 "  Please connect the source layer somewhere else first.");
@@ -324,7 +301,6 @@ class FreeformNetwork {
         }
 
         // now connect the context layer to the target layer
-
         this.connectLayers(result, target, activatonFunction, biasActivation, false);
 
         return result;
@@ -359,7 +335,7 @@ class FreeformNetwork {
 
         // Add the neurons for this layer
         for (let i = 0; i < neuronCount; i++) {
-            result.add(new FreeformContextNeuron(null));
+            result.add(new BasicFreeformNeuron());
         }
 
         return result;
@@ -386,21 +362,22 @@ class FreeformNetwork {
         let index = 0;
         const visited = [];
         const queue = [];
+        let neuron;
 
         // first copy outputs to queue
-        for (let neuron in this.outputLayer.getNeurons()) {
+        for (let neuron of this.outputLayer.getNeurons()) {
             queue.push(neuron);
         }
 
-        while (queue.size() > 0) {
+        while (queue.length > 0) {
             // pop a neuron off the queue
-            const neuron = queue[0];
-            queue.pop();
+            neuron = queue[0];
+            queue.shift();
             visited.push(neuron);
 
             // find anymore neurons and add them to the queue.
             if (neuron.getInputSummation() != null) {
-                for (let connection in neuron.getInputSummation().list()) {
+                for (let connection of neuron.getInputSummation().list()) {
                     connection.setWeight(encoded[index++]);
                     const nextNeuron = connection.getSource();
                     if (visited.indexOf(nextNeuron) === -1) {
@@ -427,7 +404,7 @@ class FreeformNetwork {
         while (queue.length > 0) {
             // pop a neuron off the queue
             const neuron = queue[0];
-            queue.pop();
+            queue.shift();
             visited.push(neuron);
 
             // find anymore neurons and add them to the queue.
@@ -454,19 +431,19 @@ class FreeformNetwork {
         const queue = [];
 
         // first copy outputs to queue
-        for (let neuron in this.outputLayer.getNeurons()) {
+        for (let neuron of this.outputLayer.getNeurons()) {
             queue.push(neuron);
         }
 
         while (queue.length > 0) {
             // pop a neuron off the queue
             const neuron = queue[0];
-            queue.pop();
+            queue.shift();
             visited.push(neuron);
 
             // find anymore neurons and add them to the queue.
             if (neuron.getInputSummation() != null) {
-                for (let connection in neuron.getInputSummation().list()) {
+                for (let connection of neuron.getInputSummation().list()) {
                     encoded[index++] = connection.getWeight();
                     const nextNeuron = connection.getSource();
                     if (visited.indexOf(nextNeuron) === -1) {
@@ -509,7 +486,7 @@ class FreeformNetwork {
     performConnectionTask(task) {
         const visited = [];
 
-        for (let neuron in this.outputLayer.getNeurons()) {
+        for (let neuron of this.outputLayer.getNeurons()) {
             this.__performConnectionTask(visited, neuron, task);
         }
     }
@@ -530,7 +507,7 @@ class FreeformNetwork {
         // does this neuron have any inputs?
         if (parentNeuron.getInputSummation() != null) {
             // visit the inputs
-            for (let connection in parentNeuron.getInputSummation().list()) {
+            for (let connection of parentNeuron.getInputSummation().list()) {
                 task(connection);
                 const neuron = connection.getSource();
                 // have we already visited this neuron?
@@ -550,7 +527,7 @@ class FreeformNetwork {
     performNeuronTask(task) {
         const visited = [];
 
-        for (let neuron in this.outputLayer.getNeurons()) {
+        for (let neuron of this.outputLayer.getNeurons()) {
             this.__performNeuronTask(visited, neuron, task);
         }
     }
@@ -568,7 +545,7 @@ class FreeformNetwork {
         // does this neuron have any inputs?
         if (parentNeuron.getInputSummation() != null) {
             // visit the inputs
-            for (let connection in parentNeuron.getInputSummation().list()) {
+            for (let connection of parentNeuron.getInputSummation().list()) {
                 const neuron = connection.getSource();
                 // have we already visited this neuron?
                 if (visited.indexOf(neuron) === -1) {
@@ -582,8 +559,8 @@ class FreeformNetwork {
     /**
      * {@inheritDoc}
      */
-    reset(seed = new DateTime()) {
-        const randomizer = new ConsistentRandomizer(-1, 1, seed);
+    reset() {
+        const randomizer = new RangeRandomizer(-1, 1);
 
         /**
          * {@inheritDoc}
@@ -602,7 +579,7 @@ class FreeformNetwork {
         this.performNeuronTask((neuron) => {
             neuron.allocateTempTraining(neuronSize);
             if (neuron.getInputSummation() != null) {
-                for (let connection in neuron.getInputSummation().list()) {
+                for (let connection of neuron.getInputSummation().list()) {
                     connection.allocateTempTraining(connectionSize);
                 }
             }
@@ -616,7 +593,7 @@ class FreeformNetwork {
         this.performNeuronTask((neuron) => {
             neuron.clearTempTraining();
             if (neuron.getInputSummation() != null) {
-                for (let connection in neuron.getInputSummation().list()) {
+                for (let connection of neuron.getInputSummation().list()) {
                     connection.clearTempTraining();
                 }
             }
@@ -630,6 +607,20 @@ class FreeformNetwork {
         this.performNeuronTask((neuron) => {
             neuron.updateContext();
         });
+    }
+
+    /**
+     * Calculate the error for this neural network.  We always calculate the error
+     * using the "regression" calculator.  Neural networks don't directly support
+     * classification, rather they use one-of-encoding or similar.  So just using
+     * the regression calculator gives a good approximation.
+     *
+     * @param input {Array}
+     * @param output {Array}
+     * @return {Number} The error percentage.
+     */
+    calculateError(input, output) {
+        return ErrorUtil.calculateRegressionError(this, input, output);
     }
 }
 

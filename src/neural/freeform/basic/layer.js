@@ -32,7 +32,7 @@ class BasicFreeformLayer extends FreeformLayer {
      * {@inheritDoc}
      */
     hasBias() {
-        for (let neuron in this.neurons) {
+        for (let neuron of this.neurons) {
             if (neuron.isBias()) {
                 return true;
             }

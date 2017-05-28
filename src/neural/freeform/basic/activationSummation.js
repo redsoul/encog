@@ -31,7 +31,7 @@ class BasicActivationSummation extends InputSummation {
         this.sum = 0;
 
         // sum the input connections
-        for (let connection in this.inputs) {
+        for (let connection of this.inputs) {
             connection.getSource().performCalculation();
             this.sum += connection.getWeight() * connection.getSource().getActivation();
         }

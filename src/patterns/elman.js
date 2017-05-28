@@ -1,5 +1,6 @@
 const BasicLayer = require(PATHS.LAYERS + 'basic');
 const BasicNetwork = require(PATHS.NETWORKS + 'basic');
+const FreeformNetwork = require(PATHS.FREEFORM + 'network');
 const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
@@ -40,8 +41,7 @@ class ElmanPattern extends NeuralNetworkPattern {
         if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
             throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
         }
-
-        const network = new BasicNetwork();
+        let network = new BasicNetwork();
         const input = new BasicLayer(this.inputLayer.activationFunction, true, this.inputLayer.neurons);
         const hidden = new BasicLayer(this.hiddenLayers[0].activationFunction, true, this.hiddenLayers[0].neurons);
 
@@ -50,8 +50,26 @@ class ElmanPattern extends NeuralNetworkPattern {
         network.addLayer(input);
         network.addLayer(hidden);
         network.addLayer(new BasicLayer(this.outputLayer.activationFunction, false, this.outputLayer.neurons));
-        network.reset();
 
+        network.reset();
+        return network;
+    }
+
+    generateFreeformNetwork() {
+        if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
+            throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
+        }
+
+        let network = new FreeformNetwork();
+        const inputLayer = network.createInputLayer(this.inputLayer.neurons);
+        const hiddenLayer1 = network.createLayer(this.hiddenLayers[0].neurons);
+        const outputLayer = network.createOutputLayer(this.outputLayer.neurons);
+
+        network.connectLayers(inputLayer, hiddenLayer1, this.hiddenLayers[0].activationFunction, 1.0);
+        network.connectLayers(hiddenLayer1, outputLayer, this.outputLayer.activationFunction, 1.0);
+        network.createContext(hiddenLayer1, hiddenLayer1);
+
+        network.reset();
         return network;
     }
 }

@@ -1,4 +1,5 @@
 const BasicTraining = require(PATHS.TRAINING + 'basic');
+const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 
 /**
  * Provides basic propagation functions to other trainers.
@@ -37,7 +38,7 @@ class FreeformPropagationTraining extends BasicTraining {
             // between the layer deltas between toNeuron and the neurons that
             // feed toNeuron.
             // also calculate all inbound gradeints to toNeuron
-            for (let connection in toNeuron.getInputSummation()) {
+            for (let connection of toNeuron.getInputSummation().list()) {
 
                 // calculate the gradient
                 const gradient = connection.getSource().getActivation() * toNeuron.getTempTraining(0);
@@ -46,7 +47,7 @@ class FreeformPropagationTraining extends BasicTraining {
                 // calculate the next layer delta
                 const fromNeuron = connection.getSource();
                 let sum = 0;
-                for (let toConnection in fromNeuron.getOutputs()) {
+                for (let toConnection of fromNeuron.getOutputs()) {
                     sum += toConnection.getTarget().getTempTraining(0) * toConnection.getWeight();
                 }
                 const neuronOutput = fromNeuron.getActivation();
@@ -54,14 +55,14 @@ class FreeformPropagationTraining extends BasicTraining {
                 let deriv = toNeuron.getInputSummation().getActivationFunction().derivativeFunction(neuronSum, neuronOutput);
 
                 if (this.fixFlatSopt && (toNeuron.getInputSummation().getActivationFunction().constructor.name === 'ActivationSigmoid')) {
-                    deriv += FreeformPropagationTraining.FLAT_SPOT_CONST;
+                    deriv += this.FLAT_SPOT_CONST;
                 }
 
                 fromNeuron.setTempTraining(0, sum * deriv);
             }
 
             // recurse to the next level
-            for (let connection in toNeuron.getInputSummation()) {
+            for (let connection of toNeuron.getInputSummation().list()) {
                 let fromNeuron = connection.getSource();
                 this.calculateNeuronGradient(fromNeuron);
             }
@@ -80,8 +81,8 @@ class FreeformPropagationTraining extends BasicTraining {
         const neuronOutput = neuron.getActivation();
         const neuronSum = neuron.getInputSummation().getSum();
         let deriv = neuron.getInputSummation().getActivationFunction().derivativeFunction(neuronSum, neuronOutput);
-        if (this.fixFlatSopt && (toNeuron.getInputSummation().getActivationFunction().constructor.name === 'ActivationSigmoid')) {
-            deriv += FreeformPropagationTraining.FLAT_SPOT_CONST;
+        if (this.fixFlatSopt && (neuron.getInputSummation().getActivationFunction().constructor.name === 'ActivationSigmoid')) {
+            deriv += this.FLAT_SPOT_CONST;
         }
         neuron.setTempTraining(0, deriv * diff);
     }
@@ -164,10 +165,10 @@ class FreeformPropagationTraining extends BasicTraining {
             actual = this.network.compute(input);
             sig = 1;
 
-            errorCalc.updateError(actual.getData(), ideal.getData(), sig);
+            errorCalc.updateError(actual, ideal, sig);
 
             for (let i = 0; i < this.network.getOutputCount(); i++) {
-                const diff = (ideal.getData(i) - actual.getData(i)) * sig;
+                const diff = (ideal[i] - actual[i]) * sig;
                 const neuron = this.network.getOutputLayer().getNeurons()[i];
                 this.calculateOutputDelta(neuron, diff);
                 this.calculateNeuronGradient(neuron);
@@ -232,7 +233,7 @@ class FreeformPropagationTraining extends BasicTraining {
         const that = this;
         this.network.performConnectionTask((connection)=> {
             that.learnConnection(connection);
-            that.connection.setTempTraining(0, 0);
+            connection.setTempTraining(0, 0);
         });
     }
 

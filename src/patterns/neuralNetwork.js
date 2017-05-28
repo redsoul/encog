@@ -41,6 +41,16 @@ class NeuralNetworkPattern {
      * @return {BasicNetwork} The resulting neural network.
      */
     generate() {
+
+    }
+
+    /**
+     * Generate the freeform version of specified neural network.
+     *
+     * @return {FreeformNetwork} The resulting neural network.
+     */
+    generateFreeformNetwork(){
+
     }
 
     /**

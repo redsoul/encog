@@ -6,6 +6,7 @@ const CONFIGS = {
     TEMP_LAST_WEIGHT_DELTA: 3
 };
 const RPROPConst = require(PATHS.TRAINING + 'resilientConst');
+const EncogMath = require(PATHS.MATH_UTILS + 'encogMath');
 
 class FreeformResilientPropagation extends FreeformPropagationTraining {
 
@@ -13,12 +14,14 @@ class FreeformResilientPropagation extends FreeformPropagationTraining {
      * Construct the RPROP trainer.
      * @param theNetwork {FreeformNetwork} The network to train.
      * @param theInput {Array} The input set.
-     * @param theOuput {Array} The input set.
-     * @param initialUpdate The initial update.
-     * @param theMaxStep The max step.
+     * @param theOutput {Array} The input set.
+     * @param initialUpdate {Number} The initial update.
+     * @param theMaxStep {Number} The max step.
      */
-    constructor(theNetwork, theInput, theOuput, initialUpdate = RPROPConst.DEFAULT_INITIAL_UPDATE, theMaxStep = RPROPConst.DEFAULT_MAX_STEP) {
-        super(theNetwork, theInput, theOuput);
+    constructor(theNetwork, theInput, theOutput,
+                initialUpdate = RPROPConst.DEFAULT_INITIAL_UPDATE,
+                theMaxStep = RPROPConst.DEFAULT_MAX_STEP) {
+        super(theNetwork, theInput, theOutput);
 
         this.maxStep = theMaxStep;
         theNetwork.tempTrainingAllocate(1, 4);

@@ -20,6 +20,8 @@ const ActivationFunctions = requireDir(PATHS.ACTIVATION_FUNCTIONS);
 const ErrorFunctions = requireDir(PATHS.ERROR_FUNCTIONS);
 const Layers = requireDir(PATHS.LAYERS);
 const Networks = requireDir(PATHS.NETWORKS);
+const Freeform = requireDir(PATHS.FREEFORM);
+const FreeformPropagation = requireDir(PATHS.FREEFORM_PROPAGATION);
 const Neural = requireDir(PATHS.NEURAL);
 const Patterns = requireDir(PATHS.PATTERNS);
 const Training = {Propagation: requireDir(PATHS.PROPAGATION)};
@@ -33,6 +35,8 @@ module.exports = {
     ErrorFunctions,
     Layers,
     Networks,
+    Freeform,
+    FreeformPropagation,
     Neural,
     Patterns,
     Training,

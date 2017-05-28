@@ -19,6 +19,7 @@
     "neural",
     "network",
     "neural network",
+    "artificial neural network",
     "artificial",
     "intelligence",
     "artificial intelligence",
@@ -30,8 +31,11 @@
     "adaline neural network",
     "elman neural network",
     "feed forward neural network",
+    "perceptron",
     "jordan neural network",
-    "hopfield network"
+    "hopfield network",
+    "bidirectional associative memory network",
+    "freeform networks"
   ],
   "author": "redsoul",
   "license": "Apache",

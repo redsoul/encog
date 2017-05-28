@@ -1,4 +1,5 @@
 const FreeformConnection = require(PATHS.FREEFORM + 'interfaces/connection');
+const ArrayUtils = require(PATHS.UTILS + 'array');
 /**
  * A basic freeform connection.
  *
@@ -39,7 +40,7 @@ class BasicFreeformConnection extends FreeformConnection {
      * {@inheritDoc}
      */
     allocateTempTraining(l) {
-        this.tempTraining = new double[l];
+        this.tempTraining = ArrayUtils.newFloatArray(l);
 
     }
 

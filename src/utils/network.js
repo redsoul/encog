@@ -3,6 +3,7 @@ const BasicLayer = require(PATHS.LAYERS + 'basic');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 const _ = require('lodash');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+const ErrorUtil = require(PATHS.UTILS + 'error');
 
 class NetworkUtil {
 
@@ -233,9 +234,11 @@ class NetworkUtil {
         }
 
         let accuracy = accuratePredictions / testDataset.length * 100;
+        let error = _.round(ErrorUtil.calculateRegressionError(network, testDataset, idealOutput) * 100, 4);
 
         EncogLog.debug('Total test size: ' + testDataset.length);
         EncogLog.debug('Accuracy: ' + accuracy + '%');
+        EncogLog.debug('Error: ' + error + '%');
 
         EncogLog.print();
         return accuracy;
