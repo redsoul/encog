@@ -26,8 +26,7 @@ class RangeRandomizer extends BasicRandomizer {
      * modify the array. Previous values may be used, or they may be discarded,
      * depending on the randomizer.
      *
-     * @param network {BasicNetwork}
-     *            A network to randomize.
+     * @param network {BasicNetwork} A network to randomize.
      */
     randomize() {
         if (arguments.length == 1) {
@@ -37,7 +36,7 @@ class RangeRandomizer extends BasicRandomizer {
                     this.randomizeNetworkLayer(network, i);
                 }
             } else {
-                return this.nextDouble(this.min, this.max);
+                return this.nextDouble();
             }
         } else {
             const min = arguments[0];
@@ -47,12 +46,14 @@ class RangeRandomizer extends BasicRandomizer {
     }
 
     /**
-     * @param min {number}
-     *            The minimum random value.
-     * @param max {number}
-     *            The maximum random value.
+     * @param min {number} The minimum random value.
+     * @param max {number} The maximum random value.
      */
     nextDouble(min, max) {
+        if (arguments.length === 0) {
+            min = this.min;
+            max = this.max;
+        }
         const range = max - min;
         return (range * Math.random()) + min;
     }

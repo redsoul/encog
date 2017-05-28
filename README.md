@@ -31,6 +31,7 @@ const Encog = require('encog');
   * Basic Network
   * Hopfield Network
   * BAM (Bidirectional associative memory) Network
+  * Freeform Network
 * **Training**
   * Back Propagation
   * Manhattan Propagation
@@ -50,6 +51,7 @@ const Encog = require('encog');
   * Gaussian
   * Linear
   * Ramp
+  * ReLu
   * Sigmoid
   * Softmax
   * Steepened Sigmoid

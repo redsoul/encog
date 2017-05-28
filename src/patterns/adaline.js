@@ -2,8 +2,7 @@ const BasicLayer = require(PATHS.LAYERS + 'basic');
 const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
-const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
-const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
+const FreeformNetwork = require(PATHS.FREEFORM + 'network');
 
 /**
  * Construct an ADALINE neural network.
@@ -32,6 +31,21 @@ class ADALINEPattern extends NeuralNetworkPattern {
 
         network.addLayer(inputLayer);
         network.addLayer(outputLayer);
+        network.reset();
+
+        return network;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    generateFreeformNetwork() {
+        const network = new FreeformNetwork();
+
+        const inputLayer = network.createInputLayer(this.inputLayer.neurons);
+        const outputLayer = network.createOutputLayer(this.outputLayer.neurons);
+
+        network.connectLayers(inputLayer, outputLayer, this.outputLayer.activationFunction, 1.0);
         network.reset();
 
         return network;

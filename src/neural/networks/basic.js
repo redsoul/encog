@@ -6,6 +6,7 @@ const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const BasicLayer = require(PATHS.LAYERS + 'basic');
 const requireAll = require('require-all');
 const ActivationFunctions = requireAll(PATHS.ACTIVATION_FUNCTIONS);
+const ErrorUtil = require(PATHS.UTILS + 'error');
 
 /**
  * This class implements a neural network. This class works in conjunction the
@@ -132,12 +133,12 @@ class BasicNetwork {
      * classification, rather they use one-of-encoding or similar.  So just using
      * the regression calculator gives a good approximation.
      *
-     * @param data
-     *            The training set.
-     * @return {float} The error percentage.
+     * @param input {Array}
+     * @param output {Array}
+     * @return {Number} The error percentage.
      */
-    calculateError(data) {
-        return EncogUtility.calculateRegressionError(this, data);
+    calculateError(input, output) {
+        return ErrorUtil.calculateRegressionError(this, input, output);
     }
 
     /**
