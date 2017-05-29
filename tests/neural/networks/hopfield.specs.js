@@ -1,5 +1,4 @@
 describe('Hopfield Network', function () {
-    const NetworkUtil = require(PATHS.UTILS + 'network');
     const HopfieldNetwork = require(PATHS.NETWORKS + 'hopfield');
     const HopfieldPattern = require(PATHS.PATTERNS + 'hopfield');
     let network;

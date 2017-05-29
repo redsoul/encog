@@ -20,64 +20,7 @@ const ArrayUtils = require(PATHS.UTILS + 'array');
  */
 class FreeformNetwork {
 
-
-
-    /**
-     * Create a feedforward freeform neural network.
-     *
-     * @param input {Number}
-     *            The input count.
-     * @param hidden1 {Number}
-     *            The first hidden layer count, zero if none.
-     * @param hidden2 {Number}
-     *            The second hidden layer count, zero if none.
-     * @param output {Number}
-     *            The output count.
-     * @param af {ActivationFunction}
-     *            The activation function.
-     * @return {FreeformNetwork}The newly crated network.
-     */
-    static createFeedforward(input, hidden1, hidden2, output, af) {
-        const network = new FreeformNetwork();
-        let lastLayer = network.createInputLayer(input);
-        let currentLayer;
-
-        if (hidden1 > 0) {
-            currentLayer = network.createLayer(hidden1);
-            network.connectLayers(lastLayer, currentLayer, af, 1.0, false);
-            lastLayer = currentLayer;
-        }
-
-        if (hidden2 > 0) {
-            currentLayer = network.createLayer(hidden2);
-            network.connectLayers(lastLayer, currentLayer, af, 1.0, false);
-            lastLayer = currentLayer;
-        }
-
-        currentLayer = network.createOutputLayer(output);
-        network.connectLayers(lastLayer, currentLayer, af, 1.0, false);
-
-        network.reset();
-
-        return network;
-    }
-
-
-    /**
-     * Create a freeform network from a basic network.
-     *
-     * @param network {BasicNetwork} The basic network to use.
-     */
-    constructor(network) {
-        if (arguments.length === 0) {
-            return;
-        }
-
-        if (network.getLayerCount() < 2) {
-            throw new FreeformNetworkError(
-                "The BasicNetwork must have at least two layers to be converted.");
-        }
-
+    __loadBasicNetwork(network) {
         // handle each layer
         let previousLayer = null;
         let currentLayer;
@@ -127,6 +70,24 @@ class FreeformNetwork {
 
         // finally, set the output layer.
         this.outputLayer = previousLayer;
+    }
+
+    /**
+     * Create a freeform network from a basic network.
+     *
+     * @param network {BasicNetwork} The basic network to use.
+     */
+    constructor(network) {
+        if (arguments.length === 0) {
+            return;
+        }
+
+        if (network.getLayerCount() < 2) {
+            throw new FreeformNetworkError(
+                "The BasicNetwork must have at least two layers to be converted.");
+        }
+
+        this.__loadBasicNetwork(network);
     }
 
     /**
