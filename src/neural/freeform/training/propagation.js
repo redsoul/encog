@@ -88,35 +88,35 @@ class FreeformPropagationTraining extends BasicTraining {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     canContinue() {
         return false;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     finishTraining() {
         this.network.tempTrainingClear();
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getError() {
         return this.error;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getImplementationType() {
         return TrainingImplementationType.Iterative;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getIteration() {
         return this.iterationCount;
@@ -130,7 +130,7 @@ class FreeformPropagationTraining extends BasicTraining {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     iteration(count = 1) {
         for (let i = 0; i < count; i++) {
@@ -244,7 +244,7 @@ class FreeformPropagationTraining extends BasicTraining {
     learnConnection(connection){}
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setError(theError) {
         this.error = theError;
@@ -260,7 +260,7 @@ class FreeformPropagationTraining extends BasicTraining {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setIteration(iteration) {
         this.iterationCount = iteration;

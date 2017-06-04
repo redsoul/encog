@@ -31,7 +31,7 @@ class FreeformResilientPropagation extends FreeformPropagationTraining {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     learnConnection(connection) {
         // multiply the current and previous gradient, and take the

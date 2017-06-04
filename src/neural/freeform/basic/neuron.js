@@ -16,7 +16,7 @@ class BasicFreeformNeuron extends FreeformNeuron {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     addInput(connection) {
         this.inputSummation.add(connection);
@@ -24,56 +24,56 @@ class BasicFreeformNeuron extends FreeformNeuron {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     addOutput(connection) {
         this.outputConnections.push(connection);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     addTempTraining(i, value) {
         this.tempTraining[i] += value;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     allocateTempTraining(l) {
         this.tempTraining = ArrayUtils.newFloatArray(l);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     clearTempTraining() {
         this.tempTraining = null;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getActivation() {
         return this.activation;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getInputSummation() {
         return this.inputSummation;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getOutputs() {
         return this.outputConnections;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getSum() {
         if (this.inputSummation == null) {
@@ -84,21 +84,21 @@ class BasicFreeformNeuron extends FreeformNeuron {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getTempTraining(index) {
         return this.tempTraining[index];
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     isBias() {
         return this.bias;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     performCalculation() {
         // no inputs? Just keep activation as is, probably a bias neuron.
@@ -110,35 +110,35 @@ class BasicFreeformNeuron extends FreeformNeuron {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setActivation(theActivation) {
         this.activation = theActivation;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setBias(bias) {
         this.bias = bias;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setInputSummation(theInputSummation) {
         this.inputSummation = theInputSummation;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setTempTraining(index, value) {
         this.tempTraining[index] = value;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     updateContext() {
         // nothing to do for a non-context neuron

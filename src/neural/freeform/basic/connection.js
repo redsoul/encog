@@ -22,7 +22,7 @@ class BasicFreeformConnection extends FreeformConnection {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     addTempTraining(i, value) {
         this.tempTraining[i] += value;
@@ -30,14 +30,14 @@ class BasicFreeformConnection extends FreeformConnection {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     addWeight(delta) {
         this.weight += delta;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     allocateTempTraining(l) {
         this.tempTraining = ArrayUtils.newFloatArray(l);
@@ -45,7 +45,7 @@ class BasicFreeformConnection extends FreeformConnection {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     clearTempTraining() {
         this.tempTraining = null;
@@ -53,63 +53,63 @@ class BasicFreeformConnection extends FreeformConnection {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getSource() {
         return this.source;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getTarget() {
         return this.target;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getTempTraining(index) {
         return this.tempTraining[index];
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getWeight() {
         return this.weight;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     isRecurrent() {
         return this.recurrent;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setRecurrent(recurrent) {
         this.recurrent = recurrent;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setSource(source) {
         this.source = source;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setTarget(target) {
         this.target = target;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setTempTraining(index, value) {
         this.tempTraining[index] = value;
@@ -117,7 +117,7 @@ class BasicFreeformConnection extends FreeformConnection {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     setWeight(weight) {
         this.weight = weight;

@@ -368,7 +368,7 @@ class ResilientPropagation extends Propagation {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     postIteration() {
         super.postIteration();

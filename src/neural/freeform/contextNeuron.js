@@ -30,7 +30,7 @@ class FreeformContextNeuron extends BasicFreeformNeuron {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     updateContext() {
         this.setActivation(this.contextSource.getActivation());
