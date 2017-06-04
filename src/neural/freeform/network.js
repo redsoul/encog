@@ -83,8 +83,7 @@ class FreeformNetwork {
         }
 
         if (network.getLayerCount() < 2) {
-            throw new FreeformNetworkError(
-                "The BasicNetwork must have at least two layers to be converted.");
+            throw new FreeformNetworkError("The BasicNetwork must have at least two layers to be converted.");
         }
 
         this.__loadBasicNetwork(network);
@@ -114,10 +113,8 @@ class FreeformNetwork {
     /**
      * Compute the output for this network.
      *
-     * @param input {Array}
-     *            The input.
-     * @return {Array}
-     *            The output.
+     * @param input {Array} The input.
+     * @return {Array} The output.
      */
     compute(input) {
         // Allocate result
@@ -154,7 +151,7 @@ class FreeformNetwork {
      * @param isRecurrent {Boolean}
      *            True, if this is a recurrent connection.
      */
-    connectLayers(source, target, theActivationFunction = new ActivationTANH(), biasActivation = 1.0, isRecurrent = false) {
+    connectLayers(source, target, theActivationFunction = new ActivationTANH(), biasActivation = 1.0) {
         // create bias, if requested
         if (biasActivation > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
             // does the source already have a bias?
@@ -285,9 +282,10 @@ class FreeformNetwork {
      * Create a hidden layer.
      *
      * @param neuronCount {Number} The neuron count.
+     * @param biasActivation {Number} The neuron count.
      * @return {FreeformLayer} The newly created layer.
      */
-    createLayer(neuronCount) {
+    createLayer(neuronCount, biasActivation) {
         if (neuronCount < 1) {
             throw new FreeformNetworkError("Layer must have at least one neuron.");
         }
@@ -297,6 +295,10 @@ class FreeformNetwork {
         // Add the neurons for this layer
         for (let i = 0; i < neuronCount; i++) {
             result.add(new BasicFreeformNeuron());
+        }
+
+        if (biasActivation > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
+            result.setBias(biasActivation);
         }
 
         return result;
@@ -317,7 +319,7 @@ class FreeformNetwork {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     decodeFromArray(encoded) {
         let index = 0;
@@ -350,7 +352,7 @@ class FreeformNetwork {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     encodedArrayLength() {
         let result = 0;
@@ -384,7 +386,7 @@ class FreeformNetwork {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     encodeToArray(encoded) {
         let index = 0;
@@ -417,14 +419,14 @@ class FreeformNetwork {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getInputCount() {
         return this.inputLayer.sizeNonBias();
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getOutputCount() {
         return this.outputLayer.sizeNonBias();
@@ -518,14 +520,11 @@ class FreeformNetwork {
 
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     reset() {
         const randomizer = new RangeRandomizer(-1, 1);
 
-        /**
-         * {@inheritDoc}
-         */
         this.performConnectionTask((connection) => {
             connection.setWeight(randomizer.nextDouble());
         });
