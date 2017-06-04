@@ -21,6 +21,11 @@ class FreeformLayer {
     hasBias(){}
 
     /**
+     * @param biasActivation {Number} Bias activation
+     */
+    setBias(biasActivation) {}
+
+    /**
      * Set the activation for the specified index.
      * @param i {Number} The index.
      * @param data {Number} The data for that index.
