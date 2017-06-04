@@ -21,7 +21,7 @@ class FreeformBackPropagation extends FreeformPropagationTraining {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     learnConnection(connection) {
         const gradient = connection.getTempTraining(0);

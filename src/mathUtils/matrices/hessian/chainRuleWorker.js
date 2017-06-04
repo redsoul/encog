@@ -41,7 +41,7 @@ class ChainRuleWorker {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     run() {
         this.error = 0;

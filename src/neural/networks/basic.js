@@ -292,7 +292,7 @@ class BasicNetwork {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getInputCount() {
         this.structure.requireFlat();
@@ -300,7 +300,7 @@ class BasicNetwork {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getOutputCount() {
         this.structure.requireFlat();

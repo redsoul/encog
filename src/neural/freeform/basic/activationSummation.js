@@ -17,14 +17,14 @@ class BasicActivationSummation extends InputSummation {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     add(connection) {
         this.inputs.push(connection);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     calculate() {
         let sumArray = ArrayUtils.newFloatArray(1);
@@ -44,21 +44,21 @@ class BasicActivationSummation extends InputSummation {
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getActivationFunction() {
         return this.activationFunction;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     getSum() {
         return this.sum;
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     list() {
         return this.inputs;
