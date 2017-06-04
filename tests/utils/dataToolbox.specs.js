@@ -7,17 +7,45 @@ describe('DataSet', function () {
 
     });
 
-    it('readTrainingCSV', function (done) {
-        DataToolbox.readTrainingCSV(__dirname + '/iris.csv', ['Species'], ['Id']).then(function (trainingDataset) {
-            expect(trainingDataset.constructor.name).toBe('Object');
-            expect(trainingDataset.input.constructor.name).toBe('Array');
-            expect(trainingDataset.output.constructor.name).toBe('Array');
+    describe('readTrainingCSV method', function () {
+        it('ignore and output columns', function (done) {
+            DataToolbox.readTrainingCSV(
+                __dirname + '/iris.csv',
+                {
+                    outputColumns: ['Species'],
+                    ignoreColumns: ['Id']
+                }
+            ).then(function (trainingDataset) {
+                expect(trainingDataset.constructor.name).toBe('Object');
+                expect(trainingDataset.input.constructor.name).toBe('Array');
+                expect(trainingDataset.output.constructor.name).toBe('Array');
 
-            expect(trainingDataset.input.length).toBe(150);
-            expect(trainingDataset.output.length).toBe(150);
-            expect(_.keys(trainingDataset.input[0])).toEqual(['Sepal.Length', 'Sepal.Width', 'Petal.Length', 'Petal.Width']);
-            expect(_.keys(trainingDataset.output[0])).toEqual(['Species']);
-            done();
+                expect(trainingDataset.input.length).toBe(150);
+                expect(trainingDataset.output.length).toBe(150);
+                expect(_.keys(trainingDataset.input[0])).toEqual(['Sepal.Length', 'Sepal.Width', 'Petal.Length', 'Petal.Width']);
+                expect(_.keys(trainingDataset.output[0])).toEqual(['Species']);
+                done();
+            });
+        });
+
+        it('input and output columns', function (done) {
+            DataToolbox.readTrainingCSV(
+                __dirname + '/iris.csv',
+                {
+                    outputColumns: ['Species'],
+                    inputColumns: ['Sepal.Width']
+                }
+            ).then(function (trainingDataset) {
+                expect(trainingDataset.constructor.name).toBe('Object');
+                expect(trainingDataset.input.constructor.name).toBe('Array');
+                expect(trainingDataset.output.constructor.name).toBe('Array');
+
+                expect(trainingDataset.input.length).toBe(150);
+                expect(trainingDataset.output.length).toBe(150);
+                expect(_.keys(trainingDataset.input[0])).toEqual(['Sepal.Width']);
+                expect(_.keys(trainingDataset.output[0])).toEqual(['Species']);
+                done();
+            });
         });
     });
 

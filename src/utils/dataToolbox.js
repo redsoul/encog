@@ -29,16 +29,17 @@ class DataToolbox {
 
     /**
      * @param file {String}
-     * @param outputColumns {Array} - optional
-     * @param ignoreColumns {Array} - optional
      * @param csvOptions {Object} - optional - full description on https://www.npmjs.com/package/fast-csv
      *
      * @returns {Promise}
      */
-    static readTrainingCSV(file, outputColumns = [], ignoreColumns = [], csvOptions = {}) {
+    static readTrainingCSV(file, csvOptions = {}) {
         let deferred = Q.defer();
         let dataset = [];
         let defaultCsvOptions = {
+            outputColumns: [],
+            inputColumns: [],
+            ignoreColumns: [],
             headers: true,
             ignoreEmpty: false,
             discardUnmappedColumns: false,
@@ -52,27 +53,28 @@ class DataToolbox {
         };
 
         //merge with default options
-        csvOptions = _.merge(defaultCsvOptions, csvOptions);
+        const _options = _.merge(defaultCsvOptions, csvOptions);
+        const outputColumns = _options.outputColumns;
+        const inputColumns = _options.inputColumns;
+        const ignoreColumns = _options.ignoreColumns;
+        const options = _.omit(_options, ['outputColumns', 'inputColumns', 'ignoreColumns']);
+
         //objectMode must be true
-        csvOptions.objectMode = true;
+        options.objectMode = true;
 
         EncogLog.debug('Reading ' + file);
-        const parser = csv(csvOptions)
+        const parser = csv(options)
             .on('data', function (data) {
                 dataset.push(data);
             })
             .on('end', function (count) {
+                const input = [];
+                const output = [];
                 EncogLog.debug(count + ' rows loaded');
 
-                dataset = _.map(dataset, function (entry) {
-                    return _.omit(entry, ignoreColumns);
-                });
-
-                const input = _.map(dataset, function (entry) {
-                    return _.omit(entry, outputColumns);
-                });
-                const output = _.map(dataset, function (entry) {
-                    return _.pick(entry, outputColumns);
+                _.each(dataset, function (entry) {
+                    input.push((inputColumns.length > 0) ? _.pick(entry, inputColumns) : _.omit(entry, outputColumns.concat(ignoreColumns)));
+                    output.push(_.pick(entry, outputColumns));
                 });
 
                 deferred.resolve({input: input, output: output});
