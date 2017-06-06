@@ -55,30 +55,6 @@ class JordanPattern extends NeuralNetworkPattern {
 
         return network;
     }
-
-    /**
-     * @inheritDoc
-     */
-    generateFreeformNetwork() {
-        if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
-            throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
-        }
-
-        const network = new FreeformNetwork();
-        const inputLayer = network.createInputLayer(this.inputLayer.neurons);
-        const hiddenLayer1 = network.createLayer(this.hiddenLayers[0].neurons);
-        const contextLayer = network.createLayer(1);
-        const outputLayer = network.createOutputLayer(this.outputLayer.neurons);
-
-        network.connectLayers(inputLayer, hiddenLayer1, this.hiddenLayers[0].activationFunction, 1.0);
-        network.connectLayers(hiddenLayer1, outputLayer, this.outputLayer.activationFunction, 1.0);
-        network.connectLayers(outputLayer, contextLayer, this.outputLayer.activationFunction, 1.0);
-        network.createContext(outputLayer, contextLayer);
-
-        network.reset();
-
-        return network;
-    }
 }
 
 module.exports = JordanPattern;

@@ -21,6 +21,16 @@ class NetworkUtil {
     /**
      * @return {Array}
      */
+    static getXORThroughTimeDataset() {
+        return {
+            input: [[0], [0], [0], [0], [1], [1], [1], [0], [1], [1], [1], [0]],
+            output: [[0], [0], [0], [1], [1], [1], [0], [1], [1], [1], [0], [0]]
+        };
+    }
+
+    /**
+     * @return {Array}
+     */
     static getCounterDataset() {
         return {
             input: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]],

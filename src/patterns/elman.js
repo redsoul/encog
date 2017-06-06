@@ -45,7 +45,7 @@ class ElmanPattern extends NeuralNetworkPattern {
         const input = new BasicLayer(this.inputLayer.activationFunction, true, this.inputLayer.neurons);
         const hidden = new BasicLayer(this.hiddenLayers[0].activationFunction, true, this.hiddenLayers[0].neurons);
 
-        input.contextFedBy = hidden;
+        hidden.contextFedBy = hidden;
 
         network.addLayer(input);
         network.addLayer(hidden);
