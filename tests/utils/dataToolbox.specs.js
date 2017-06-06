@@ -139,4 +139,17 @@ describe('DataSet', function () {
             expect(values).toEqual([[2.14285714, 0], [5, 3.5], [0, 2.5], [2.14285714, 5]]);
         });
     });
+
+    describe('oneHotEncoding', function () {
+
+        beforeEach(function () {
+        });
+
+        it('should return a one hot array', function () {
+            expect(DataToolbox.oneHotEncoding([1, 2])).toEqual([[1, 0], [0, 1]]);
+            expect(DataToolbox.oneHotEncoding([1, 2, 3])).toEqual([[1, 0, 0], [0, 1, 0], [0, 0, 1]]);
+            expect(DataToolbox.oneHotEncoding(['a', 'b', 'c', 'd'])).toEqual([[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]);
+            expect(DataToolbox.oneHotEncoding(['a', 'b', 'a', 'b', 'c', 'd'])).toEqual([[1, 0, 0, 0], [0, 1, 0, 0], [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]);
+        });
+    });
 });

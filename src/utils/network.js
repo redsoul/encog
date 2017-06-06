@@ -4,6 +4,7 @@ const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 const _ = require('lodash');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ErrorUtil = require(PATHS.UTILS + 'error');
+const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
 
 class NetworkUtil {
 
@@ -20,6 +21,16 @@ class NetworkUtil {
     /**
      * @return {Array}
      */
+    static getCounterDataset() {
+        return {
+            input: [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1]],
+            output: [[0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 0], [1, 0, 1], [1, 1, 0], [1, 1, 1], [0, 0, 0]]
+        };
+    }
+
+    /**
+     * @return {Array}
+     */
     static getIrisDataset() {
         let irisDataset = require('ml-dataset-iris').getDataset();
         irisDataset = _.shuffle(irisDataset);
@@ -29,23 +40,12 @@ class NetworkUtil {
         //split the dataset in input and output
         irisDataset.map(function (val) {
             irisInput.push(val.slice(0, -1));
-            //convert the output column in to 3 independent columns
-            switch (val[val.length - 1]) {
-                case 'setosa':
-                    irisOutput.push([0, 0, 1]);
-                    break;
-                case 'versicolor':
-                    irisOutput.push([0, 1, 0]);
-                    break;
-                case 'virginica':
-                    irisOutput.push([1, 0, 0]);
-                    break;
-            }
+            irisOutput.push(val[val.length - 1]);
         });
 
         return {
             input: irisInput,
-            output: irisOutput
+            output: DataToolbox.oneHotEncoding(irisOutput)
         };
     }
 

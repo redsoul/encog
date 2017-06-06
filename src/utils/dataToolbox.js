@@ -4,6 +4,7 @@ const fs = require('fs');
 const csv = require('fast-csv');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const CONSTANTS = PATHS.CONSTANTS;
+const ArrayUtils = require(PATHS.UTILS + 'array');
 
 class DataToolbox {
 
@@ -174,6 +175,25 @@ class DataToolbox {
         });
 
         return normalizedArr;
+    }
+
+    /**
+     * https://en.wikipedia.org/wiki/One-hot
+     * @param data {Array}
+     * @returns {Array}
+     */
+    static oneHotEncoding(data){
+        const uniqueValues = _.uniq(data);
+        const oneHotLength = uniqueValues.length;
+        const oneHotArray = [];
+
+        _.each(data, function (value) {
+            const arr = ArrayUtils.newIntArray(oneHotLength);
+            arr[uniqueValues.indexOf(value)] = 1;
+            oneHotArray.push(arr);
+        });
+
+        return oneHotArray;
     }
 }
 
