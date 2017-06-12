@@ -195,7 +195,11 @@ class NetworkUtil {
 
         do {
             train.iteration();
-            EncogLog.debug("Epoch #" + epoch + " Error:" + train.error);
+            EncogLog.info("Epoch #" + epoch + " Error:" + train.error).print();
+
+            if (isNaN(train.error)) {
+                throw new NeuralNetworkError("Error is not a number");
+            }
 
             if ((train.error < options.minError && options.minIterations == null) ||
                 (train.error < options.minError && options.minIterations != null && epoch >= options.minIterations)) {
@@ -246,9 +250,9 @@ class NetworkUtil {
         let accuracy = accuratePredictions / testDataset.length * 100;
         let error = _.round(ErrorUtil.calculateRegressionError(network, testDataset, idealOutput) * 100, 4);
 
-        EncogLog.debug('Total test size: ' + testDataset.length);
-        EncogLog.debug('Accuracy: ' + accuracy + '%');
-        EncogLog.debug('Error: ' + error + '%');
+        EncogLog.info('Total test size: ' + testDataset.length);
+        EncogLog.info('Accuracy: ' + accuracy + '%');
+        EncogLog.info('Error: ' + error + '%');
 
         EncogLog.print();
         return accuracy;

@@ -1,5 +1,6 @@
 const BasicTraining = require(PATHS.TRAINING + 'basic');
 const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
 /**
  * Provides basic propagation functions to other trainers.
@@ -21,7 +22,6 @@ class FreeformPropagationTraining extends BasicTraining {
         this.output = theOutput;
         this.batchSize = 0;
         this.fixFlatSopt = true;
-        this.visited = [];
     }
 
     /**
@@ -30,14 +30,12 @@ class FreeformPropagationTraining extends BasicTraining {
      */
     calculateNeuronGradient(toNeuron) {
 
-        // Only calculate if layer has inputs, because we've already handled the
-        // output
-        // neurons, this means a hidden layer.
+        // Only calculate if layer has inputs, because we've already handled the output neurons
+        // this means a hidden layer.
         if (toNeuron.getInputSummation() != null) {
 
-            // between the layer deltas between toNeuron and the neurons that
-            // feed toNeuron.
-            // also calculate all inbound gradeints to toNeuron
+            // between the layer deltas between toNeuron and the neurons that feed toNeuron.
+            // also calculate all inbound gradients to toNeuron
             for (let connection of toNeuron.getInputSummation().list()) {
 
                 // calculate the gradient
@@ -45,20 +43,8 @@ class FreeformPropagationTraining extends BasicTraining {
                 connection.addTempTraining(0, gradient);
 
                 // calculate the next layer delta
-                const fromNeuron = connection.getSource();
-                let sum = 0;
-                for (let toConnection of fromNeuron.getOutputs()) {
-                    sum += toConnection.getTarget().getTempTraining(0) * toConnection.getWeight();
-                }
-                const neuronOutput = fromNeuron.getActivation();
-                const neuronSum = fromNeuron.getSum();
-                let deriv = toNeuron.getInputSummation().getActivationFunction().derivativeFunction(neuronSum, neuronOutput);
-
-                if (this.fixFlatSopt && (toNeuron.getInputSummation().getActivationFunction().constructor.name === 'ActivationSigmoid')) {
-                    deriv += this.FLAT_SPOT_CONST;
-                }
-
-                fromNeuron.setTempTraining(0, sum * deriv);
+                this.calculateLayerDelta(connection.getSource(), toNeuron.getInputSummation().getActivationFunction());
+                EncogLog.debug(toNeuron.layerName + '(' + toNeuron.name + ') Gradient: ' + toNeuron.getTempTraining(0)).print();
             }
 
             // recurse to the next level
@@ -66,9 +52,23 @@ class FreeformPropagationTraining extends BasicTraining {
                 let fromNeuron = connection.getSource();
                 this.calculateNeuronGradient(fromNeuron);
             }
+        }
+    }
 
+    calculateLayerDelta(fromNeuron, activationFunction) {
+        let sum = 0;
+        for (let toConnection of fromNeuron.getOutputs()) {
+            sum += toConnection.getTarget().getTempTraining(0) * toConnection.getWeight();
+        }
+        const neuronOutput = fromNeuron.getActivation();
+        const neuronSum = fromNeuron.getSum();
+        let deriv = activationFunction.derivativeFunction(neuronSum, neuronOutput);
+
+        if (this.fixFlatSopt && (activationFunction.constructor.name === 'ActivationSigmoid')) {
+            deriv += this.FLAT_SPOT_CONST;
         }
 
+        fromNeuron.setTempTraining(0, sum * deriv);
     }
 
     /**
@@ -133,6 +133,7 @@ class FreeformPropagationTraining extends BasicTraining {
      * @inheritDoc
      */
     iteration(count = 1) {
+        this.iterationCount = 0;
         for (let i = 0; i < count; i++) {
             this.preIteration();
             this.iterationCount++;
@@ -153,7 +154,6 @@ class FreeformPropagationTraining extends BasicTraining {
      */
     processPureBatch() {
         const errorCalc = new ErrorCalculation();
-        this.visited = [];
         let input;
         let ideal;
         let actual;
@@ -163,7 +163,14 @@ class FreeformPropagationTraining extends BasicTraining {
             input = this.input[j];
             ideal = this.output[j];
             actual = this.network.compute(input);
+            EncogLog.print();
             sig = 1;
+
+            for (let value of actual) {
+                if (isNaN(value)) {
+                    throw new NeuralNetworkError('Computed Network value is not a number');
+                }
+            }
 
             errorCalc.updateError(actual, ideal, sig);
 
@@ -171,6 +178,7 @@ class FreeformPropagationTraining extends BasicTraining {
                 const diff = (ideal[i] - actual[i]) * sig;
                 const neuron = this.network.getOutputLayer().getNeurons()[i];
                 this.calculateOutputDelta(neuron, diff);
+                EncogLog.debug(neuron.layerName + '(' + neuron.name + ') Delta: ' + neuron.getTempTraining(0));
                 this.calculateNeuronGradient(neuron);
             }
         }
@@ -188,7 +196,6 @@ class FreeformPropagationTraining extends BasicTraining {
     processBatches() {
         let lastLearn = 0;
         const errorCalc = new ErrorCalculation();
-        this.visited = [];
         let input;
         let ideal;
         let actual;
@@ -234,6 +241,9 @@ class FreeformPropagationTraining extends BasicTraining {
         this.network.performConnectionTask((connection)=> {
             that.learnConnection(connection);
             connection.setTempTraining(0, 0);
+            EncogLog.debug('===>>> setTempTraining -> ' + connection.getSource().layerName + ' (' + connection.getSource().name + ') --> '
+                + connection.getTarget().layerName + ' (' + connection.getTarget().name + ')');
+            EncogLog.print();
         });
     }
 
@@ -241,7 +251,8 @@ class FreeformPropagationTraining extends BasicTraining {
      * Learn for a single connection.
      * @param connection The connection to learn from.
      */
-    learnConnection(connection){}
+    learnConnection(connection) {
+    }
 
     /**
      * @inheritDoc

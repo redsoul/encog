@@ -1,9 +1,13 @@
 const FreeformNetworkError = require(PATHS.ERROR_HANDLING + 'freeformNetwork');
-const ActivationTANH = require(PATHS.ACTIVATION_FUNCTIONS + 'tanh');
+const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
+const ActivationTanh = require(PATHS.ACTIVATION_FUNCTIONS + 'tanh');
+const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
 const BasicFreeformNeuron = require(PATHS.FREEFORM + 'basic/neuron');
 const BasicActivationSummation = require(PATHS.FREEFORM + 'basic/activationSummation');
 const BasicFreeformConnection = require(PATHS.FREEFORM + 'basic/connection');
+const WeightlessConnection = require(PATHS.FREEFORM + 'basic/weightlessConnection');
 const BasicFreeformLayer = require(PATHS.FREEFORM + 'basic/layer');
+const GateLayer = require(PATHS.FREEFORM + 'basic/gate');
 const FreeformContextNeuron = require(PATHS.FREEFORM + 'contextNeuron');
 const ErrorUtil = require(PATHS.UTILS + 'error');
 const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
@@ -19,58 +23,6 @@ const ArrayUtils = require(PATHS.UTILS + 'array');
  *
  */
 class FreeformNetwork {
-
-    __loadBasicNetwork(network) {
-        // handle each layer
-        let previousLayer = null;
-        let currentLayer;
-
-        for (let currentLayerIndex = 0; currentLayerIndex < network.getLayerCount(); currentLayerIndex++) {
-            // create the layer
-            currentLayer = new BasicFreeformLayer();
-
-            // Is this the input layer?
-            if (this.inputLayer == null) {
-                this.inputLayer = currentLayer;
-            }
-
-            // Add the neurons for this layer
-            for (let i = 0; i < network.getLayerNeuronCount(currentLayerIndex); i++) {
-                // obtain the summation object.
-                let summation = null;
-
-                if (previousLayer != null) {
-                    summation = new BasicActivationSummation(network.getActivation(currentLayerIndex));
-                }
-
-                // add the new neuron
-                currentLayer.add(new BasicFreeformNeuron(summation));
-            }
-
-            // Fully connect this layer to previous
-            if (previousLayer != null) {
-                this.connectLayersFromBasic(network, currentLayerIndex - 1,
-                    previousLayer, currentLayerIndex, currentLayer,
-                    currentLayerIndex, false);
-            }
-
-            // Add the bias neuron
-            // The bias is added after connections so it has no inputs
-            if (network.isLayerBiased(currentLayerIndex)) {
-                const biasNeuron = new FreeformContextNeuron(null);
-                biasNeuron.setBias(true);
-                biasNeuron.setActivation(network.getLayerBiasActivation(currentLayerIndex));
-                currentLayer.add(biasNeuron);
-            }
-
-            // update previous layer
-            previousLayer = currentLayer;
-            currentLayer = null;
-        }
-
-        // finally, set the output layer.
-        this.outputLayer = previousLayer;
-    }
 
     /**
      * Create a freeform network from a basic network.
@@ -140,141 +92,109 @@ class FreeformNetwork {
     /**
      * Connect two layers.
      *
-     * @param source {FreeformLayer}
-     *            The source layer.
-     * @param target {FreeformLayer}
-     *            The target layer.
-     * @param theActivationFunction {ActivationFunction}
-     *            The activation function to use.
-     * @param biasActivation {Number}
-     *            The bias activation to use.
-     * @param isRecurrent {Boolean}
-     *            True, if this is a recurrent connection.
+     * @param source {FreeformLayer} The source layer.
+     * @param target {FreeformLayer} The target layer.
+     * @param theActivationFunction {ActivationFunction} The activation function to use.
+     * @param biasActivation {Number} The bias activation to use.
      */
-    connectLayers(source, target, theActivationFunction = new ActivationTANH(), biasActivation = 1.0) {
-        // create bias, if requested
-        if (biasActivation > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
-            // does the source already have a bias?
-            if (source.hasBias()) {
-                throw new FreeformNetworkError("The source layer already has a bias neuron, you cannot create a second.");
-            }
-            const biasNeuron = new BasicFreeformNeuron(null);
-            biasNeuron.setActivation(biasActivation);
-            biasNeuron.setBias(true);
-            source.add(biasNeuron);
-        }
-
-        // create connections
-        for (let targetNeuron of target.getNeurons()) {
-            // create the summation for the target
-            let summation = targetNeuron.getInputSummation();
-
-            // do not create a second input summation
-            if (summation == null) {
-                summation = new BasicActivationSummation(theActivationFunction);
-                targetNeuron.setInputSummation(summation);
-            }
-
-            // connect the source neurons to the target neuron
-            for (let sourceNeuron of source.getNeurons()) {
-                const connection = new BasicFreeformConnection(sourceNeuron, targetNeuron);
-                sourceNeuron.addOutput(connection);
-                targetNeuron.addInput(connection);
-            }
-        }
+    connectLayers(source, target, theActivationFunction = new ActivationTanh(), biasActivation = 1.0, connectionType = BasicFreeformConnection) {
+        source.connectWith(target, theActivationFunction, biasActivation, connectionType);
     }
 
-
-    /**
-     * Connect layers from a BasicNetwork. Used internally only.
-     *
-     * @param network {BasicNetwork}
-     *            The BasicNetwork.
-     * @param fromLayerIdx {Number}
-     *            The from layer index.
-     * @param source {FreeformLayer}
-     *            The from layer.
-     * @param sourceIdx {Number}
-     *            The source index.
-     * @param target {FreeformLayer}
-     *            The target.
-     * @param targetIdx {Number}
-     *            The target index.
-     * @param isRecurrent {Boolean}
-     *            True, if this is recurrent.
-     */
-    connectLayersFromBasic(network, fromLayerIdx, source, sourceIdx, target, targetIdx, isRecurrent) {
-        for (let targetNeuronIdx = 0; targetNeuronIdx < target.size(); targetNeuronIdx++) {
-            for (let sourceNeuronIdx = 0; sourceNeuronIdx < source.size(); sourceNeuronIdx++) {
-                const sourceNeuron = source.getNeurons()[sourceNeuronIdx];
-                const targetNeuron = target.getNeurons()[targetNeuronIdx];
-
-                // neurons with no input (i.e. bias neurons)
-                if (targetNeuron.getInputSummation() == null) {
-                    continue;
-                }
-
-                const connection = new BasicFreeformConnection(sourceNeuron, targetNeuron);
-                sourceNeuron.addOutput(connection);
-                targetNeuron.addInput(connection);
-                connection.setWeight(network.getWeight(fromLayerIdx, sourceNeuronIdx, targetNeuronIdx));
-            }
+    gateLayers(source, target, layerName = 'GateLayer', theActivationFunction = new ActivationTanh()) {
+        if (source.id === target.id) {
+            source = this.createContext(source, target, source.name + ' Context Layer', WeightlessConnection);
         }
+
+        const gateLayer = new GateLayer(layerName);
+        const gateMul = new BasicFreeformLayer(source.name + ' Gate Multiplier');
+
+        gateLayer.add(new BasicFreeformNeuron());
+        for (let i = 0; i < source.size(); i++) {
+            gateMul.add(new BasicFreeformNeuron());
+        }
+
+        source.connectWith(gateMul, theActivationFunction, 1, WeightlessConnection);
+        gateLayer.connectWith(gateMul, new ActivationSigmoid(), 0, WeightlessConnection);
+        gateMul.connectWith(target, new ActivationLinear(), 0, WeightlessConnection);
+
+        return gateLayer;
+    }
+
+    createLSTMUnit(inputNeurons, memoryCellNeuron, outputNeurons) {
+        const input = this.createLayer(inputNeurons, 'LSTM Input');
+        const output = this.createLayer(outputNeurons, 'LSTM Ouput');
+        const memoryCell = this.createLayer(memoryCellNeuron, 'Memory Cell');
+
+        const inputGate = this.gateLayers(input, memoryCell, 'Input Gate');
+        const outputGate = this.gateLayers(memoryCell, output, 'Output Gate');
+        const forgetGate = this.gateLayers(memoryCell, memoryCell, 'Forget Gate');
+
+        this.createContext(output, inputGate, 'LSTM Ouput to inputGate context');
+        this.createContext(output, outputGate, 'LSTM Ouput to outputGate context');
+        this.createContext(output, forgetGate, 'LSTM Ouput to forgetGate context');
+
+        return {
+            input,
+            output,
+            inputGate,
+            outputGate,
+            forgetGate
+        };
     }
 
     /**
      * Create a context connection, such as those used by Jordan/Elmann.
      *
-     * @param source {FreeformLayer}
-     *            The source layer.
-     * @param target {FreeformLayer}
-     *            The target layer.
+     * @param source {FreeformLayer} The source layer.
+     * @param target {FreeformLayer} The target layer.
+     * @param layerName {String} The layer name.
      * @return {FreeformLayer} The newly created context layer.
      */
-    createContext(source, target) {
+    createContext(source, target, layerName = 'Context Layer', connectionType = BasicFreeformConnection) {
         const biasActivation = 0.0;
-        let activatonFunction;
+        let activationFunction;
+        let contextLayerNeuron;
 
-        if (source.getNeurons()[0].getOutputs().length < 1) {
-            throw new FreeformNetworkError(
-                "A layer cannot have a context layer connected if there are no other outbound connections from the source layer." +
-                "  Please connect the source layer somewhere else first.");
-        }
+        // if (source.getNeurons()[0].getOutputs().length < 1) {
+        //     throw new FreeformNetworkError(
+        //         "A layer cannot have a context layer connected if there are no other outbound connections from the source layer." +
+        //         "  Please connect the source layer somewhere else first.");
+        // }
 
-        activatonFunction = source.getNeurons()[0].getInputSummation().getActivationFunction();
+        activationFunction = source.getNeurons()[0].getInputSummation().getActivationFunction();
 
         // first create the context layer
-        const result = new BasicFreeformLayer();
-
-        for (let i = 0; i < source.size(); i++) {
-            const neuron = source.getNeurons()[i];
+        const contextLayer = new BasicFreeformLayer(layerName);
+        for (let neuron of source.getNeurons()) {
             if (neuron.isBias()) {
-                const biasNeuron = new BasicFreeformNeuron(null);
-                biasNeuron.setBias(true);
-                biasNeuron.setActivation(neuron.getActivation());
-                result.add(biasNeuron);
+                contextLayerNeuron = new BasicFreeformNeuron(null);
+                contextLayerNeuron.setBias(true);
+                contextLayerNeuron.setActivation(neuron.getActivation());
             } else {
-                result.add(new FreeformContextNeuron(neuron));
+                contextLayerNeuron = new FreeformContextNeuron(neuron);
             }
+            contextLayer.add(contextLayerNeuron);
         }
 
         // now connect the context layer to the target layer
-        this.connectLayers(result, target, activatonFunction, biasActivation, false);
+        this.connectLayers(contextLayer, target, activationFunction, biasActivation, connectionType);
 
-        return result;
+        return contextLayer;
     }
 
     /**
      * Create the input layer.
      *
      * @param neuronCount {Number} The input neuron count.
+     * @param layerName {String} The layer name.
      * @return {FreeformLayer} The newly created layer.
      */
-    createInputLayer(neuronCount) {
+    createInputLayer(neuronCount, layerName = 'Input Layer') {
         if (neuronCount < 1) {
             throw new FreeformNetworkError("Input layer must have at least one neuron.");
         }
-        this.inputLayer = this.createLayer(neuronCount);
+        this.inputLayer = this.createLayer(neuronCount, layerName);
         return this.inputLayer;
     }
 
@@ -282,23 +202,19 @@ class FreeformNetwork {
      * Create a hidden layer.
      *
      * @param neuronCount {Number} The neuron count.
-     * @param biasActivation {Number} The neuron count.
+     * @param layerName {String} The layer name.
      * @return {FreeformLayer} The newly created layer.
      */
-    createLayer(neuronCount, biasActivation) {
+    createLayer(neuronCount, layerName = 'Layer') {
         if (neuronCount < 1) {
             throw new FreeformNetworkError("Layer must have at least one neuron.");
         }
 
-        const result = new BasicFreeformLayer();
+        const result = new BasicFreeformLayer(layerName);
 
         // Add the neurons for this layer
         for (let i = 0; i < neuronCount; i++) {
             result.add(new BasicFreeformNeuron());
-        }
-
-        if (biasActivation > PATHS.CONSTANTS.DEFAULT_DOUBLE_EQUAL) {
-            result.setBias(biasActivation);
         }
 
         return result;
@@ -308,13 +224,14 @@ class FreeformNetwork {
      * Create the output layer.
      *
      * @param neuronCount {Number} The neuron count.
+     * @param layerName {String} The layer name.
      * @return {FreeformLayer} The newly created output layer.
      */
-    createOutputLayer(neuronCount) {
+    createOutputLayer(neuronCount, layerName = 'Output Layer') {
         if (neuronCount < 1) {
             throw new FreeformNetworkError("Output layer must have at least one neuron.");
         }
-        this.outputLayer = this.createLayer(neuronCount);
+        this.outputLayer = this.createLayer(neuronCount, layerName);
         return this.outputLayer;
     }
 
@@ -455,33 +372,6 @@ class FreeformNetwork {
     }
 
     /**
-     * Perform the specified connection task.
-     *
-     * @param visited {Array}
-     *            The list of visited neurons.
-     * @param parentNeuron {FreeformNeuron}
-     *            The parent neuron.
-     * @param task {Function}
-     *            The task.
-     */
-    __performConnectionTask(visited, parentNeuron, task) {
-        visited.push(parentNeuron);
-
-        // does this neuron have any inputs?
-        if (parentNeuron.getInputSummation() != null) {
-            // visit the inputs
-            for (let connection of parentNeuron.getInputSummation().list()) {
-                task(connection);
-                const neuron = connection.getSource();
-                // have we already visited this neuron?
-                if (visited.indexOf(neuron) === -1) {
-                    this.__performConnectionTask(visited, neuron, task);
-                }
-            }
-        }
-    }
-
-    /**
      * Perform the specified neuron task. This task will be executed over all
      * neurons.
      *
@@ -495,29 +385,6 @@ class FreeformNetwork {
         }
     }
 
-    /**
-     * Perform the specified neuron task.
-     * @param visited {Array} The visited list.
-     * @param parentNeuron {FreeformNeuron} The neuron to start with.
-     * @param task {Function} The task to perform.
-     */
-    __performNeuronTask(visited, parentNeuron, task) {
-        visited.push(parentNeuron);
-        task(parentNeuron);
-
-        // does this neuron have any inputs?
-        if (parentNeuron.getInputSummation() != null) {
-            // visit the inputs
-            for (let connection of parentNeuron.getInputSummation().list()) {
-                const neuron = connection.getSource();
-                // have we already visited this neuron?
-                if (visited.indexOf(neuron) === -1) {
-                    this.__performNeuronTask(visited, neuron, task);
-                }
-            }
-        }
-    }
-
 
     /**
      * @inheritDoc
@@ -525,9 +392,15 @@ class FreeformNetwork {
     reset() {
         const randomizer = new RangeRandomizer(-1, 1);
 
+        EncogLog.debug('==> Randomize weights');
         this.performConnectionTask((connection) => {
             connection.setWeight(randomizer.nextDouble());
+            EncogLog.debug(connection.getSource().layerName + ' (' + connection.getSource().name + ') --> '
+                + connection.getTarget().layerName + ' (' + connection.getTarget().name + '): '
+                + "initial weight: " + connection.getWeight());
         });
+        EncogLog.debug('==> Finish randomize weights');
+        EncogLog.print();
     }
 
     /**
@@ -581,6 +454,139 @@ class FreeformNetwork {
      */
     calculateError(input, output) {
         return ErrorUtil.calculateRegressionError(this, input, output);
+    }
+
+    /**
+     * Connect layers from a BasicNetwork. Used internally only.
+     *
+     * @param network {BasicNetwork} The BasicNetwork.
+     * @param fromLayerIdx {Number} The from layer index.
+     * @param source {FreeformLayer} The from layer.
+     * @param target {FreeformLayer} The target.
+     */
+    connectLayersFromBasic(network, fromLayerIdx, source, target) {
+        for (let targetNeuronIdx = 0; targetNeuronIdx < target.size(); targetNeuronIdx++) {
+            for (let sourceNeuronIdx = 0; sourceNeuronIdx < source.size(); sourceNeuronIdx++) {
+                const sourceNeuron = source.getNeurons()[sourceNeuronIdx];
+                const targetNeuron = target.getNeurons()[targetNeuronIdx];
+
+                // neurons with no input (i.e. bias neurons)
+                if (targetNeuron.getInputSummation() == null) {
+                    continue;
+                }
+
+                const connection = new BasicFreeformConnection(sourceNeuron, targetNeuron);
+                sourceNeuron.addOutput(connection);
+                targetNeuron.addInput(connection);
+                connection.setWeight(network.getWeight(fromLayerIdx, sourceNeuronIdx, targetNeuronIdx));
+            }
+        }
+    }
+
+
+    /*******************/
+    /* PRIVATE METHODS */
+    /*******************/
+
+    __loadBasicNetwork(network) {
+        // handle each layer
+        let previousLayer = null;
+        let currentLayer;
+
+        for (let currentLayerIndex = 0; currentLayerIndex < network.getLayerCount(); currentLayerIndex++) {
+            // create the layer
+            currentLayer = new BasicFreeformLayer();
+
+            // Is this the input layer?
+            if (this.inputLayer == null) {
+                this.inputLayer = currentLayer;
+            }
+
+            // Add the neurons for this layer
+            for (let i = 0; i < network.getLayerNeuronCount(currentLayerIndex); i++) {
+                // obtain the summation object.
+                let summation = null;
+
+                if (previousLayer != null) {
+                    summation = new BasicActivationSummation(network.getActivation(currentLayerIndex));
+                }
+
+                // add the new neuron
+                currentLayer.add(new BasicFreeformNeuron(summation));
+            }
+
+            // Fully connect this layer to previous
+            if (previousLayer != null) {
+                this.connectLayersFromBasic(network, currentLayerIndex - 1, previousLayer, currentLayer);
+            }
+
+            // Add the bias neuron
+            // The bias is added after connections so it has no inputs
+            if (network.isLayerBiased(currentLayerIndex)) {
+                const biasNeuron = new FreeformContextNeuron(null);
+                biasNeuron.setBias(true);
+                biasNeuron.setActivation(network.getLayerBiasActivation(currentLayerIndex));
+                currentLayer.add(biasNeuron);
+            }
+
+            // update previous layer
+            previousLayer = currentLayer;
+            currentLayer = null;
+        }
+
+        // finally, set the output layer.
+        this.outputLayer = previousLayer;
+    }
+
+    /**
+     * Perform the specified neuron task.
+     * @param visited {Array} The visited list.
+     * @param parentNeuron {FreeformNeuron} The neuron to start with.
+     * @param task {Function} The task to perform.
+     */
+    __performNeuronTask(visited, parentNeuron, task) {
+        visited.push(parentNeuron.id);
+        task(parentNeuron);
+
+        // does this neuron have any inputs?
+        if (parentNeuron.getInputSummation() != null) {
+            // visit the inputs
+            for (let connection of parentNeuron.getInputSummation().list()) {
+                const neuron = connection.getSource();
+                // have we already visited this neuron?
+                if (visited.indexOf(neuron.id) === -1) {
+                    this.__performNeuronTask(visited, neuron, task);
+                }
+            }
+        }
+    }
+
+    /**
+     * Perform the specified connection task.
+     *
+     * @param visited {Array}
+     *            The list of visited neurons.
+     * @param parentNeuron {FreeformNeuron}
+     *            The parent neuron.
+     * @param task {Function}
+     *            The task.
+     */
+    __performConnectionTask(visited, parentNeuron, task) {
+        let neuron;
+        visited.push(parentNeuron.id);
+
+        // does this neuron have any inputs?
+        if (parentNeuron.getInputSummation() != null) {
+            // visit the inputs
+            for (let connection of parentNeuron.getInputSummation().list()) {
+                task(connection);
+                neuron = connection.getSource();
+                // have we already visited this neuron?
+                if (visited.indexOf(neuron.id) === -1) {
+                    this.__performConnectionTask(visited, neuron, task);
+                }
+            }
+        }
     }
 }
 

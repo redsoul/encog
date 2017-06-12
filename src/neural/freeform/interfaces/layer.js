@@ -41,6 +41,16 @@ class FreeformLayer {
      * @return {Number} The size of this layer, no bias counted.
      */
     sizeNonBias(){}
+
+    /**
+     * Connect the actual layer with the target layer
+     *
+     * @param target {FreeformLayer} The target layer.
+     * @param theActivationFunction {ActivationFunction} The activation function to use.
+     * @param biasActivation {Number} The bias activation to use.
+     * @param connectionType {FreeformConnection} The bias activation to use.
+     */
+    connectWith(target, theActivationFunction, biasActivation,connectionType){}
 }
 
 module.exports = FreeformLayer;

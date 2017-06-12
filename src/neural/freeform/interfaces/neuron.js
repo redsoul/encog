@@ -56,7 +56,7 @@ class FreeformNeuron {
     /**
      * Perform the internal calculation for this neuron.
      */
-    performCalculation() {
+    wperformCalculation() {
     }
 
     /**

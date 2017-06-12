@@ -1,5 +1,7 @@
 const ArrayUtils = require(PATHS.UTILS + 'array');
 const FreeformNeuron = require(PATHS.FREEFORM + 'interfaces/neuron');
+const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+var cuid = require('cuid');
 /**
  * This class provides a basic implementation of a freeform neuron.
  */
@@ -13,6 +15,10 @@ class BasicFreeformNeuron extends FreeformNeuron {
         this.inputSummation = theInputSummation;
         this.tempTraining = [];
         this.outputConnections = [];
+        this.layerName = null;
+        this.layer = null;
+        this.name = null;
+        this.id = cuid();
     }
 
     /**
@@ -20,7 +26,6 @@ class BasicFreeformNeuron extends FreeformNeuron {
      */
     addInput(connection) {
         this.inputSummation.add(connection);
-
     }
 
     /**
@@ -107,12 +112,18 @@ class BasicFreeformNeuron extends FreeformNeuron {
         }
 
         this.activation = this.inputSummation.calculate();
+        if (isNaN(this.activation)) {
+            throw new NeuralNetworkError('Activation is not a number');
+        }
     }
 
     /**
      * @inheritDoc
      */
     setActivation(theActivation) {
+        if (isNaN(theActivation)) {
+            throw new NeuralNetworkError('Trying to set the activation with a non numeric value');
+        }
         this.activation = theActivation;
     }
 

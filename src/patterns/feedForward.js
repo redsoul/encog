@@ -47,12 +47,12 @@ class FeedForwardPattern extends NeuralNetworkPattern {
 
         for (let hiddenLayer of this.hiddenLayers) {
             currentLayer = network.createLayer(hiddenLayer.neurons);
-            network.connectLayers(lastLayer, currentLayer, hiddenLayer.activationFunction, 1.0, false);
+            network.connectLayers(lastLayer, currentLayer, hiddenLayer.activationFunction, 1.0);
             lastLayer = currentLayer;
         }
 
         currentLayer = network.createOutputLayer(this.outputLayer.neurons);
-        network.connectLayers(lastLayer, currentLayer, this.outputLayer.activationFunction, null, false);
+        network.connectLayers(lastLayer, currentLayer, this.outputLayer.activationFunction, null);
 
         network.reset();
         return network;

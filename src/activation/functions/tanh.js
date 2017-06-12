@@ -6,7 +6,7 @@ var ActivationFunction = require('../activationFunction');
  * negative output. Use this activation function if both negative and positive
  * output is desired.
  * @constructor
- * @class ActivationTANH
+ * @class ActivationTanh
  */
 
 class ActivationTANH extends ActivationFunction {

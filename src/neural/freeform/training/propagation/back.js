@@ -13,7 +13,7 @@ class FreeformBackPropagation extends FreeformPropagationTraining {
      * In theory, prevents local minima stall.
      * @param theMomentum {Number} The momentum.
      */
-    constructor(theNetwork, theInput, theOuput, theLearningRate, theMomentum) {
+    constructor(theNetwork, theInput, theOuput, theLearningRate = 0.7, theMomentum = 0.9) {
         super(theNetwork, theInput, theOuput);
         theNetwork.tempTrainingAllocate(1, 2);
         this.learningRate = theLearningRate;
@@ -28,6 +28,9 @@ class FreeformBackPropagation extends FreeformPropagationTraining {
         const delta = (gradient * this.learningRate) + (connection.getTempTraining(1) * this.momentum);
         connection.setTempTraining(1, delta);
         connection.addWeight(delta);
+
+        EncogLog.debug(connection.getSource().layerName + ' (' + connection.getSource().name + ') weight update: '
+            + connection.getWeight() + ' + ' + delta);
     }
 
 }

@@ -113,7 +113,6 @@ class BasicFreeformConnection extends FreeformConnection {
      */
     setTempTraining(index, value) {
         this.tempTraining[index] = value;
-
     }
 
     /**

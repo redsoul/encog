@@ -61,7 +61,9 @@ class EncogLog {
     }
 
     _pushNewMessage(msg, level) {
-        this.messages[level].push(msg);
+        if (this.options.logLevel === level || this.levelsInheritance[this.options.logLevel].indexOf(level) !== -1) {
+            this.messages[level].push(msg);
+        }
         return this;
     }
 
