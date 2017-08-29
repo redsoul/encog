@@ -520,7 +520,7 @@ class FreeformNetwork {
     /**
      * {@inheritDoc}
      */
-    reset() {
+    randomize() {
         const randomizer = new RangeRandomizer(-1, 1);
 
         /**

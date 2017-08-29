@@ -37,8 +37,8 @@ describe('Matrix Math', function () {
             const mat2 = new Matrix([[1, 2, 3], [3, 2, 1], [2, 2, 2]]);
             const mat3 = MatrixMath.subtract(mat1, mat2);
 
-            expect(MatrixMath.subtract(mat1, mat2).getData()).toEqual([[ 0, -1, -2 ], [ -2, -1, 0 ], [ -1, -1, -1 ]]);
-            expect(MatrixMath.subtract(mat2, mat1).getData()).toEqual([[ 0, 1, 2 ], [ 2, 1, 0 ], [ 1, 1, 1 ]]);
+            expect(MatrixMath.subtract(mat1, mat2).getData()).toEqual([[0, -1, -2], [-2, -1, 0], [-1, -1, -1]]);
+            expect(MatrixMath.subtract(mat2, mat1).getData()).toEqual([[0, 1, 2], [2, 1, 0], [1, 1, 1]]);
         });
 
         it('different column size matrices', function () {
@@ -54,6 +54,18 @@ describe('Matrix Math', function () {
 
             expect(()=>MatrixMath.subtract(mat1, mat2)).toThrow();
         });
+    });
+
+    describe('dot product method', function () {
+        it('two vectors', function () {
+            expect(MatrixMath.dot(new Matrix([[2, 4, 1]]), new Matrix([[2, 2, 3]]))).toBe(15);
+            expect(MatrixMath.dot(new Matrix([[2, 4, 1]]), new Matrix([[2], [2], [3]]))).toBe(15);
+            expect(MatrixMath.dot(new Matrix([[2], [4], [1]]), new Matrix([[2, 2, 3]]))).toBe(15);
+        });
+
+        // it('vectors and matrix', function () {
+        //     expect(MatrixMath.dot(new Matrix([[1, 2]]), new Matrix([[1, 2], [3, 4], [5, 6]]))).toBe(15);
+        // });
     });
 
     describe('multiply method', function () {

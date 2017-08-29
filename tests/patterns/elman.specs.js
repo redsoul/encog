@@ -14,51 +14,21 @@ describe('Elman Network', function () {
         }).toThrow(new NeuralNetworkError("An Elman neural network should have only one hidden layer."))
     });
 
-    it('Iris Flower Dataset using BasicNetwork', function () {
-        const irisDataset = Encog.Utils.Network.getIrisDataset();
-        let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
+    it('XOR through time Dataset', function () {
+        const XORDataset = Encog.Utils.Datasets.getXORThroughTimeDataSet();
 
-        ElmanPattern.setInputLayer(4);
-        ElmanPattern.addHiddenLayer(10);
-        ElmanPattern.setOutputLayer(3);
+        ElmanPattern.setInputLayer(1);
+        ElmanPattern.addHiddenLayer(2);
+        ElmanPattern.setOutputLayer(1);
 
         const network = ElmanPattern.generate();
 
-        Encog.Utils.DataToolbox.normalizeData(inputDataset.train);
-        Encog.Utils.DataToolbox.normalizeData(inputDataset.test);
-
         // train the neural network
-        const train = new Encog.Training.Propagation.Resilient(network, inputDataset.train, outputDataset.train);
+        const train = new Encog.Training.Propagation.Back(network, XORDataset.input, XORDataset.output);
 
-        Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5, maxIterations: 25});
-        const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
+        Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5});
+        const accuracy = Encog.Utils.Network.validateNetwork(network, XORDataset.input, XORDataset.output);
 
-        //TODO: use a more appropriate dataset
-        expect(accuracy >= 0).toBe(true);
-    });
-
-    it('Iris Flower Dataset using FreeformNetwork', function () {
-        const irisDataset = Encog.Utils.Network.getIrisDataset();
-        let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
-
-        ElmanPattern.setInputLayer(4);
-        ElmanPattern.addHiddenLayer(10);
-        ElmanPattern.setOutputLayer(3);
-
-        const network = ElmanPattern.generateFreeformNetwork();
-
-        Encog.Utils.DataToolbox.normalizeData(inputDataset.train);
-        Encog.Utils.DataToolbox.normalizeData(inputDataset.test);
-
-        // train the neural network
-        const train = new Encog.FreeformPropagation.Resilient(network, inputDataset.train, outputDataset.train);
-
-        Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5, maxIterations: 25});
-        const accuracy = Encog.Utils.Network.validateNetwork(network, inputDataset.test, outputDataset.test);
-
-        //TODO: use a more appropriate dataset
-        expect(accuracy >= 0).toBe(true);
+        expect(accuracy >= 50).toBe(true);
     });
 });

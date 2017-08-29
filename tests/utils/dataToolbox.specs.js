@@ -139,4 +139,40 @@ describe('DataSet', function () {
             expect(values).toEqual([[2.14285714, 0], [5, 3.5], [0, 2.5], [2.14285714, 5]]);
         });
     });
+
+    describe('one hot encode/decode', function () {
+
+        beforeEach(function () {
+        });
+
+        it('should encode into a one hot array', function () {
+            expect(DataToolbox.oneHotEncode([1, 2])).toEqual({
+                dictionary: [1, 2],
+                oneHotData: [[1, 0], [0, 1]]
+            });
+            expect(DataToolbox.oneHotEncode([1, 2, 3])).toEqual({
+                dictionary: [1, 2, 3],
+                oneHotData: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+            });
+            expect(DataToolbox.oneHotEncode(['a', 'b', 'c', 'd'])).toEqual({
+                dictionary: ['a', 'b', 'c', 'd'],
+                oneHotData: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            });
+            expect(DataToolbox.oneHotEncode(['a', 'b', 'a', 'b', 'c', 'd'])).toEqual({
+                dictionary: ['a', 'b', 'c', 'd'],
+                oneHotData: [[1, 0, 0, 0], [0, 1, 0, 0], [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            });
+        });
+
+        it('should decode a one hot array', function () {
+            expect(DataToolbox.oneHotDecode([1, 2], [1, 0])).toBe(1);
+            expect(DataToolbox.oneHotDecode([1, 2], [0, 1])).toBe(2);
+            expect(DataToolbox.oneHotDecode([1, 2, 3], [0, 0, 1])).toBe(3);
+            expect(DataToolbox.oneHotDecode([1, 2, 3], [0, 1, 0])).toBe(2);
+            expect(DataToolbox.oneHotDecode([1, 2, 3], [1, 0, 0])).toBe(1);
+            expect(DataToolbox.oneHotDecode([1, 2, 3], [1, 1, 0])).toBe(1);
+            expect(DataToolbox.oneHotDecode([1, 2, 3], [1, 1, 1])).toBe(1);
+            expect(DataToolbox.oneHotDecode(['a', 'b', 'c', 'd'], [0, 1, 0, 0])).toBe('b');
+        });
+    });
 });

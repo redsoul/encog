@@ -91,6 +91,57 @@ class MatrixMath {
     }
 
     /**
+     * Compute the dot product for the two matrices
+     *
+     * @param a {Matrix} The first matrix.
+     * @param b {Matrix} The second matrix.
+     * @return {Number} The dot product.
+     */
+    static dot(a, b) {
+        if (!a.isVector() || !b.isVector()) {
+            let result = [];
+            for (let row = 0; row < a.getRows(); row++) {
+                result.push(MatrixMath.dot(a.getRow(row), b.getCol(row)));
+            }
+        }
+
+        const aArray = a.getData();
+        const bArray = b.getData();
+
+        const aLength = aArray.length == 1 ? aArray[0].length : aArray.length;
+        const bLength = bArray.length == 1 ? bArray[0].length : bArray.length;
+
+        if (aLength != bLength) {
+            throw new MatrixError("To take the dot product, both matrices must be of the same length.");
+        }
+
+        let result = 0;
+        if (aArray.length == 1 && bArray.length == 1) {
+            for (let i = 0; i < aLength; i++) {
+                result += aArray[0][i] * bArray[0][i];
+            }
+        }
+        else if (aArray.length == 1 && bArray[0].length == 1) {
+            for (let i = 0; i < aLength; i++) {
+                result += aArray[0][i] * bArray[i][0];
+            }
+        }
+        else if (aArray[0].length == 1 && bArray.length == 1) {
+            for (let i = 0; i < aLength; i++) {
+                result += aArray[i][0] * bArray[0][i];
+            }
+        }
+        else if (aArray[0].length == 1 && bArray[0].length == 1) {
+            for (let i = 0; i < aLength; i++) {
+                result += aArray[i][0] * bArray[i][0];
+            }
+        }
+
+        return result;
+
+    }
+
+    /**
      * Return the transposition of a matrix.
      *
      * @param input {Matrix} The matrix to transpose.

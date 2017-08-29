@@ -45,13 +45,13 @@ class ElmanPattern extends NeuralNetworkPattern {
         const input = new BasicLayer(this.inputLayer.activationFunction, true, this.inputLayer.neurons);
         const hidden = new BasicLayer(this.hiddenLayers[0].activationFunction, true, this.hiddenLayers[0].neurons);
 
-        input.contextFedBy = hidden;
+        hidden.contextFedBy = hidden;
 
         network.addLayer(input);
         network.addLayer(hidden);
         network.addLayer(new BasicLayer(this.outputLayer.activationFunction, false, this.outputLayer.neurons));
 
-        network.reset();
+        network.randomize();
         return network;
     }
 
@@ -69,7 +69,7 @@ class ElmanPattern extends NeuralNetworkPattern {
         network.connectLayers(hiddenLayer1, outputLayer, this.outputLayer.activationFunction, 1.0);
         network.createContext(hiddenLayer1, hiddenLayer1);
 
-        network.reset();
+        network.randomize();
         return network;
     }
 }

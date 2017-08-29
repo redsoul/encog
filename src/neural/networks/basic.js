@@ -257,7 +257,7 @@ class BasicNetwork {
      * used.
      *
      */
-    reset() {
+    randomize() {
         this.structure.finalizeStructure();
         this.getRandomizer().randomize(this);
     }
@@ -339,7 +339,7 @@ class BasicNetwork {
             activationFunc = new ActivationFunctions[funcName]();
             that.addLayer(new BasicLayer(activationFunc, obj.biasActivation[index], neuronCount))
         });
-        this.reset();
+        this.randomize();
         this.getFlat().fromJSON(obj);
     }
 }

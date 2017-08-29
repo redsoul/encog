@@ -69,14 +69,14 @@ const Encog = require('encog');
 
 ```javascript
 const Encog = require('encog');
-const XORdataset = Encog.Utils.Network.getXORDataset();
+const XORdataset = Encog.Utils.Datasets.getXORDataSet();
 
 // create a neural network
 const network = new Encog.Networks.Basic();
 network.addLayer(new Encog.Layers.Basic(null, true, 2));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
-network.reset();
+network.randomize();
 
 const train = new Encog.Training.Propagation.Back(network, XORdataset.input, XORdataset.output);
 
@@ -89,7 +89,7 @@ console.log('Accuracy:', accuracy);
 
 ```javascript
 const Encog = require('encog');
-const irisDataset = Encog.Utils.Network.getIrisDataset();
+const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
 let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
 let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
 
@@ -99,7 +99,7 @@ network.addLayer(new Encog.Layers.Basic(null, true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 10));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 5));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 3));
-network.reset();
+network.randomize();
 
 Encog.Utils.DataToolbox.normalizeData(inputDataset.train);
 Encog.Utils.DataToolbox.normalizeData(inputDataset.test);

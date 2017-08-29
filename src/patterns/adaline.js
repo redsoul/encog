@@ -31,7 +31,7 @@ class ADALINEPattern extends NeuralNetworkPattern {
 
         network.addLayer(inputLayer);
         network.addLayer(outputLayer);
-        network.reset();
+        network.randomize();
 
         return network;
     }
@@ -46,7 +46,7 @@ class ADALINEPattern extends NeuralNetworkPattern {
         const outputLayer = network.createOutputLayer(this.outputLayer.neurons);
 
         network.connectLayers(inputLayer, outputLayer, this.outputLayer.activationFunction, 1.0);
-        network.reset();
+        network.randomize();
 
         return network;
     }

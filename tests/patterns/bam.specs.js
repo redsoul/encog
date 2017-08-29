@@ -20,7 +20,7 @@ describe('BAM Pattern', function () {
     });
 
     it('XOR Dataset', function () {
-        const xorDataset = Encog.Utils.Network.getXORDataset();
+        const xorDataset = Encog.Utils.Datasets.getXORDataSet();
 
         BamPattern.setF1Neurons(2);
         BamPattern.setF2Neurons(1);

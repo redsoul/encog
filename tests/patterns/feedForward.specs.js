@@ -7,7 +7,7 @@ describe('Feed Forward Network', function () {
     });
 
     it('Iris Flower Dataset', function () {
-        const irisDataset = Encog.Utils.Network.getIrisDataset();
+        const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
         let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
         let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
 
@@ -31,7 +31,7 @@ describe('Feed Forward Network', function () {
     });
 
     it('Iris Flower Dataset using FreeformNetwork', function () {
-        const irisDataset = Encog.Utils.Network.getIrisDataset();
+        const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
         let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
         let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
 

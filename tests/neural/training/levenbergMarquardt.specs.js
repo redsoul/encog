@@ -1,6 +1,7 @@
 xdescribe('Levenberg Marquardt Training', function () {
     const LevenbergMarquardt = require(PATHS.TRAINING + 'levenbergMarquardt');
     const NetworkUtil = require(PATHS.UTILS + 'network');
+    const Datasets = require(PATHS.UTILS + 'datasets');
     const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
 
     beforeEach(function () {
@@ -9,7 +10,7 @@ xdescribe('Levenberg Marquardt Training', function () {
 
     it('XOR Dataset', function () {
         // train the neural network
-        const dataset = NetworkUtil.getXORDataset();
+        const dataset = Datasets.getXORDataset();
         const network = NetworkUtil.createXORNetwork();
         const train = new LevenbergMarquardt(network, dataset.input, dataset.output);
 
@@ -21,7 +22,7 @@ xdescribe('Levenberg Marquardt Training', function () {
 
     it('Iris Flower Dataset', function () {
         // train the neural network
-        const dataset = NetworkUtil.getIrisDataset();
+        const dataset = Datasets.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
         let inputDataset = DataToolbox.trainTestSpit(dataset.input);

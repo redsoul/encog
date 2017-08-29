@@ -2,6 +2,7 @@ describe('ResilientPropagation', function () {
     const ResilientPropagation = require(PATHS.PROPAGATION + 'resilient');
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+    const Datasets = require(PATHS.UTILS + 'datasets');
     const RPROPTypes = ResilientPropagation.getResilientTypes();
 
     beforeEach(function () {
@@ -11,7 +12,7 @@ describe('ResilientPropagation', function () {
     describe('Using default Resilient Type (iRPROPp)', function () {
         it('XOR Dataset', function () {
             // train the neural network
-            const dataset = NetworkUtil.getXORDataset();
+            const dataset = Datasets.getXORDataSet();
             const network = NetworkUtil.createXORNetwork();
             const train = new ResilientPropagation(network, dataset.input, dataset.output);
 
@@ -23,7 +24,7 @@ describe('ResilientPropagation', function () {
 
         it('Iris Flower Dataset', function () {
             // train the neural network
-            const irisDataset = NetworkUtil.getIrisDataset();
+            const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
             let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
@@ -39,7 +40,7 @@ describe('ResilientPropagation', function () {
 
         it('Iris Flower Dataset using normalized data', function () {
             // train the neural network
-            const irisDataset = NetworkUtil.getIrisDataset();
+            const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
             let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
@@ -60,7 +61,7 @@ describe('ResilientPropagation', function () {
     describe('Using RPROP+ type', function () {
         it('Iris Flower Dataset using normalized data with RPROP+ type', function () {
             // train the neural network
-            const irisDataset = NetworkUtil.getIrisDataset();
+            const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
             let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
@@ -82,7 +83,7 @@ describe('ResilientPropagation', function () {
     describe('Using RPROP- type', function () {
         it('Iris Flower Dataset using normalized data with RPROP- type', function () {
             // train the neural network
-            const irisDataset = NetworkUtil.getIrisDataset();
+            const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
             let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
@@ -104,7 +105,7 @@ describe('ResilientPropagation', function () {
     describe('Using iRPROP- type', function () {
         it('Iris Flower Dataset using normalized data with iRPROP- type', function () {
             // train the neural network
-            const irisDataset = NetworkUtil.getIrisDataset();
+            const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
             let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
@@ -126,7 +127,7 @@ describe('ResilientPropagation', function () {
     describe('Using ARPROP type', function () {
         it('Iris Flower Dataset using normalized data with ARPROP type', function () {
             // train the neural network
-            const irisDataset = NetworkUtil.getIrisDataset();
+            const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
             let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);

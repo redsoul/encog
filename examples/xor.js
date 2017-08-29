@@ -1,12 +1,12 @@
 const Encog = require('../index');
-const XORdataset = Encog.Utils.Network.getXORDataset();
+const XORdataset = Encog.Utils.Datasets.getXORDataSet();
 
 // create a neural network, without using a factory
 network = new Encog.Networks.Basic();
 network.addLayer(new Encog.Layers.Basic(null, true, 2));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), true, 4));
 network.addLayer(new Encog.Layers.Basic(new Encog.ActivationFunctions.Sigmoid(), false, 1));
-network.reset();
+network.randomize();
 
 // train the neural network
 const train = new Encog.Training.Propagation.Resilient(network, XORdataset.input, XORdataset.output);

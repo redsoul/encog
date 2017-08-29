@@ -3,6 +3,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const TrainingSetScore = require(PATHS.SCORE + 'trainingSet');
     const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+    const Datasets = require(PATHS.UTILS + 'datasets');
 
     beforeEach(function () {
 
@@ -10,7 +11,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
 
     it('XOR Dataset', function () {
         // train the neural network
-        const dataset = NetworkUtil.getXORDataset();
+        const dataset = Datasets.getXORDataset();
         const network = NetworkUtil.createXORNetwork();
         const score = new TrainingSetScore(dataset.input, dataset.output);
         const train = new NeuralSimulatedAnnealing(network, score, 10, 2, 100);
@@ -23,7 +24,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
 
     it('Iris Flower Dataset', function () {
         // train the neural network
-        const dataset = NetworkUtil.getIrisDataset();
+        const dataset = Datasets.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
         let inputDataset = DataToolbox.trainTestSpit(dataset.input);

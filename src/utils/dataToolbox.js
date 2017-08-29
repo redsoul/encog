@@ -4,6 +4,7 @@ const fs = require('fs');
 const csv = require('fast-csv');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const CONSTANTS = PATHS.CONSTANTS;
+const ArrayUtils = require(PATHS.UTILS + 'array');
 
 class DataToolbox {
 
@@ -153,7 +154,6 @@ class DataToolbox {
      * @param maxRange {Number} Default 1
      * */
     static normalizeData(values, minRange = -1, maxRange = 1) {
-        let normalizedArr = [];
         let minMaxValues = DataToolbox.calcMinMaxValues(values);
 
         _.each(values, function (row, rowIndex) {
@@ -172,8 +172,43 @@ class DataToolbox {
                 );
             });
         });
+    }
 
-        return normalizedArr;
+    static oneHotDictionary(data) {
+        return _.uniq(data);
+    }
+
+    /**
+     * https://en.wikipedia.org/wiki/One-hot
+     * @param data {Array}
+     * @param customDictionary {Array}
+     * @returns {Object}
+     */
+    static oneHotEncode(data, customDictionary) {
+        const dictionary = customDictionary || this.oneHotDictionary(data);
+        const oneHotLength = dictionary.length;
+        const oneHotData = [];
+
+        _.each(data, function (value) {
+            const arr = ArrayUtils.newIntArray(oneHotLength);
+            arr[dictionary.indexOf(value)] = 1;
+            oneHotData.push(arr);
+        });
+
+        return {
+            dictionary,
+            oneHotData
+        };
+    }
+
+    /**
+     * https://en.wikipedia.org/wiki/One-hot
+     * @param dictionary {Array}
+     * @param oneHotArray {Array}
+     * @returns {Object}
+     */
+    static oneHotDecode(dictionary, oneHotArray) {
+        return dictionary[oneHotArray.indexOf(1)];
     }
 }
 

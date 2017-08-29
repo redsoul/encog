@@ -155,7 +155,7 @@ class NetworkUtil {
         network.addLayer(new BasicLayer(null, true, 2));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 4));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
-        network.reset();
+        network.randomize();
 
         return network;
     }
@@ -169,7 +169,7 @@ class NetworkUtil {
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 10));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 5));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 3));
-        network.reset();
+        network.randomize();
 
         return network;
     }

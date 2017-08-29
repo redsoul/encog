@@ -32,7 +32,7 @@ class FeedForwardPattern extends NeuralNetworkPattern {
 
         const output = new BasicLayer(this.outputLayer.activationFunction, false, this.outputLayer.neurons);
         network.addLayer(output);
-        network.reset();
+        network.randomize();
 
         return network;
     }
@@ -47,14 +47,14 @@ class FeedForwardPattern extends NeuralNetworkPattern {
 
         for (let hiddenLayer of this.hiddenLayers) {
             currentLayer = network.createLayer(hiddenLayer.neurons);
-            network.connectLayers(lastLayer, currentLayer, hiddenLayer.activationFunction, 1.0, false);
+            network.connectLayers(lastLayer, currentLayer, hiddenLayer.activationFunction, 1.0);
             lastLayer = currentLayer;
         }
 
         currentLayer = network.createOutputLayer(this.outputLayer.neurons);
-        network.connectLayers(lastLayer, currentLayer, this.outputLayer.activationFunction, null, false);
+        network.connectLayers(lastLayer, currentLayer, this.outputLayer.activationFunction, null);
 
-        network.reset();
+        network.randomize();
         return network;
     }
 }

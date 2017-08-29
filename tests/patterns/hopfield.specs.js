@@ -23,7 +23,7 @@ describe('Hopfield Pattern', function () {
     });
 
     it('Letters pattern Dataset', function () {
-        const hopfieldPatterns = Encog.Utils.Network.getHopfieldPatterns();
+        const hopfieldPatterns = Encog.Utils.Datasets.getHopfieldPatterns();
 
         HopfieldPattern.setInputLayer(35);
         const network = HopfieldPattern.generate();

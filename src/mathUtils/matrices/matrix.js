@@ -232,6 +232,33 @@ class Matrix {
     }
 
     /**
+     * Determine if the matrix is a vector. A vector is has either a single
+     * number of rows or columns.
+     *
+     * @return {Boolean} True if this matrix is a vector.
+     */
+    isVector() {
+        if (this.getRows() == 1) {
+            return true;
+        }
+        return this.getCols() == 1;
+    }
+
+    each(cb) {
+        let value;
+        cb = cb || function () {
+            };
+        for (let row = 0; row < this.matrix.length; row++) {
+            for (let col = 0; col < this.matrix[row].length; col++) {
+                value = cb(row, col, this.get(row, col));
+                if (!isNaN(value)) {
+                    this.set(row, col, value);
+                }
+            }
+        }
+    }
+
+    /**
      * Validate that the specified row and column are within the required
      * ranges. Otherwise throw a MatrixError exception.
      *

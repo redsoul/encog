@@ -5,6 +5,7 @@ describe('Freeform Network', function () {
     const BasicLayer = require(PATHS.LAYERS + 'basic');
     const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
     const NetworkUtil = require(PATHS.UTILS + 'network');
+    const Datasets = require(PATHS.UTILS + 'datasets');
     const ArrayUtils = require(PATHS.UTILS + 'array');
 
 
@@ -21,7 +22,7 @@ describe('Freeform Network', function () {
             network.connectLayers(inputLayer, hiddenLayer1, new ActivationSigmoid(), 1.0, false);
             network.connectLayers(hiddenLayer1, outputLayer, new ActivationSigmoid(), 1.0, false);
 
-            network.reset();
+            network.randomize();
 
             return network;
         }
@@ -32,7 +33,7 @@ describe('Freeform Network', function () {
             basicNetwork.addLayer(new BasicLayer(null, true, 2));
             basicNetwork.addLayer(new BasicLayer(new ActivationSigmoid(), true, 3));
             basicNetwork.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
-            basicNetwork.reset();
+            basicNetwork.randomize();
 
             let freeformNetwork = new FreeformNetwork(basicNetwork);
             expect(basicNetwork.getInputCount()).toEqual(freeformNetwork.getInputCount());
@@ -42,7 +43,7 @@ describe('Freeform Network', function () {
 
         it('should encode and decode a network', function () {
             // train (and test) a network
-            const XORDataset = NetworkUtil.getXORDataset();
+            const XORDataset = Datasets.getXORDataSet();
             let network = createXORNetwork();
 
             let rprop = new FreeformResilientPropagation(network, XORDataset.input, XORDataset.output);

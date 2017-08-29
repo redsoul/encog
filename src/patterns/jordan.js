@@ -51,7 +51,7 @@ class JordanPattern extends NeuralNetworkPattern {
         network.addLayer(new BasicLayer(this.inputLayer.activationFunction, true, this.inputLayer.neurons));
         network.addLayer(hidden);
         network.addLayer(output);
-        network.reset();
+        network.randomize();
 
         return network;
     }
