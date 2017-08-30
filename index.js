@@ -43,5 +43,6 @@ module.exports = {
     Strategies,
     MathUtils,
     ErrorCalculation,
-    Utils
+    Utils,
+    Log: EncogLog
 };
