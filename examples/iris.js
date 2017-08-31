@@ -1,7 +1,7 @@
 const Encog = require('../index');
 const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
-const inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input, 0.2);
-const outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output, 0.2);
+const inputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.input, 0.2);
+const outputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.output, 0.2);
 let accuracy;
 
 Encog.Log.options.logLevel = 'info';

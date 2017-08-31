@@ -27,8 +27,8 @@ xdescribe('Neural Simulated Annealing Training', function () {
         const dataset = Datasets.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSpit(dataset.input);
-        let outputDataset = DataToolbox.trainTestSpit(dataset.output);
+        let inputDataset = DataToolbox.trainTestSplit(dataset.input);
+        let outputDataset = DataToolbox.trainTestSplit(dataset.output);
 
         const score = new TrainingSetScore(inputDataset.train, outputDataset.train);
         const train = new NeuralSimulatedAnnealing(network, score, 10, 2, 100);

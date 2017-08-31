@@ -28,8 +28,8 @@ describe('ManhattanPropagation', function () {
         const irisDataset = Datasets.getIrisDataSet();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
         train = new ManhattanPropagation(network, inputDataset.train, outputDataset.train, .03, .7);
 
@@ -44,8 +44,8 @@ describe('ManhattanPropagation', function () {
         const irisDataset = Datasets.getIrisDataSet();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
         DataToolbox.normalizeData(inputDataset.train);
         DataToolbox.normalizeData(inputDataset.test);

@@ -27,8 +27,8 @@ describe('ResilientPropagation', function () {
             const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
             const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
 
@@ -43,8 +43,8 @@ describe('ResilientPropagation', function () {
             const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
             DataToolbox.normalizeData(inputDataset.train);
             DataToolbox.normalizeData(inputDataset.test);
@@ -64,8 +64,8 @@ describe('ResilientPropagation', function () {
             const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
             DataToolbox.normalizeData(inputDataset.train);
             DataToolbox.normalizeData(inputDataset.test);
@@ -86,8 +86,8 @@ describe('ResilientPropagation', function () {
             const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
             DataToolbox.normalizeData(inputDataset.train);
             DataToolbox.normalizeData(inputDataset.test);
@@ -108,8 +108,8 @@ describe('ResilientPropagation', function () {
             const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
             DataToolbox.normalizeData(inputDataset.train);
             DataToolbox.normalizeData(inputDataset.test);
@@ -130,8 +130,8 @@ describe('ResilientPropagation', function () {
             const irisDataset = Datasets.getIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
             DataToolbox.normalizeData(inputDataset.train);
             DataToolbox.normalizeData(inputDataset.test);

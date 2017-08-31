@@ -90,8 +90,8 @@ console.log('Accuracy:', accuracy);
 ```javascript
 const Encog = require('encog');
 const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
-let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
-let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
+let inputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.input);
+let outputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.output);
 
 // create a neural network
 const network = new Encog.Networks.Basic();

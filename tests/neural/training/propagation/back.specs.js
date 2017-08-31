@@ -28,8 +28,8 @@ describe('BackPropagation', function () {
         const irisDataset = Datasets.getIrisDataSet();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
         train = new BackPropagation(network, inputDataset.train, outputDataset.train, .08, .1);
 
@@ -44,8 +44,8 @@ describe('BackPropagation', function () {
         const irisDataset = Datasets.getIrisDataSet();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSpit(irisDataset.output);
+        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
+        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
 
         DataToolbox.normalizeData(inputDataset.train);
         DataToolbox.normalizeData(inputDataset.test);

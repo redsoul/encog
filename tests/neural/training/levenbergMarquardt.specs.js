@@ -25,8 +25,8 @@ xdescribe('Levenberg Marquardt Training', function () {
         const dataset = Datasets.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSpit(dataset.input);
-        let outputDataset = DataToolbox.trainTestSpit(dataset.output);
+        let inputDataset = DataToolbox.trainTestSplit(dataset.input);
+        let outputDataset = DataToolbox.trainTestSplit(dataset.output);
 
         const train = new LevenbergMarquardt(network, inputDataset.train, outputDataset.train);
 

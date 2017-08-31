@@ -54,9 +54,9 @@ describe('DataSet', function () {
         expect(temp).toEqual([[1, 2, 3], [4, 5, 6]]);
     });
 
-    describe('trainTestSpit', function () {
+    describe('trainTestSplit', function () {
         it('should use the default test size', function () {
-            const trainingSet = DataToolbox.trainTestSpit(_.range(100));
+            const trainingSet = DataToolbox.trainTestSplit(_.range(100));
 
             expect(trainingSet.constructor.name).toBe('Object');
             expect(trainingSet.train.constructor.name).toBe('Array');
@@ -67,7 +67,7 @@ describe('DataSet', function () {
         });
 
         it('should use a given test size', function () {
-            const trainingSet = DataToolbox.trainTestSpit(_.range(100), .25);
+            const trainingSet = DataToolbox.trainTestSplit(_.range(100), .25);
 
             expect(trainingSet.train.length).toBe(75);
             expect(trainingSet.test.length).toBe(25);
@@ -75,7 +75,7 @@ describe('DataSet', function () {
 
         it('should throw an exception', function () {
             expect(()=> {
-                DataToolbox.trainTestSpit(_.range(100), 5)
+                DataToolbox.trainTestSplit(_.range(100), 5)
             }).toThrow(new NeuralNetworkError('Test size should be between 0 and 1'))
         });
     });

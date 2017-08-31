@@ -15,8 +15,8 @@ describe('ADALINE Network', function () {
 
     it('Iris Flower Dataset', function () {
         const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
-        let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
+        let inputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.input);
+        let outputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.output);
 
         AdalinePattern.setInputLayer(4);
         AdalinePattern.setOutputLayer(3);
@@ -37,8 +37,8 @@ describe('ADALINE Network', function () {
 
     it('Iris Flower Dataset using FreeformNetwork', function () {
         const irisDataset = Encog.Utils.Datasets.getIrisDataSet();
-        let inputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.input);
-        let outputDataset = Encog.Utils.DataToolbox.trainTestSpit(irisDataset.output);
+        let inputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.input);
+        let outputDataset = Encog.Utils.DataToolbox.trainTestSplit(irisDataset.output);
 
         AdalinePattern.setInputLayer(4);
         AdalinePattern.setOutputLayer(3);

@@ -16,7 +16,7 @@ class DataToolbox {
      * @param dataset {Array}
      * @param testSize {Number}
      */
-    static trainTestSpit(dataset, testSize = 0.2) {
+    static trainTestSplit(dataset, testSize = 0.2) {
         if (testSize >= 1 || testSize <= 0) {
             throw new NeuralNetworkError('Test size should be between 0 and 1');
         }
