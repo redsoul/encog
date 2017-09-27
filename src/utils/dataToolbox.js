@@ -74,11 +74,24 @@ class DataToolbox {
                 EncogLog.debug(count + ' rows loaded');
 
                 _.each(dataset, function (entry) {
-                    input.push((inputColumns.length > 0) ? _.pick(entry, inputColumns) : _.omit(entry, outputColumns.concat(ignoreColumns)));
-                    output.push(_.pick(entry, outputColumns));
+                    if (options.headers) {
+                        input.push((inputColumns.length > 0) ?
+                            _.pick(entry, inputColumns) :
+                            _.omit(entry, outputColumns.concat(ignoreColumns)));
+
+                        if (outputColumns.length > 0) {
+                            output.push(_.pick(entry, outputColumns));
+                        }
+                    } else {
+                        input.push(entry);
+                    }
                 });
 
-                deferred.resolve({input: input, output: output});
+                if (output.length > 0) {
+                    deferred.resolve({input: input, output: output});
+                } else {
+                    deferred.resolve(input);
+                }
             })
             .on('error', function (error) {
                 EncogLog.error(error);
