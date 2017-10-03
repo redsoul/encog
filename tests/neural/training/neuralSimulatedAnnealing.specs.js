@@ -2,7 +2,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
     const NeuralSimulatedAnnealing = require(PATHS.TRAINING + 'neuralSimulatedAnnealing');
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const TrainingSetScore = require(PATHS.SCORE + 'trainingSet');
-    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
     const Datasets = require(PATHS.UTILS + 'datasets');
 
     beforeEach(function () {

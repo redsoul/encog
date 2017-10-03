@@ -1,6 +1,6 @@
 const LinearErrorFunction = require(PATHS.ERROR_FUNCTIONS + 'linear');
 const GradientWorker = require(PATHS.TRAINING + 'gradientWorker');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const EncogError = require(PATHS.ERROR_HANDLING + 'encog');
 const BasicTraining = require(PATHS.TRAINING + 'basic');
 /**

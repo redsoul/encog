@@ -1,5 +1,8 @@
 const _ = require('lodash');
-const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
+const DataEncoder = require(PATHS.PREPROCESSING + 'dataEncoder');
+const OneHot = require(PATHS.DATA_MAPPERS + 'oneHot');
+const MinMaxScaller = require(PATHS.DATA_MAPPERS + 'minMaxScaller');
 
 class DataSets {
     /**
@@ -36,20 +39,30 @@ class DataSets {
      * @return {Array}
      */
     static getIrisDataSet() {
-        let irisDataSet = require('ml-dataset-iris').getDataset();
-        irisDataSet = _.shuffle(irisDataSet);
+        return require(PATHS.DATA_FOLDER + 'iris.json');
+    }
 
-        let irisInput = [];
-        let irisOutput = [];
-        //split the dataset in input and output
-        irisDataSet.map(function (val) {
-            irisInput.push(val.slice(0, -1));
-            irisOutput.push(val[val.length - 1]);
-        });
+    /**
+     * @return {Array}
+     */
+    static getNormalizedIrisDataSet() {
+        let irisDataset = DataSets.getIrisDataSet();
+        irisDataset = _.shuffle(irisDataset);
+        irisDataset = DataToolbox.trainTestSplit(irisDataset);
+        const dataEncoder = new DataEncoder();
+        const mappings = {
+            'Sepal.Length': new MinMaxScaller(),
+            'Sepal.Width': new MinMaxScaller(),
+            'Petal.Length': new MinMaxScaller(),
+            'Petal.Width': new MinMaxScaller(),
+            'Species': new OneHot(),
+        };
+        const trainData = dataEncoder.fit_transform(irisDataset.train, mappings);
+        const testData = dataEncoder.transform(irisDataset.test, mappings);
 
         return {
-            input: irisInput,
-            output: DataToolbox.oneHotEncode(irisOutput).oneHotData
+            train: DataToolbox.sliceOutput(trainData.values, 3),
+            test: DataToolbox.sliceOutput(testData.values, 3)
         };
     }
 

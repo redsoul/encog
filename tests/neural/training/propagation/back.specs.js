@@ -1,7 +1,7 @@
 describe('BackPropagation', function () {
     const BackPropagation = require(PATHS.PROPAGATION + 'back');
     const NetworkUtil = require(PATHS.UTILS + 'network');
-    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
     const Datasets = require(PATHS.UTILS + 'datasets');
     let network;
     let train;
@@ -23,37 +23,15 @@ describe('BackPropagation', function () {
         expect(accuracy >= 50).toBe(true);
     });
 
-    it('Iris Flower Dataset', function () {
-        // train the neural network
-        const irisDataset = Datasets.getIrisDataSet();
-        network = NetworkUtil.createIrisNetwork();
-
-        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-        train = new BackPropagation(network, inputDataset.train, outputDataset.train, .08, .1);
-
-        NetworkUtil.trainNetwork(train, {minError: 0.02, minIterations: 5});
-        const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
-
-        expect(accuracy >= 75).toBe(true);
-    });
-
     it('Iris Flower Dataset using normalized data', function () {
         // train the neural network
-        const irisDataset = Datasets.getIrisDataSet();
+        const irisDataset = Datasets.getNormalizedIrisDataSet();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-        DataToolbox.normalizeData(inputDataset.train);
-        DataToolbox.normalizeData(inputDataset.test);
-
-        train = new BackPropagation(network, inputDataset.train, outputDataset.train, .3, .3);
+        train = new BackPropagation(network, irisDataset.train.input, irisDataset.train.output, .3, .3);
 
         NetworkUtil.trainNetwork(train, {minError: 0.02, minIterations: 5});
-        const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+        const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
         expect(accuracy >= 75).toBe(true);
     });

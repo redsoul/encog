@@ -1,4 +1,4 @@
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const BiPolarUtil = require(PATHS.UTILS + 'biPolar');
 /**
  * A NeuralData implementation designed to work with bipolar data.

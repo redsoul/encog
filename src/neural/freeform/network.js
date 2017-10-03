@@ -7,7 +7,7 @@ const BasicFreeformLayer = require(PATHS.FREEFORM + 'basic/layer');
 const FreeformContextNeuron = require(PATHS.FREEFORM + 'contextNeuron');
 const ErrorUtil = require(PATHS.UTILS + 'error');
 const RangeRandomizer = require(PATHS.RANDOMIZERS + 'range');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 /**
  * Implements a freefrom neural network. A freeform neural network can represent
  * much more advanced structures than the flat networks that the Encog

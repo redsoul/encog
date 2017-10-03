@@ -1,4 +1,4 @@
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const _ = require('lodash');
 

@@ -2,7 +2,7 @@ xdescribe('Levenberg Marquardt Training', function () {
     const LevenbergMarquardt = require(PATHS.TRAINING + 'levenbergMarquardt');
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const Datasets = require(PATHS.UTILS + 'datasets');
-    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
 
     beforeEach(function () {
 

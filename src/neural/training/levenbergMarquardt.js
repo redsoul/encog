@@ -1,5 +1,5 @@
 const BasicTraining = require(PATHS.TRAINING + 'basic');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const HessionCR = require(PATHS.HESSIAN + 'hessianCR');
 const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const mathjs = require('mathjs');

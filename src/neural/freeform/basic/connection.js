@@ -1,5 +1,5 @@
 const FreeformConnection = require(PATHS.FREEFORM + 'interfaces/connection');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 /**
  * A basic freeform connection.
  *

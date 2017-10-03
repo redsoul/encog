@@ -1,3 +1,5 @@
+const _ = require('lodash');
+
 global.PATHS = require('./paths.js');
 
 const encogLog = require(PATHS.UTILS + 'encogLog');
@@ -8,10 +10,8 @@ const requireDir = (dir)=> {
     return requireAll({
         dirname: dir,
         filter: /(\w+).js$/,
-        map: (name, path)=> {
-            return name.replace(/^[a-z]/, function (match) {
-                return match.toUpperCase();
-            });
+        map: (name)=> {
+            return _.upperFirst(name);
         }
     });
 };
@@ -29,6 +29,7 @@ const Strategies = requireDir(PATHS.STRATEGIES);
 const MathUtils = requireDir(PATHS.MATH_UTILS);
 const ErrorCalculation = requireDir(PATHS.ERROR_CALCULATION);
 const Utils = requireDir(PATHS.UTILS);
+const Preprocessing = requireDir(PATHS.PREPROCESSING);
 
 module.exports = {
     ActivationFunctions,
@@ -44,5 +45,6 @@ module.exports = {
     MathUtils,
     ErrorCalculation,
     Utils,
+    Preprocessing,
     Log: EncogLog
 };
