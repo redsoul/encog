@@ -57,7 +57,7 @@ class NeuralNetworkPattern {
      * @param neuronsCount {number} The number of neurons in the hidden layer.
      * @param activationFunc {ActivationFunction} The Activation Function
      */
-    setInputLayer(neuronsCount, activationFunc = null) {
+    setInputLayer(neuronsCount, activationFunc = new ActivationSigmoid()) {
         this.inputLayer = {
             neurons: neuronsCount,
             activationFunction: activationFunc
