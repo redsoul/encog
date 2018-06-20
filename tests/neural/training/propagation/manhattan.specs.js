@@ -2,7 +2,7 @@ describe('ManhattanPropagation', function () {
     const ManhattanPropagation = require(PATHS.PROPAGATION + 'manhattan');
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const Datasets = require(PATHS.UTILS + 'datasets');
-    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
+    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
     let network;
     let train;
 
@@ -23,37 +23,15 @@ describe('ManhattanPropagation', function () {
         expect(accuracy).toBeGreaterThan(75);
     });
 
-     it('Iris Flower Dataset', function () {
+    it('Iris Flower Dataset using normalized data', function () {
         // train the neural network
-        const irisDataset = Datasets.getIrisDataSet();
+        const irisDataset = Datasets.getNormalizedIrisDataSet();
         network = NetworkUtil.createIrisNetwork();
 
-        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-        train = new ManhattanPropagation(network, inputDataset.train, outputDataset.train, .03, .7);
+        train = new ManhattanPropagation(network, irisDataset.train.input, irisDataset.train.output, .03, .7);
 
         NetworkUtil.trainNetwork(train, {minError: 0.05, minIterations: 5});
-        const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
-
-        expect(accuracy).toBeGreaterThan(65);
-    });
-
-     it('Iris Flower Dataset using normalized data', function () {
-        // train the neural network
-        const irisDataset = Datasets.getIrisDataSet();
-        network = NetworkUtil.createIrisNetwork();
-
-        let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-        let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-        DataToolbox.normalizeData(inputDataset.train);
-        DataToolbox.normalizeData(inputDataset.test);
-
-        train = new ManhattanPropagation(network, inputDataset.train, outputDataset.train, .03, .7);
-
-        NetworkUtil.trainNetwork(train, {minError: 0.05, minIterations: 5});
-        const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+        const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
         expect(accuracy).toBeGreaterThan(75);
     });

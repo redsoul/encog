@@ -1,4 +1,4 @@
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const BiPolarNeuralData = require(PATHS.NEURAL + 'biPolarNeuralData');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 /**

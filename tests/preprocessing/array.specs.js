@@ -1,5 +1,5 @@
 describe('ArrayUtils', function () {
-    const ArrayUtils = require(PATHS.UTILS + 'array');
+    const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
     beforeEach(function () {
     });

@@ -6,7 +6,7 @@ describe('Freeform Network', function () {
     const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const Datasets = require(PATHS.UTILS + 'datasets');
-    const ArrayUtils = require(PATHS.UTILS + 'array');
+    const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
 
     beforeEach(function () {

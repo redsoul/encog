@@ -1,7 +1,6 @@
 describe('ResilientPropagation', function () {
     const ResilientPropagation = require(PATHS.PROPAGATION + 'resilient');
     const NetworkUtil = require(PATHS.UTILS + 'network');
-    const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
     const Datasets = require(PATHS.UTILS + 'datasets');
     const RPROPTypes = ResilientPropagation.getResilientTypes();
 
@@ -22,37 +21,15 @@ describe('ResilientPropagation', function () {
             expect(accuracy).toBeGreaterThan(75);
         });
 
-        it('Iris Flower Dataset', function () {
-            // train the neural network
-            const irisDataset = Datasets.getIrisDataSet();
-            const network = NetworkUtil.createIrisNetwork();
-
-            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-            const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
-
-            NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-            const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
-
-            expect(accuracy).toBeGreaterThan(80);
-        });
-
         it('Iris Flower Dataset using normalized data', function () {
             // train the neural network
-            const irisDataset = Datasets.getIrisDataSet();
+            const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-            DataToolbox.normalizeData(inputDataset.train);
-            DataToolbox.normalizeData(inputDataset.test);
-
-            const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
+            const train = new ResilientPropagation(network, irisDataset.train.input, irisDataset.train.output);
 
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-            const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+            const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
             expect(accuracy).toBeGreaterThan(70);
         });
@@ -61,20 +38,14 @@ describe('ResilientPropagation', function () {
     describe('Using RPROP+ type', function () {
         it('Iris Flower Dataset using normalized data with RPROP+ type', function () {
             // train the neural network
-            const irisDataset = Datasets.getIrisDataSet();
+            const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-            DataToolbox.normalizeData(inputDataset.train);
-            DataToolbox.normalizeData(inputDataset.test);
-
-            const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
+            const train = new ResilientPropagation(network, irisDataset.train.input, irisDataset.train.output);
             train.setResilientType(RPROPTypes.RPROPp);
 
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-            const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+            const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
             expect(accuracy).toBeGreaterThan(75);
         });
@@ -83,20 +54,14 @@ describe('ResilientPropagation', function () {
     describe('Using RPROP- type', function () {
         it('Iris Flower Dataset using normalized data with RPROP- type', function () {
             // train the neural network
-            const irisDataset = Datasets.getIrisDataSet();
+            const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-            DataToolbox.normalizeData(inputDataset.train);
-            DataToolbox.normalizeData(inputDataset.test);
-
-            const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
+            const train = new ResilientPropagation(network, irisDataset.train.input, irisDataset.train.output);
             train.setResilientType(RPROPTypes.RPROPm);
 
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-            const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+            const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
             expect(accuracy).toBeGreaterThan(75);
         });
@@ -105,20 +70,14 @@ describe('ResilientPropagation', function () {
     describe('Using iRPROP- type', function () {
         it('Iris Flower Dataset using normalized data with iRPROP- type', function () {
             // train the neural network
-            const irisDataset = Datasets.getIrisDataSet();
+            const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-            DataToolbox.normalizeData(inputDataset.train);
-            DataToolbox.normalizeData(inputDataset.test);
-
-            const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
+            const train = new ResilientPropagation(network, irisDataset.train.input, irisDataset.train.output);
             train.setResilientType(RPROPTypes.iRPROPm);
 
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-            const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+            const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
             expect(accuracy).toBeGreaterThan(80);
         });
@@ -127,20 +86,14 @@ describe('ResilientPropagation', function () {
     describe('Using ARPROP type', function () {
         it('Iris Flower Dataset using normalized data with ARPROP type', function () {
             // train the neural network
-            const irisDataset = Datasets.getIrisDataSet();
+            const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
 
-            let inputDataset = DataToolbox.trainTestSplit(irisDataset.input);
-            let outputDataset = DataToolbox.trainTestSplit(irisDataset.output);
-
-            DataToolbox.normalizeData(inputDataset.train);
-            DataToolbox.normalizeData(inputDataset.test);
-
-            const train = new ResilientPropagation(network, inputDataset.train, outputDataset.train);
+            const train = new ResilientPropagation(network, irisDataset.train.input, irisDataset.train.output);
             train.setResilientType(RPROPTypes.ARPROP);
 
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
-            const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
+            const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
             expect(accuracy).toBeGreaterThan(80);
         });

@@ -1,4 +1,4 @@
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const FreeformNeuron = require(PATHS.FREEFORM + 'interfaces/neuron');
 /**
  * This class provides a basic implementation of a freeform neuron.

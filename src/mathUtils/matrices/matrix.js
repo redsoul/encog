@@ -1,4 +1,4 @@
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const MatrixError = require(PATHS.ERROR_HANDLING + 'matrix');
 
 /**

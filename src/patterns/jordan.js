@@ -3,6 +3,7 @@ const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
+const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
 const FreeformNetwork = require(PATHS.FREEFORM + 'network');
 
 /**
@@ -37,8 +38,18 @@ class JordanPattern extends NeuralNetworkPattern {
     /**
      * @inheritDoc
      */
+    setOutputLayer(neuronsCount, activationFunc = new ActivationLinear()) {
+        this.outputLayer = {
+            neurons: neuronsCount,
+            activationFunction: activationFunc
+        };
+    }
+
+    /**
+     * @inheritDoc
+     */
     generate() {
-        if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
+        if (!this.inputLayer || this.hiddenLayers.length === 0 || !this.outputLayer) {
             throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
         }
 
@@ -60,7 +71,7 @@ class JordanPattern extends NeuralNetworkPattern {
      * @inheritDoc
      */
     generateFreeformNetwork() {
-        if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
+        if (!this.inputLayer || this.hiddenLayers.length === 0 || !this.outputLayer) {
             throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
         }
 

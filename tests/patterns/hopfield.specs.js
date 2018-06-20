@@ -1,7 +1,7 @@
 describe('Hopfield Pattern', function () {
     const Encog = require('../../index');
     const _ = require('lodash');
-    const ArrayUtils = require(PATHS.UTILS + 'array');
+    const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
     let HopfieldPattern;
 
     beforeEach(function () {

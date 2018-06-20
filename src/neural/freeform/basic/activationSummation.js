@@ -1,5 +1,5 @@
 const InputSummation = require(PATHS.FREEFORM + 'interfaces/inputSummation');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 /**
  * Provides a basic implementation of an input summation. The inputs are summed
  * and applied to the activation function.

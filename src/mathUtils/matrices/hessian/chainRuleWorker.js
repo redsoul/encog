@@ -1,4 +1,4 @@
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const Matrix = require(PATHS.MATRICES + 'matrix');
 /**
  * A threaded worker that is used to calculate the first derivatives of the

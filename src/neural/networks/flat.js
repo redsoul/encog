@@ -4,7 +4,7 @@ const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
 const FlatLayer = require(PATHS.LAYERS + 'flat');
 const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const _ = require('lodash');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const EncogError = require(PATHS.ERROR_HANDLING + 'encog');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 

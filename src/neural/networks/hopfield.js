@@ -2,7 +2,7 @@ const ThermalNetwork = require(PATHS.NETWORKS + 'thermal');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const Matrix = require(PATHS.MATRICES + 'matrix');
 const MatrixMath = require(PATHS.MATRICES + 'math');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const BiPolarUtil = require(PATHS.UTILS + 'biPolar');
 const BiPolarNeuralData = require(PATHS.NEURAL + 'biPolarNeuralData');
 /**

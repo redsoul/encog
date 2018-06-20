@@ -1,5 +1,5 @@
 const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
 /**
  * Worker class for the mulithreaded training of flat networks.

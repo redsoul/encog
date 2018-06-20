@@ -1,5 +1,7 @@
 module.exports = (function () {
     const BASE = __dirname;
+    const EXAMPLES = BASE + '/examples/';
+    const DATA_FOLDER = EXAMPLES + '/data/';
     const SRC = BASE + '/src/';
     const CONSTANTS = require(SRC + 'constants.js');
     const ACTIVATION_FUNCTIONS = SRC + 'activation/functions/';
@@ -20,8 +22,10 @@ module.exports = (function () {
     const HESSIAN = MATH_UTILS + 'matrices/hessian/';
     const DECOMPOSITION = MATH_UTILS + 'matrices/decomposition/';
     const UTILS = SRC + 'utils/';
+    const PREPROCESSING = SRC + 'preprocessing/';
     const ERROR_CALCULATION = UTILS + 'errorCalculation/';
     const ERROR_HANDLING = UTILS + 'errorHandling/';
+    const DATA_MAPPERS = PREPROCESSING + 'dataMappers/';
     const RANDOMIZERS = MATH_UTILS + 'randomizers/';
     const GENERATORS = MATH_UTILS + 'generators/';
     const ML = SRC + 'ml/';
@@ -31,6 +35,8 @@ module.exports = (function () {
 
     return {
         BASE,
+        EXAMPLES,
+        DATA_FOLDER,
         SRC,
         TESTS,
         TEST_HELPERS,
@@ -53,8 +59,10 @@ module.exports = (function () {
         HESSIAN,
         DECOMPOSITION,
         UTILS,
+        PREPROCESSING,
         ERROR_CALCULATION,
         ERROR_HANDLING,
+        DATA_MAPPERS,
         RANDOMIZERS,
         GENERATORS,
         ML

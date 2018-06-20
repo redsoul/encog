@@ -4,6 +4,7 @@ const FreeformNetwork = require(PATHS.FREEFORM + 'network');
 const NeuralNetworkPattern = require(PATHS.PATTERNS + 'neuralNetwork');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
+const ActivationLinear = require(PATHS.ACTIVATION_FUNCTIONS + 'linear');
 
 /**
  * This class is used to generate an Elman style recurrent neural network. This
@@ -37,15 +38,25 @@ class ElmanPattern extends NeuralNetworkPattern {
     /**
      * @inheritDoc
      */
+    setOutputLayer(neuronsCount, activationFunc = new ActivationLinear()) {
+        this.outputLayer = {
+            neurons: neuronsCount,
+            activationFunction: activationFunc
+        };
+    }
+
+    /**
+     * @inheritDoc
+     */
     generate() {
-        if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
-            throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
+        if (!this.inputLayer || this.hiddenLayers.length === 0 || !this.outputLayer) {
+            throw new NeuralNetworkError("A Elman neural network should have input, hidden and output layers defined");
         }
         let network = new BasicNetwork();
         const input = new BasicLayer(this.inputLayer.activationFunction, true, this.inputLayer.neurons);
         const hidden = new BasicLayer(this.hiddenLayers[0].activationFunction, true, this.hiddenLayers[0].neurons);
 
-        hidden.contextFedBy = hidden;
+        input.contextFedBy = hidden;
 
         network.addLayer(input);
         network.addLayer(hidden);
@@ -56,8 +67,8 @@ class ElmanPattern extends NeuralNetworkPattern {
     }
 
     generateFreeformNetwork() {
-        if (!this.inputLayer || this.hiddenLayers.length == 0 || !this.outputLayer) {
-            throw new NeuralNetworkError("A Jordan neural network should have input, hidden and output layers defined");
+        if (!this.inputLayer || this.hiddenLayers.length === 0 || !this.outputLayer) {
+            throw new NeuralNetworkError("A Elman neural network should have input, hidden and output layers defined");
         }
 
         let network = new FreeformNetwork();
