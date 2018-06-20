@@ -13,6 +13,7 @@ module.exports = (function () {
     const PATTERNS = SRC + 'patterns/';
     const TRAINING = SRC + 'neural/training/';
     const PROPAGATION = TRAINING + 'propagation/';
+    const SGD = PROPAGATION + 'sgd/';
     const STRATEGIES = TRAINING + 'strategy/';
     const MATH_UTILS = SRC + 'mathUtils/';
     const MATRICES = SRC + 'mathUtils/matrices/';
@@ -45,6 +46,7 @@ module.exports = (function () {
         PATTERNS,
         TRAINING,
         PROPAGATION,
+        SGD,
         STRATEGIES,
         MATH_UTILS,
         MATRICES,

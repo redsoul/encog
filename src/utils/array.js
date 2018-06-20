@@ -8,8 +8,8 @@ class ArrayUtils {
      * @param stop The stopping index.
      * @param value The value to fill.
      */
-    static fillArray(arr, start, stop, value) {
-        if (arguments.length == 2) {
+    static fill(arr, start, stop, value) {
+        if (arguments.length === 2) {
             _.fill(arguments[0], arguments[1]);
         } else {
             _.fill(arr, value, start, stop);

@@ -107,6 +107,7 @@ class BasicTraining {
      * @return {Number} The current training iteration.
      */
     getIteration() {
+        return this.iterationCount;
     }
 
     /**
@@ -116,6 +117,7 @@ class BasicTraining {
      *            Iteration.
      */
     setIteration(iteration) {
+        this.iterationCount = iteration;
     }
 
     /**
@@ -125,6 +127,13 @@ class BasicTraining {
      */
     setTraining(training) {
         this.training = training;
+    }
+
+    /**
+     * @return {Array} The training data to use.
+     */
+    getTraining() {
+        return this.training;
     }
 }
 

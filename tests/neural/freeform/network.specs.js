@@ -27,7 +27,7 @@ describe('Freeform Network', function () {
             return network;
         }
 
-        it('should create a free form network based on a basic network', function () {
+         it('should create a free form network based on a basic network', function () {
             // create a neural network
             let basicNetwork = new BasicNetwork();
             basicNetwork.addLayer(new BasicLayer(null, true, 2));
@@ -41,7 +41,7 @@ describe('Freeform Network', function () {
             expect(basicNetwork.encodedArrayLength()).toEqual(freeformNetwork.encodedArrayLength());
         });
 
-        it('should encode and decode a network', function () {
+         it('should encode and decode a network', function () {
             // train (and test) a network
             const XORDataset = Datasets.getXORDataSet();
             let network = createXORNetwork();

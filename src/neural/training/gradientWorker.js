@@ -104,7 +104,8 @@ class GradientWorker {
         const fromLayerSize = this.layerCounts[currentLevel + 1];
         const toLayerSize = this.layerFeedCounts[currentLevel];
         let dropoutRate = 0;
-        if (this.layerDropoutRates.length > currentLevel && this.layerDropoutRates[currentLevel] != 0) {
+
+        if (this.layerDropoutRates.length > currentLevel && this.layerDropoutRates[currentLevel] !== 0) {
             dropoutRate = this.layerDropoutRates[currentLevel];
         }
 
@@ -120,7 +121,7 @@ class GradientWorker {
 
             let wi = index + y;
             let loopEnd = toLayerIndex + toLayerSize;
-            if (dropoutRate == 0) {
+            if (dropoutRate === 0) {
                 for (let xi = toLayerIndex; xi < loopEnd; xi++, wi += fromLayerSize) {
                     this.gradients[wi] += output * this.layerDelta[xi];
                     sum += this.weights[wi] * this.layerDelta[xi];
@@ -167,7 +168,7 @@ class GradientWorker {
     run(index = 1) {
         this.errorCalculation.reset();
 
-        if (arguments.length == 0) {
+        if (arguments.length === 0) {
             this.process(this.input[index], this.output[index]);
         } else {
             for (let i = this.low; i <= this.high; i++) {
@@ -176,7 +177,7 @@ class GradientWorker {
         }
 
         this.owner.report(this.gradients, this.errorCalculation.calculate(), null);
-        ArrayUtils.fillArray(this.gradients, 0);
+        ArrayUtils.fill(this.gradients, 0);
     }
 }
 

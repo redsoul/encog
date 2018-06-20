@@ -69,7 +69,7 @@ class ErrorCalculation {
 
             this.sum += ideal[j];
 
-            if (this.setSize == 0) {
+            if (this.setSize === 0) {
                 this.min = this.max = actual[j];
             } else {
                 this.min = Math.min(actual[j], this.min);
@@ -87,7 +87,7 @@ class ErrorCalculation {
      * @return {number} The current error for the neural network.
      */
     calculate() {
-        if (this.setSize == 0) {
+        if (this.setSize === 0) {
             return 0;
         }
 
@@ -117,7 +117,7 @@ class ErrorCalculation {
      * @return {number} The current error for the neural network.
      */
     calculateMSE() {
-        if (this.setSize == 0) {
+        if (this.setSize === 0) {
             return 0;
         }
         return this.globalError / this.setSize;
@@ -129,7 +129,7 @@ class ErrorCalculation {
      * @return {number} The current error for the neural network.
      */
     calculateESS() {
-        if (this.setSize == 0) {
+        if (this.setSize === 0) {
             return 0;
         }
         return this.globalError / 2;
@@ -149,7 +149,7 @@ class ErrorCalculation {
      * @return {number} The current error for the neural network.
      */
     calculateRMS() {
-        if (this.setSize == 0) {
+        if (this.setSize === 0) {
             return 0;
         }
         return Math.sqrt(this.globalError / this.setSize);

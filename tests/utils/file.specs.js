@@ -12,7 +12,7 @@ describe('File Utils', function () {
             network = NetworkUtil.createXORNetwork();
         });
 
-        it('', function () {
+         it('', function () {
             spyOn(network, 'toJSON');
             FileUtils.saveNetwork(network, 'test.dat');
             expect(fsMock.writeFileSync).toHaveBeenCalled();
@@ -25,7 +25,7 @@ describe('File Utils', function () {
             network = NetworkUtil.createXORNetwork();
         });
 
-        it('BasicNetwork', function () {
+         it('BasicNetwork', function () {
             fsMock.readFileSync.and.returnValue(JSON.stringify(network));
             FileUtils.__set__("fs", fsMock);
             const newNetwork = FileUtils.loadNetwork('test.dat');

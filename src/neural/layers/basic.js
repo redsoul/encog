@@ -22,7 +22,7 @@ class BasicLayer extends FlatLayer {
      *              The dropout rate for this layer
      */
     constructor(activation, hasBias, neuronCount, dropoutRate = 0) {
-        if (arguments.length == 1) {
+        if (arguments.length === 1) {
             super(new ActivationSigmoid(), arguments[0], 1.0);
         } else {
             super(activation, neuronCount, hasBias ? 1.0 : 0.0, dropoutRate);

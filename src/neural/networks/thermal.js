@@ -63,7 +63,7 @@ class ThermalNetwork {
      * Clear any connection weights.
      */
     clear() {
-        ArrayUtils.fillArray(this.weights, 0);
+        ArrayUtils.fill(this.weights, 0);
     }
 
     /**
@@ -126,7 +126,7 @@ class ThermalNetwork {
      */
     reset() {
         this.getCurrentState().clear();
-        ArrayUtils.fillArray(this.weights, 0.0);
+        ArrayUtils.fill(this.weights, 0.0);
     }
 
     /**

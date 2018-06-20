@@ -8,7 +8,7 @@ describe('DataSet', function () {
     });
 
     describe('readTrainingCSV method', function () {
-        it('ignore and output columns', function (done) {
+         it('ignore and output columns', function (done) {
             DataToolbox.readTrainingCSV(
                 __dirname + '/iris.csv',
                 {
@@ -28,7 +28,7 @@ describe('DataSet', function () {
             });
         });
 
-        it('input and output columns', function (done) {
+         it('input and output columns', function (done) {
             DataToolbox.readTrainingCSV(
                 __dirname + '/iris.csv',
                 {
@@ -49,13 +49,13 @@ describe('DataSet', function () {
         });
     });
 
-    it('convertToArray', function () {
+     it('convertToArray', function () {
         const temp = DataToolbox.convertToArray([{a: 1, b: 2, c: 3}, {a: 4, b: 5, c: 6}]);
         expect(temp).toEqual([[1, 2, 3], [4, 5, 6]]);
     });
 
     describe('trainTestSplit', function () {
-        it('should use the default test size', function () {
+         it('should use the default test size', function () {
             const trainingSet = DataToolbox.trainTestSplit(_.range(100));
 
             expect(trainingSet.constructor.name).toBe('Object');
@@ -66,14 +66,14 @@ describe('DataSet', function () {
             expect(trainingSet.test.length).toBe(20);
         });
 
-        it('should use a given test size', function () {
+         it('should use a given test size', function () {
             const trainingSet = DataToolbox.trainTestSplit(_.range(100), .25);
 
             expect(trainingSet.train.length).toBe(75);
             expect(trainingSet.test.length).toBe(25);
         });
 
-        it('should throw an exception', function () {
+         it('should throw an exception', function () {
             expect(()=> {
                 DataToolbox.trainTestSplit(_.range(100), 5)
             }).toThrow(new NeuralNetworkError('Test size should be between 0 and 1'))
@@ -81,7 +81,7 @@ describe('DataSet', function () {
     });
 
     describe('calcMinMaxValues', function () {
-        it('should return an object with min and max values per column', function () {
+         it('should return an object with min and max values per column', function () {
             let mixMaxValues = DataToolbox.calcMinMaxValues([[2, -3], [5, 4], [-1, 2], [2, 4]]);
 
             expect(mixMaxValues).toEqual([{max: 5, min: -1}, {max: 4, min: -3}]);
@@ -89,19 +89,19 @@ describe('DataSet', function () {
     });
 
     describe('featureScalling', function () {
-        it('should throw an exception', function () {
+         it('should throw an exception', function () {
             expect(()=> {
                 DataToolbox.featureScaling(5, 4, 3)
             }).toThrow(new NeuralNetworkError('Min value should be smaller than Max value'));
         });
 
-        it('should throw an exception', function () {
+         it('should throw an exception', function () {
             expect(()=> {
                 DataToolbox.featureScaling(5, 2, 3, 1, 0)
             }).toThrow(new NeuralNetworkError('Min range should be smaller than Max range'));
         });
 
-        it('should return a normalized value, using the default parameters', function () {
+         it('should return a normalized value, using the default parameters', function () {
             expect(DataToolbox.featureScaling(0, 0, 100)).toBe(-1);
             expect(DataToolbox.featureScaling(50, 0, 100)).toBe(0);
             expect(DataToolbox.featureScaling(100, 0, 100)).toBe(1);
@@ -110,7 +110,7 @@ describe('DataSet', function () {
             expect(DataToolbox.featureScaling(150, 0, 100)).toBe(2);
         });
 
-        it('should return a normalized value, using a customized range', function () {
+         it('should return a normalized value, using a customized range', function () {
             expect(DataToolbox.featureScaling(0, 0, 100, 0, 5)).toBe(0);
             expect(DataToolbox.featureScaling(50, 0, 100, 0, 5)).toBe(2.5);
             expect(DataToolbox.featureScaling(100, 0, 100, 0, 5)).toBe(5);
@@ -127,13 +127,13 @@ describe('DataSet', function () {
             values = [[2, -3], [6, 4], [-1, 2], [2, 7]];
         });
 
-        it('should return a normalized array, using the default parameters', function () {
+         it('should return a normalized array, using the default parameters', function () {
             DataToolbox.normalizeData(values);
 
             expect(values).toEqual([[-0.14285714, -1], [1, 0.4], [-1, 0], [-0.14285714, 1]]);
         });
 
-        it('should return a normalized array, using a customized range', function () {
+         it('should return a normalized array, using a customized range', function () {
             DataToolbox.normalizeData(values, 0, 5);
 
             expect(values).toEqual([[2.14285714, 0], [5, 3.5], [0, 2.5], [2.14285714, 5]]);
@@ -145,7 +145,7 @@ describe('DataSet', function () {
         beforeEach(function () {
         });
 
-        it('should encode into a one hot array', function () {
+         it('should encode into a one hot array', function () {
             expect(DataToolbox.oneHotEncode([1, 2])).toEqual({
                 dictionary: [1, 2],
                 oneHotData: [[1, 0], [0, 1]]
@@ -164,7 +164,7 @@ describe('DataSet', function () {
             });
         });
 
-        it('should decode a one hot array', function () {
+         it('should decode a one hot array', function () {
             expect(DataToolbox.oneHotDecode([1, 2], [1, 0])).toBe(1);
             expect(DataToolbox.oneHotDecode([1, 2], [0, 1])).toBe(2);
             expect(DataToolbox.oneHotDecode([1, 2, 3], [0, 0, 1])).toBe(3);

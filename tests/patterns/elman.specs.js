@@ -7,14 +7,14 @@ describe('Elman Network', function () {
         ElmanPattern = new Encog.Patterns.Elman();
     });
 
-    it('Should throw and error when trying to add more than one hidden layer', function () {
+     it('Should throw and error when trying to add more than one hidden layer', function () {
         ElmanPattern.addHiddenLayer(10);
         expect(()=> {
             ElmanPattern.addHiddenLayer(10);
         }).toThrow(new NeuralNetworkError("An Elman neural network should have only one hidden layer."))
     });
 
-    it('XOR through time Dataset', function () {
+     it('XOR through time Dataset', function () {
         const XORDataset = Encog.Utils.Datasets.getXORThroughTimeDataSet();
 
         ElmanPattern.setInputLayer(1);

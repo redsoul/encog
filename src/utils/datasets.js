@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const fs = require('fs');
 const DataToolbox = require(PATHS.UTILS + 'dataToolbox');
 
 class DataSets {
@@ -36,6 +37,24 @@ class DataSets {
      * @return {Array}
      */
     static getIrisDataSet() {
+        let irisDataSet = require('ml-dataset-iris').getDataset();
+        irisDataSet = _.shuffle(irisDataSet);
+
+        let irisInput = [];
+        let irisOutput = [];
+        //split the dataset in input and output
+        irisDataSet.map(function (val) {
+            irisInput.push(val.slice(0, -1));
+            irisOutput.push(val[val.length - 1]);
+        });
+
+        return {
+            input: irisInput,
+            output: DataToolbox.oneHotEncode(irisOutput).oneHotData
+        };
+    }
+
+    static getIrisDataSet2() {
         let irisDataSet = require('ml-dataset-iris').getDataset();
         irisDataSet = _.shuffle(irisDataSet);
 
