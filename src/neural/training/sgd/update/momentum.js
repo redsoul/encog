@@ -1,7 +1,7 @@
 const UpdateRule = require('./updateRule');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
-class MomentumUpdate extends UpdateRule {
+class Momentum extends UpdateRule {
     /**
      * @inheritDoc
      */
@@ -24,4 +24,4 @@ class MomentumUpdate extends UpdateRule {
     }
 }
 
-module.exports = MomentumUpdate;
+module.exports = Momentum;

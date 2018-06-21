@@ -1,11 +1,11 @@
 const BasicTraining = require(PATHS.TRAINING + 'basic');
 const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
-const ArrayUtils = require(PATHS.UTILS + 'array');
-const AdamUpdate = require(PATHS.SGD + 'update/adamUpdate');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
+const Adam = require(PATHS.SGD + 'update/adam');
 const CrossEntropyErrorFunction = require(PATHS.ERROR_FUNCTIONS + 'crossEntropy');
 
 class StochasticGradientDescent extends BasicTraining {
-    constructor(network, input, output, updateRule = new AdamUpdate()) {
+    constructor(network, input, output, updateRule = new Adam()) {
         super();
 
         this.input = input;
@@ -60,8 +60,6 @@ class StochasticGradientDescent extends BasicTraining {
         if (this.getIteration() === 0) {
             this.updateRule.init(this);
         }
-
-        this.preIteration();
 
         this.updateRule.update(this.gradients, this.flat.getWeights());
         this.setError(this.errorCalculation.calculate());
@@ -122,6 +120,9 @@ class StochasticGradientDescent extends BasicTraining {
 
         this.update();
         this.postIteration();
+
+        EncogLog.info(`Training iteration #${this.getIteration()} done, error: ${this.error}`);
+        EncogLog.print();
     }
 
     getLearningRate() {

@@ -23,9 +23,6 @@ describe('BackPropagation', function () {
         expect(accuracy).toBeGreaterThan(50);
     });
 
-        expect(accuracy >= 50).toBe(true);
-    });
-
     it('Iris Flower Dataset using normalized data', function () {
         // train the neural network
         const irisDataset = Datasets.getNormalizedIrisDataSet();

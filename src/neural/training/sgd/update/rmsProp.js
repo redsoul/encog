@@ -1,7 +1,7 @@
 const UpdateRule = require('./updateRule');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
-class RMSPropUpdate extends UpdateRule {
+class RMSProp extends UpdateRule {
     /**
      * @inheritDoc
      */
@@ -42,4 +42,4 @@ class RMSPropUpdate extends UpdateRule {
     }
 }
 
-module.exports = RMSPropUpdate;
+module.exports = RMSProp;

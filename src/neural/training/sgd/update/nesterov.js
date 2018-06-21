@@ -1,7 +1,7 @@
 const UpdateRule = require('./updateRule');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
-class NesterovUpdate extends UpdateRule {
+class Nesterov extends UpdateRule {
 
     /**
      * @inheritDoc
@@ -28,4 +28,4 @@ class NesterovUpdate extends UpdateRule {
     }
 }
 
-module.exports = NesterovUpdate;
+module.exports = Nesterov;

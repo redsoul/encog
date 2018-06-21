@@ -1,7 +1,7 @@
 const UpdateRule = require('./updateRule');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
-class AdamUpdate extends UpdateRule {
+class Adam extends UpdateRule {
     /**
      * @inheritDoc
      */
@@ -36,4 +36,4 @@ class AdamUpdate extends UpdateRule {
     }
 }
 
-module.exports = AdamUpdate;
+module.exports = Adam;

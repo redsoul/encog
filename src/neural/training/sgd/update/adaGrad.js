@@ -1,7 +1,7 @@
 const UpdateRule = require('./updateRule');
-const ArrayUtils = require(PATHS.UTILS + 'array');
+const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 
-class AdaGradUpdate extends UpdateRule {
+class AdaGrad extends UpdateRule {
 
     /**
      * @inheritDoc
@@ -34,4 +34,4 @@ class AdaGradUpdate extends UpdateRule {
     }
 }
 
-module.exports = AdaGradUpdate;
+module.exports = AdaGrad;

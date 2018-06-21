@@ -27,7 +27,7 @@ describe('Feed Forward Network', function () {
         expect(accuracy).toBeGreaterThan(75);
     });
 
-    it('Iris Flower Dataset using FreeformNetwork', function () {
+    xit('Iris Flower Dataset using FreeformNetwork', function () {
         const irisDataset = Datasets.getNormalizedIrisDataSet();
 
         FeedForward.setInputLayer(4);
