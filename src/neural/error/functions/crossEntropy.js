@@ -1,4 +1,4 @@
-var ErrorFunction = require('../errorFunction');
+const ErrorFunction = require('../errorFunction');
 
 /**
  * Implements a cross entropy error function.  This can be used with backpropagation to
@@ -12,7 +12,7 @@ class CrossEntropyError extends ErrorFunction {
      */
     calculateError(activationFunction, before, after,
                    ideal, actual, error, derivShift,
-                   significance) {
+                   significance = 1.0) {
         for (let i = 0; i < actual.length; i++) {
             error[i] = (ideal[i] - actual[i]) * significance;
         }

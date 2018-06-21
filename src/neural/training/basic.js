@@ -38,7 +38,8 @@ class BasicTraining {
     /**
      * @return {Boolean} True if the training can be paused, and later continued.
      */
-    canContinue(){}
+    canContinue() {
+    }
 
     /**
      * Call the strategies after an iteration.
@@ -106,6 +107,7 @@ class BasicTraining {
      * @return {Number} The current training iteration.
      */
     getIteration() {
+        return this.iterationCount;
     }
 
     /**
@@ -115,6 +117,23 @@ class BasicTraining {
      *            Iteration.
      */
     setIteration(iteration) {
+        this.iterationCount = iteration;
+    }
+
+    /**
+     * Set the training object that this strategy is working with.
+     *
+     * @param {Array} training The training object.
+     */
+    setTraining(training) {
+        this.training = training;
+    }
+
+    /**
+     * @return {Array} The training data to use.
+     */
+    getTraining() {
+        return this.training;
     }
 }
 

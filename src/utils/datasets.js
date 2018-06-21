@@ -2,6 +2,7 @@ const _ = require('lodash');
 const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
 const DataEncoder = require(PATHS.PREPROCESSING + 'dataEncoder');
 const OneHot = require(PATHS.DATA_MAPPERS + 'oneHot');
+const IntegerParser = require(PATHS.DATA_MAPPERS + 'integerParser');
 const MinMaxScaller = require(PATHS.DATA_MAPPERS + 'minMaxScaller');
 
 class DataSets {
@@ -36,6 +37,7 @@ class DataSets {
     }
 
     /**
+     * https://archive.ics.uci.edu/ml/datasets/iris
      * @return {Array}
      */
     static getIrisDataSet() {
@@ -63,6 +65,36 @@ class DataSets {
         return {
             train: DataToolbox.sliceOutput(trainData.values, 3),
             test: DataToolbox.sliceOutput(testData.values, 3)
+        };
+    }
+
+    /**
+     * https://archive.ics.uci.edu/ml/datasets/banknote+authentication
+     * @returns {Array}
+     */
+    static async getBanknoteAuthenticationDataSet() {
+        const dataset = await DataToolbox.readTrainingCSV(
+            PATHS.DATA_FOLDER + 'data_banknote_authentication.csv'
+        );
+        const shuffledDataset = _.shuffle(dataset);
+
+        const dataEncoder = new DataEncoder();
+        const mappings = {
+            'variance': new MinMaxScaller(),
+            'skewness': new MinMaxScaller(),
+            'curtosis': new MinMaxScaller(),
+            'entropy': new MinMaxScaller(),
+            'class': new IntegerParser()
+        };
+
+        const splittedDataset = DataToolbox.trainTestSplit(shuffledDataset);
+
+        const trainData = dataEncoder.fit_transform(splittedDataset.train, mappings);
+        const testData = dataEncoder.transform(splittedDataset.test, mappings);
+
+        return {
+            train: DataToolbox.sliceOutput(trainData.values, 1),
+            test: DataToolbox.sliceOutput(testData.values, 1)
         };
     }
 

@@ -27,7 +27,7 @@ class BasicHessian {
      * Clear the Hessian and gradients.
      */
     clear() {
-        ArrayUtils.fillArray(this.gradients, 0);
+        ArrayUtils.fill(this.gradients, 0);
         this.hessianMatrix.clear();
     }
 

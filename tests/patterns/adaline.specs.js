@@ -7,7 +7,7 @@ describe('ADALINE Network', function () {
         AdalinePattern = new Encog.Patterns.Adaline();
     });
 
-    it('Should throw and error when trying to add hidden layers',function () {
+     it('Should throw and error when trying to add hidden layers',function () {
         expect(()=> {
             AdalinePattern.addHiddenLayer(10);
         }).toThrow(new NeuralNetworkError("An ADALINE network has no hidden layers."))
@@ -26,7 +26,7 @@ describe('ADALINE Network', function () {
         Encog.Utils.Network.trainNetwork(train, {minError: 0.01, minIterations: 5, maxIterations: 25});
         const accuracy = Encog.Utils.Network.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
-        expect(accuracy >= 50).toBe(true);
+        expect(accuracy).toBeGreaterThan(50);
     });
 
     xit('Iris Flower Dataset using FreeformNetwork', function () {
@@ -44,6 +44,6 @@ describe('ADALINE Network', function () {
         const accuracy = Encog.Utils.Network.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
         //todo: fix me
-        expect(accuracy >= 0).toBe(true);
+        expect(accuracy).toBeGreaterThan(0);
     });
 });

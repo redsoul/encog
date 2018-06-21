@@ -38,7 +38,6 @@ class Propagation extends BasicTraining {
 
         this.input = input;
         this.output = output;
-        this.numThreads = 0;
         this.reportedException = null;
         this.shouldFixFlatSpot = false;
         this.iterationCount = 0;
@@ -62,7 +61,7 @@ class Propagation extends BasicTraining {
     /**
      * Should be called after training has completed and the iteration method
      * will not be called any further.
-     * @param dropoutRate {float}
+     * @param dropoutRate {Number}
      *            The input training set.
      */
     finishTraining(dropoutRate = 0) {
@@ -88,14 +87,14 @@ class Propagation extends BasicTraining {
             for (let i = 0; i < activationFunctionsLength; i++) {
                 const af = this.currentFlatNetwork.activationFunctions[i];
 
-                if (typeof af == 'object' && af.constructor.name == "ActivationSigmoid") {
+                if (typeof af === 'object' && af.constructor.name === "ActivationSigmoid") {
                     this.flatSpot[i] = 0.1;
                 } else {
                     this.flatSpot[i] = 0.0;
                 }
             }
         } else {
-            ArrayUtils.fillArray(this.flatSpot, 0);
+            ArrayUtils.fill(this.flatSpot, 0);
         }
 
 
@@ -182,7 +181,7 @@ class Propagation extends BasicTraining {
 
             this.rollIteration();
 
-            if (this.batchSize == 0) {
+            if (this.batchSize === 0) {
                 this.processPureBatch();
             } else {
                 this.processBatches();
@@ -214,7 +213,7 @@ class Propagation extends BasicTraining {
      * Calculate the gradients.
      */
     calculateGradients() {
-        if (this.workers.length == 0) {
+        if (this.workers.length === 0) {
             this.init();
         }
 
@@ -255,7 +254,7 @@ class Propagation extends BasicTraining {
     }
 
     processBatches() {
-        if (this.workers.length == 0) {
+        if (this.workers.length === 0) {
             this.init();
         }
 
@@ -293,7 +292,8 @@ class Propagation extends BasicTraining {
     /**
      * {@inheritDoc}
      * @param gradients {Array}
-     * @param error {number}
+     * @param error {Number}
+     * @param ex {Object}
      */
     report(gradients, error, ex) {
         if (ex == null) {

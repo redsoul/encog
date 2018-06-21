@@ -18,7 +18,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train);
             const accuracy = NetworkUtil.validateNetwork(network, dataset.input, dataset.output);
 
-            expect(accuracy >= 75).toBe(true);
+            expect(accuracy).toBeGreaterThan(74);
         });
 
         it('Iris Flower Dataset using normalized data', function () {
@@ -31,7 +31,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
             const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
-            expect(accuracy >= 70).toBe(true);
+            expect(accuracy).toBeGreaterThan(70);
         });
     });
 
@@ -47,7 +47,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
             const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
-            expect(accuracy >= 75).toBe(true);
+            expect(accuracy).toBeGreaterThan(75);
         });
     });
 
@@ -63,7 +63,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
             const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
-            expect(accuracy >= 75).toBe(true);
+            expect(accuracy).toBeGreaterThan(75);
         });
     });
 
@@ -79,7 +79,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
             const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
-            expect(accuracy >= 80).toBe(true);
+            expect(accuracy).toBeGreaterThan(80);
         });
     });
 
@@ -95,7 +95,7 @@ describe('ResilientPropagation', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
             const accuracy = NetworkUtil.validateNetwork(network, irisDataset.test.input, irisDataset.test.output);
 
-            expect(accuracy >= 80).toBe(true);
+            expect(accuracy).toBeGreaterThan(80);
         });
     });
 });

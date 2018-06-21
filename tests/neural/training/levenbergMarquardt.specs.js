@@ -17,7 +17,7 @@ xdescribe('Levenberg Marquardt Training', function () {
         NetworkUtil.trainNetwork(train);
         const accuracy = NetworkUtil.validateNetwork(network, dataset.input, dataset.output);
 
-        expect(accuracy >= 90).toBe(true);
+        expect(accuracy).toBeGreaterThan(90);
     });
 
     it('Iris Flower Dataset', function () {
@@ -33,6 +33,6 @@ xdescribe('Levenberg Marquardt Training', function () {
         NetworkUtil.trainNetwork(train, {minError: 0.01, minIterations: 5});
         const accuracy = NetworkUtil.validateNetwork(network, inputDataset.test, outputDataset.test);
 
-        expect(accuracy >= 90).toBe(true);
+        expect(accuracy).toBeGreaterThan(90);
     });
 });

@@ -46,14 +46,14 @@ class ChainRuleWorker {
     run() {
         this.error = 0;
         this.hessianMatrix.clear();
-        ArrayUtils.fillArray(this.totDeriv, 0);
-        ArrayUtils.fillArray(this.gradients, 0);
+        ArrayUtils.fill(this.totDeriv, 0);
+        ArrayUtils.fill(this.gradients, 0);
 
         let derivative = ArrayUtils.newFloatArray[this.weightCount];
 
         // Loop over every training element
         for (let i = this.low; i <= this.high; i++) {
-            ArrayUtils.fillArray(derivative, 0);
+            ArrayUtils.fill(derivative, 0);
 
             this.process(this.outputNeuron, derivative, this.input[i], this.output[i]);
         }

@@ -37,9 +37,9 @@ class FlatNetwork {
      *            True if this is a tanh activation, false for sigmoid.
      */
     constructor(inputLayers, hidden1, hidden2, output, tanh) {
-        if (arguments.length == 1 && typeof arguments[0] == 'object') {
+        if (arguments.length === 1 && typeof arguments[0] === 'object') {
             this.init(arguments[0], false);
-        } else if (arguments.length == 2 && typeof arguments[0] == 'object') {
+        } else if (arguments.length === 2 && typeof arguments[0] === 'object') {
             this.init(arguments[0], arguments[1]);
         } else if (arguments.length >= 3) {
             const linearAct = new ActivationLinear();
@@ -48,10 +48,10 @@ class FlatNetwork {
             this.DEFAULT_BIAS_ACTIVATION = 1.0;
             this.NO_BIAS_ACTIVATION = 0.0;
 
-            if ((hidden1 == 0) && (hidden2 == 0)) {
+            if ((hidden1 === 0) && (hidden2 === 0)) {
                 layers.push(new FlatLayer(linearAct, inputLayers, this.DEFAULT_BIAS_ACTIVATION));
                 layers.push(new FlatLayer(act, output, this.NO_BIAS_ACTIVATION));
-            } else if ((hidden1 == 0) || (hidden2 == 0)) {
+            } else if ((hidden1 === 0) || (hidden2 === 0)) {
                 const count = Math.max(hidden1, hidden2);
                 layers.push(new FlatLayer(linearAct, inputLayers, this.DEFAULT_BIAS_ACTIVATION));
                 layers.push(new FlatLayer(act, count, this.DEFAULT_BIAS_ACTIVATION));
@@ -102,7 +102,7 @@ class FlatNetwork {
      * @return The current error for the neural network.
      */
     // calculate() {
-    //     if (this.setSize == 0) {
+    //     if (this.setSize === 0) {
     //         return 0;
     //     }
     //
@@ -145,7 +145,7 @@ class FlatNetwork {
             const hasBias = (this.layerContextCount[i] + this.layerFeedCounts[i]) != this.layerCounts[i];
 
             // fill in regular neurons
-            ArrayUtils.fillArray(this.layerOutput, index, index + this.layerFeedCounts[i], 0);
+            ArrayUtils.fill(this.layerOutput, index, index + this.layerFeedCounts[i], 0);
             index += this.layerFeedCounts[i];
 
             // fill in the bias
@@ -154,7 +154,7 @@ class FlatNetwork {
             }
 
             // fill in context
-            ArrayUtils.fillArray(this.layerOutput, index, index + this.layerContextCount[i], 0);
+            ArrayUtils.fill(this.layerOutput, index, index + this.layerContextCount[i], 0);
             index += this.layerContextCount[i];
         }
     }
@@ -304,7 +304,7 @@ class FlatNetwork {
                 weightCount += layer.getCount() * nextLayer.getTotalCount();
             }
 
-            if (index == 0) {
+            if (index === 0) {
                 this.weightIndex[index] = 0;
                 this.layerIndex[index] = 0;
             } else {
@@ -317,7 +317,7 @@ class FlatNetwork {
             let contextTotal;
             for (let j = layers.length - 1; j >= 0; j--) {
                 contextTotal = layers[j].getTotalCount();
-                if (layers[j].contextFedBy == layer) {
+                if (layers[j].contextFedBy === layer) {
                     this.hasContext = true;
                     contextCount = layers[j].getContextCount();
                     this.contextTargetSize[index] = contextCount;
@@ -344,9 +344,9 @@ class FlatNetwork {
      * between -1 and 1.
      */
     randomize() {
-        if (arguments.length == 0) {
+        if (arguments.length === 0) {
             this._randomize(1, -1);
-        } else if (arguments.length == 2) {
+        } else if (arguments.length === 2) {
             this._randomize(arguments[0], arguments[1]);
         }
 
@@ -484,7 +484,7 @@ class FlatNetwork {
      *            The data to be decoded.
      */
     decodeNetwork(data) {
-        if (data.length != this.weights.length) {
+        if (data.length !== this.weights.length) {
             throw new EncogError(
                 "Incompatible weight sizes, can't assign length="
                 + data.length + " to length=" + this.weights.length);
@@ -539,11 +539,81 @@ class FlatNetwork {
     }
 
     /**
+     * @return {Array} The number of neurons in each layer.
+     */
+    getLayerCounts() {
+        return this.layerCounts;
+    }
+
+    /**
+     * @return {Array} The output for each layer.
+     */
+    getLayerOutput() {
+        return this.layerOutput;
+    }
+
+    /**
+     * @return {Array} The index of each layer in the weight and threshold array.
+     */
+    getWeights() {
+        return this.weights;
+    }
+
+    /**
+     * @return {Array} the layerSums
+     */
+    getLayerSums() {
+        return this.layerSums;
+    }
+
+    /**
+     * @return {Array} The activation functions.
+     */
+    getActivationFunctions() {
+        return this.activationFunctions;
+    }
+
+    /**
+     * @return {Number} the beginTraining
+     */
+    getBeginTraining() {
+        return this.beginTraining;
+    }
+
+    /**
+     * @return {Number} the endTraining
+     */
+    getEndTraining() {
+        return this.endTraining;
+    }
+
+    /**
+     * @return {Array} Indexes into the weights for the start of each layer.
+     */
+    getLayerIndex() {
+        return this.layerIndex;
+    }
+
+    /**
+     * @return {Array} The number of neurons in each layer that are fed by the previous layer.
+     */
+    getLayerFeedCounts() {
+        return this.layerFeedCounts;
+    }
+
+    /**
+     * @return {Array} The index of each layer in the weight and threshold array.
+     */
+    getWeightIndex() {
+        return this.weightIndex;
+    }
+
+    /**
      * @returns {Object}
      */
     toJSON() {
         const now = (new Date()).getTime();
-        var packageJson = require(PATHS.BASE + '/package.json');
+        const packageJson = require(PATHS.BASE + '/package.json');
 
         let result = {
             type: 'FlatNetwork',

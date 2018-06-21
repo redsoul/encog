@@ -10,7 +10,7 @@ describe('Basic Network', function () {
     });
 
     describe('toJSON and fromJSON methods', function () {
-        it('should save and restore a network without context', function () {
+         it('should save and restore a network without context', function () {
             network = NetworkUtil.createXORNetwork();
 
             const networkJSON = network.toJSON();
@@ -26,7 +26,7 @@ describe('Basic Network', function () {
             expect(newBasicNetwork.getFlat().weights).toEqual(network.getFlat().weights);
         });
 
-        it('should save and restore a network with context', function () {
+         it('should save and restore a network with context', function () {
             jordanPattern = new JordanPattern();
             jordanPattern.setInputLayer(4);
             jordanPattern.addHiddenLayer(10);

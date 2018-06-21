@@ -1,6 +1,7 @@
 const BasicNetwork = require(PATHS.NETWORKS + 'basic');
 const BasicLayer = require(PATHS.LAYERS + 'basic');
 const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
+const ActivationSoftMax = require(PATHS.ACTIVATION_FUNCTIONS + 'softmax');
 const _ = require('lodash');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ErrorUtil = require(PATHS.UTILS + 'error');
@@ -29,6 +30,21 @@ class NetworkUtil {
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 10));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 5));
         network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 3));
+        network.randomize();
+
+        return network;
+    }
+
+    /**
+     * @return {BasicNetwork}
+     */
+    static createBankNoteAuthenticationNetwork() {
+        const network = new BasicNetwork();
+        network.addLayer(new BasicLayer(null, true, 4));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 40));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 40));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), true, 40));
+        network.addLayer(new BasicLayer(new ActivationSigmoid(), false, 1));
         network.randomize();
 
         return network;
@@ -69,7 +85,7 @@ class NetworkUtil {
      * @param idealOutput {Array}
      */
     static validateNetwork(network, testDataset, idealOutput) {
-        if (testDataset.length != idealOutput.length) {
+        if (testDataset.length !== idealOutput.length) {
             throw new NeuralNetworkError('test and ideal dataset must have equal lengths');
         }
 

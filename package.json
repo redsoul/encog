@@ -35,7 +35,13 @@
     "jordan neural network",
     "hopfield network",
     "bidirectional associative memory network",
-    "freeform networks"
+    "freeform networks",
+    "Stochastic Gradient Descent",
+    "AdaGrad",
+    "Adam",
+    "Momentum",
+    "Nesterov",
+    "RmsProp"
   ],
   "author": "redsoul",
   "license": "Apache",
@@ -55,11 +61,10 @@
   "devDependencies": {
     "eslint": "^4.0.0-alpha.1",
     "gulp": "^3.9.0",
-    "gulp-eslint": "^3.0.1",
     "gulp-jasmine-phantom": "^3.0.0",
     "rewire": "^2.5.2"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   }
 }

@@ -20,7 +20,7 @@ class ErrorFunction {
      */
     calculateError(activationFunction, before, after,
                    ideal, actual, error, derivShift,
-                   significance) {
+                   significance = 1.0) {
 
     }
 }

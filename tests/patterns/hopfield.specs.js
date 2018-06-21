@@ -8,21 +8,21 @@ describe('Hopfield Pattern', function () {
         HopfieldPattern = new Encog.Patterns.Hopfield();
     });
 
-    it('Should throw and error when trying to add more than one hidden layer', function () {
+     it('Should throw and error when trying to add more than one hidden layer', function () {
         expect(()=>HopfieldPattern.addHiddenLayer(10)).toThrow()
     });
 
-    it('Should throw and error when trying to set the output layer', function () {
+     it('Should throw and error when trying to set the output layer', function () {
         expect(()=>HopfieldPattern.setOutputLayer(10)).toThrow()
     });
 
-    it('Should throw and error when add a pattern with different size than the neuron count', function () {
+     it('Should throw and error when add a pattern with different size than the neuron count', function () {
         HopfieldPattern.setInputLayer(4);
         const network = HopfieldPattern.generate();
         expect(()=>network.addPattern([1,2,3])).toThrow();
     });
 
-    it('Letters pattern Dataset', function () {
+     it('Letters pattern Dataset', function () {
         const hopfieldPatterns = Encog.Utils.Datasets.getHopfieldPatterns();
 
         HopfieldPattern.setInputLayer(35);
