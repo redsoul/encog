@@ -79,6 +79,9 @@ const Encog = require('encog');
 const Encog = require('encog');
 const XORdataset = Encog.Utils.Datasets.getXORDataSet();
 
+//adjust the log level
+Encog.Log.options.logLevel = 'info';
+
 // create a neural network
 const network = new Encog.Networks.Basic();
 network.addLayer(new Encog.Layers.Basic(null, true, 2));
@@ -100,7 +103,7 @@ const Encog = require('encog');
 const _ = require('lodash');
 
 //adjust the log level
-Encog.Log.options.logLevel = 'error';
+Encog.Log.options.logLevel = 'info';
 
 const dataEncoder = new Encog.Preprocessing.DataEncoder();
 let irisDataset = Encog.Utils.Datasets.getIrisDataSet();
@@ -168,7 +171,7 @@ Encog.Log.options.logLevel = 'info';
 
 (async () => {
     const dataset = await Encog.Preprocessing.DataToolbox.readTrainingCSV(
-        './data/data_banknote_authentication.csv'
+        './node_modules/encog/examples/data/data_banknote_authentication.csv'
     );
     const shuffledDataset = _.shuffle(dataset);
 
@@ -228,8 +231,11 @@ Encog.Log.options.logLevel = 'info';
 ```javascript
 const Encog = require('encog');
 const _ = require('lodash');
-const hopfieldPatterns = Encog.Utils.Network.getHopfieldPatterns();
+const hopfieldPatterns = Encog.Utils.Datasets.getHopfieldPatterns();
 const HopfieldPattern = new Encog.Patterns.Hopfield();
+
+//adjust the log level
+Encog.Log.options.logLevel = 'info';
 
 HopfieldPattern.setInputLayer(35);
 const network = HopfieldPattern.generate();
