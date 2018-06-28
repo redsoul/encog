@@ -124,7 +124,7 @@ class LevenbergMarquardtTraining extends BasicTraining {
             singular = uMatrix.isNonSingular();
 
             if (singular) {
-                this.deltas = mathjs.lusolve(lup, this.hessian.gradients)._data;
+                this.deltas = mathjs.lusolve(lup, this.hessian.gradients).resize([1, this.weights.length]).toArray()[0];
                 this.updateWeights();
                 currentError = this._calculateError();
             }
@@ -144,6 +144,9 @@ class LevenbergMarquardtTraining extends BasicTraining {
         this.error = currentError;
 
         this.postIteration();
+
+        EncogLog.info("Training iteration done, error: " + this.error);
+        EncogLog.print();
     }
 
     /**
