@@ -12,7 +12,7 @@ describe('Hopfield Network', function () {
     });
 
     describe('toJSON and fromJSON methods', function () {
-         it('should save and restore a network', function () {
+         test('should save and restore a network', function () {
             const networkJSON = network.toJSON();
             expect(networkJSON.type).toBe('HopfieldNetwork');
             expect(networkJSON.neuronCount).toBe(8);

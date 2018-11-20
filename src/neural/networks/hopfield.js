@@ -5,6 +5,7 @@ const MatrixMath = require(PATHS.MATRICES + 'math');
 const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const BiPolarUtil = require(PATHS.UTILS + 'biPolar');
 const BiPolarNeuralData = require(PATHS.NEURAL + 'biPolarNeuralData');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 /**
  * Implements a Hopfield network.
  *

@@ -1,35 +1,20 @@
 describe('File Utils', function () {
-    var rewire = require("rewire");
-    const FileUtils = rewire(PATHS.UTILS + 'file');
-    const fsMock = jasmine.createSpyObj('fs', ['writeFileSync', 'readFileSync']);
+    const FileUtils = require(PATHS.UTILS + 'file');
+    const fs = require("fs");
     const NetworkUtil = require(PATHS.UTILS + 'network');
     let network;
-
-    FileUtils.__set__("fs", fsMock);
 
     describe('saveNetwork method', function () {
         beforeEach(function () {
             network = NetworkUtil.createXORNetwork();
         });
 
-         it('', function () {
-            spyOn(network, 'toJSON');
+        test('', function () {
+            const toJSONSpy = jest.spyOn(network, 'toJSON');
+            fs.writeFileSync = jest.fn();
             FileUtils.saveNetwork(network, 'test.dat');
-            expect(fsMock.writeFileSync).toHaveBeenCalled();
-            expect(network.toJSON).toHaveBeenCalled();
-        });
-    });
-
-    describe('loadNetwork method', function () {
-        beforeEach(function () {
-            network = NetworkUtil.createXORNetwork();
-        });
-
-         it('BasicNetwork', function () {
-            fsMock.readFileSync.and.returnValue(JSON.stringify(network));
-            FileUtils.__set__("fs", fsMock);
-            const newNetwork = FileUtils.loadNetwork('test.dat');
-            expect(newNetwork.constructor.name).toBe("BasicNetwork");
+            expect(fs.writeFileSync).toHaveBeenCalled();
+            expect(toJSONSpy).toHaveBeenCalled();
         });
     });
 });

@@ -1,4 +1,5 @@
 const Strategy = require(PATHS.STRATEGIES + '../strategy');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 /**
  * Attempt to automatically set a momentum in a training algorithm that supports
  * momentum.

@@ -16,7 +16,7 @@ describe('DataEncoder', function () {
         beforeEach(function () {
         });
 
-        it('should encode into a one hot array', function () {
+        test('should encode into a one hot array', function () {
             const trainData = [
                 {col1: 'a', col2: 1, col3: 0, col4: 0, col5: 1, col6: 1, col7: 1},
                 {col1: 'b', col2: 2, col3: 2, col4: 5, col5: 2, col6: 2, col7: 2},

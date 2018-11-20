@@ -5,6 +5,7 @@ const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const mathjs = require('mathjs');
 const _ = require('lodash');
 const Matrix = require(PATHS.MATRICES + 'matrix');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 /**
  * The amount to scale the lambda by.
  */

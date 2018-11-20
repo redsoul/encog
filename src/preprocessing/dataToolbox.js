@@ -3,6 +3,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const csv = require('fast-csv');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 
 class DataToolbox {
 

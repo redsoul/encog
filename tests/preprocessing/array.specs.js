@@ -13,33 +13,33 @@ describe('ArrayUtils', function () {
             arr2 = [0, 0, 0, 0, 0, 0, 0, 0];
         });
 
-         it('2 arguments', function () {
+         test('2 arguments', function () {
             ArrayUtils.arrayCopy(arr1, arr2);
             expect(arr2).toEqual([1, 2, 3, 0, 0, 0, 0, 0]);
         });
 
         describe('5 arguments', function () {
-             it('positive length', function () {
+             test('positive length', function () {
                 ArrayUtils.arrayCopy(arr1, 0, arr2, 4, 2);
                 expect(arr2).toEqual([0, 0, 0, 0, 1, 2, 0, 0]);
             });
 
-             it('zero length', function () {
+             test('zero length', function () {
                 ArrayUtils.arrayCopy(arr1, 0, arr2, 4, 0);
                 expect(arr2).toEqual([0, 0, 0, 0, 0, 0, 0, 0]);
             });
 
-             it('negative length', function () {
+             test('negative length', function () {
                 ArrayUtils.arrayCopy(arr1, 0, arr2, 4, -2);
                 expect(arr2).toEqual([0, 0, 0, 0, 0, 0, 0, 0]);
             });
 
-             it('negative sourcePos', function () {
+             test('negative sourcePos', function () {
                 ArrayUtils.arrayCopy(arr1, -1, arr2, 4, 2);
                 expect(arr2).toEqual([0, 0, 0, 0, 0, 0, 0, 0]);
             });
 
-             it('negative targetPos', function () {
+             test('negative targetPos', function () {
                 ArrayUtils.arrayCopy(arr1, -1, arr2, 4, 2);
                 expect(arr2).toEqual([0, 0, 0, 0, 0, 0, 0, 0]);
             });
@@ -52,28 +52,28 @@ describe('ArrayUtils', function () {
             arr = [0, 0, 0, 0, 0, 0];
         });
 
-         it('2 arguments', function () {
+         test('2 arguments', function () {
             ArrayUtils.fill(arr, 1);
             expect(arr).toEqual([1, 1, 1, 1, 1, 1]);
         });
 
         describe('4 arguments', function () {
-             it('positive start and stop', function () {
+             test('positive start and stop', function () {
                 ArrayUtils.fill(arr, 2, 4, 1);
                 expect(arr).toEqual([0, 0, 1, 1, 0, 0]);
             });
 
-             it('stop smaller than start', function () {
+             test('stop smaller than start', function () {
                 ArrayUtils.fill(arr, 2, 1, 1);
                 expect(arr).toEqual([0, 0, 0, 0, 0, 0]);
             });
 
-             it('positive start and negative stop', function () {
+             test('positive start and negative stop', function () {
                 ArrayUtils.fill(arr, 2, -1, 1);
                 expect(arr).toEqual([0, 0, 1, 1, 1, 0]);
             });
 
-             it('negative start and positive stop', function () {
+             test('negative start and positive stop', function () {
                 ArrayUtils.fill(arr, -2, 3, 1);
                 expect(arr).toEqual([0, 0, 0, 0, 0, 0]);
             });
@@ -81,20 +81,20 @@ describe('ArrayUtils', function () {
     });
 
     describe('newIntArray method', function () {
-         it('', function () {
+         test('', function () {
             expect(ArrayUtils.newIntArray(2)).toEqual([0, 0]);
             expect(ArrayUtils.newIntArray(2, 1)).toEqual([1, 1]);
         })
     });
 
     describe('newFloatArray method', function () {
-         it('', function () {
+         test('', function () {
             expect(ArrayUtils.newFloatArray(2)).toEqual([0.0, 0.0]);
             expect(ArrayUtils.newFloatArray(2, 1.0)).toEqual([1.0, 1.0]);
         })
     });
 
-     it('toStringAsMatrix method', function () {
+     test('toStringAsMatrix method', function () {
         expect(ArrayUtils.toStringAsMatrix([1, 2, 3, 4, 5, 6], 2)).toBe('1,2\n3,4\n5,6');
         expect(ArrayUtils.toStringAsMatrix([1, 2, 3, 4, 5, 6], 3)).toBe('1,2,3\n4,5,6');
     })

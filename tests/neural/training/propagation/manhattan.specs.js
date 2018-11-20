@@ -10,7 +10,7 @@ describe('ManhattanPropagation', function () {
 
     });
 
-     it('XOR Dataset', function () {
+     test('XOR Dataset', function () {
         // train the neural network
         const XORdataset = Datasets.getXORDataSet();
         network = NetworkUtil.createXORNetwork();
@@ -23,7 +23,7 @@ describe('ManhattanPropagation', function () {
         expect(accuracy).toBeGreaterThan(75);
     });
 
-    it('Iris Flower Dataset using normalized data', function () {
+    test('Iris Flower Dataset using normalized data', function () {
         // train the neural network
         const irisDataset = Datasets.getNormalizedIrisDataSet();
         network = NetworkUtil.createIrisNetwork();

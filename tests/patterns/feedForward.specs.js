@@ -8,7 +8,7 @@ describe('Feed Forward Network', function () {
         FeedForward = new Encog.Patterns.FeedForward();
     });
 
-    it('Iris Flower Dataset', function () {
+    test('Iris Flower Dataset', function () {
         const irisDataset = Datasets.getNormalizedIrisDataSet();
 
         FeedForward.setInputLayer(4);
@@ -27,7 +27,7 @@ describe('Feed Forward Network', function () {
         expect(accuracy).toBeGreaterThan(75);
     });
 
-    xit('Iris Flower Dataset using FreeformNetwork', function () {
+    xtest('Iris Flower Dataset using FreeformNetwork', function () {
         const irisDataset = Datasets.getNormalizedIrisDataSet();
 
         FeedForward.setInputLayer(4);

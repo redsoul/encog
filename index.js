@@ -1,9 +1,7 @@
 const _ = require('lodash');
 
 global.PATHS = require('./paths.js');
-
-const encogLog = require(PATHS.UTILS + 'encogLog');
-global.EncogLog = new encogLog();
+global.__LOG_LEVEL__ = 'debug';
 
 const requireAll = require('require-all');
 const requireDir = (dir)=> {
@@ -46,5 +44,5 @@ module.exports = {
     ErrorCalculation,
     Utils,
     Preprocessing,
-    Log: EncogLog
+    Log: require(PATHS.UTILS + 'encogLog')
 };

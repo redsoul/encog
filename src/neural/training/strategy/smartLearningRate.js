@@ -1,4 +1,5 @@
 const Strategy = require(PATHS.STRATEGIES + '../strategy');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 /**
  * Attempt to automatically set the learning rate in a learning method that
  * supports a learning rate.

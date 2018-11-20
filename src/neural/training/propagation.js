@@ -3,6 +3,7 @@ const GradientWorker = require(PATHS.TRAINING + 'gradientWorker');
 const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const EncogError = require(PATHS.ERROR_HANDLING + 'encog');
 const BasicTraining = require(PATHS.TRAINING + 'basic');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 /**
  * Implements basic functionality that is needed by each of the propagation
  * methods. The specifics of each of the propagation methods is implemented

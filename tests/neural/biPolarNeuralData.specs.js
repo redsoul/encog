@@ -6,12 +6,12 @@ describe('BiPolarNeuralData', function () {
     });
 
     describe('constructor', function () {
-         it('Numeric parameter', function () {
+         test('Numeric parameter', function () {
             const obj = new BiPolarNeuralData(3);
             expect(obj.data).toEqual([false, false, false]);
         });
 
-         it('Array parameter', function () {
+         test('Array parameter', function () {
             const obj = new BiPolarNeuralData([false, true, false, true]);
             expect(obj.data).toEqual([false, true, false, true]);
         });
@@ -23,17 +23,17 @@ describe('BiPolarNeuralData', function () {
             obj = new BiPolarNeuralData([false, true, false, true]);
         });
 
-         it('clear method', function () {
+         test('clear method', function () {
             obj.clear();
             expect(obj.data).toEqual([false, false, false, false]);
         });
 
-         it('clone method', function () {
+         test('clone method', function () {
             const obj2 = obj.clone();
             expect(obj.data).toEqual(obj2.data);
         });
 
-         it('getBoolean method', function () {
+         test('getBoolean method', function () {
             expect(obj.getBoolean(0)).toBe(false);
             expect(obj.getBoolean(1)).toBe(true);
             expect(obj.getBoolean(2)).toBe(false);
@@ -41,7 +41,7 @@ describe('BiPolarNeuralData', function () {
             expect(obj.getBoolean(4)).toBe(undefined);
         });
 
-         it('getData method', function () {
+         test('getData method', function () {
             expect(obj.getData()).toEqual([-1, 1, -1, 1]);
             expect(obj.getData(0)).toBe(-1);
             expect(obj.getData(1)).toBe(1);
@@ -51,12 +51,12 @@ describe('BiPolarNeuralData', function () {
         });
 
         describe('setData method', function () {
-             it('1 argument', function () {
+             test('1 argument', function () {
                 obj.setData([1, -1, -1, 1]);
                 expect(obj.data).toEqual([true, false, false, true]);
             });
 
-             it('2 arguments', function () {
+             test('2 arguments', function () {
                 obj.setData(0, false);
                 expect(obj.getData(0)).toEqual(-1);
                 obj.setData(0, true);
@@ -69,7 +69,7 @@ describe('BiPolarNeuralData', function () {
             });
         });
 
-         it('size method', function () {
+         test('size method', function () {
             expect(obj.size()).toBe(4);
         });
     })

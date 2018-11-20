@@ -7,13 +7,13 @@ describe('ADALINE Network', function () {
         AdalinePattern = new Encog.Patterns.Adaline();
     });
 
-     it('Should throw and error when trying to add hidden layers',function () {
+     test('Should throw and error when trying to add hidden layers',function () {
         expect(()=> {
             AdalinePattern.addHiddenLayer(10);
         }).toThrow(new NeuralNetworkError("An ADALINE network has no hidden layers."))
     });
 
-    it('Iris Flower Dataset', function () {
+    test('Iris Flower Dataset', function () {
         const irisDataset = Encog.Utils.Datasets.getNormalizedIrisDataSet();
         AdalinePattern.setInputLayer(4);
         AdalinePattern.setOutputLayer(3);
@@ -29,7 +29,7 @@ describe('ADALINE Network', function () {
         expect(accuracy).toBeGreaterThan(50);
     });
 
-    xit('Iris Flower Dataset using FreeformNetwork', function () {
+    xtest('Iris Flower Dataset using FreeformNetwork', function () {
         const irisDataset = Encog.Utils.Datasets.getNormalizedIrisDataSet();
 
         AdalinePattern.setInputLayer(4);

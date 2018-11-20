@@ -5,6 +5,7 @@ const ActivationSoftMax = require(PATHS.ACTIVATION_FUNCTIONS + 'softmax');
 const _ = require('lodash');
 const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 const ErrorUtil = require(PATHS.UTILS + 'error');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 
 class NetworkUtil {
 

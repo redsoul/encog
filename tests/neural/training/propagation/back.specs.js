@@ -10,7 +10,7 @@ describe('BackPropagation', function () {
 
     });
 
-     it('XOR Dataset', function () {
+     test('XOR Dataset', function () {
         // train the neural network
         const XORdataset = Datasets.getXORDataSet();
         network = NetworkUtil.createXORNetwork();
@@ -23,7 +23,7 @@ describe('BackPropagation', function () {
         expect(accuracy).toBeGreaterThan(50);
     });
 
-    it('Iris Flower Dataset using normalized data', function () {
+    test('Iris Flower Dataset using normalized data', function () {
         // train the neural network
         const irisDataset = Datasets.getNormalizedIrisDataSet();
         network = NetworkUtil.createIrisNetwork();

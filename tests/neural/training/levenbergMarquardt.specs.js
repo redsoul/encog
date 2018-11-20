@@ -3,7 +3,7 @@ describe('Levenberg Marquardt Training', function () {
     const NetworkUtil = require(PATHS.UTILS + 'network');
     const Datasets = require(PATHS.UTILS + 'datasets');
 
-    it('Iris Flower Dataset', function () {
+    test('Iris Flower Dataset', function () {
         // train the neural network
         const irisDataset = Datasets.getNormalizedIrisDataSet();
         const network = NetworkUtil.createIrisNetwork();

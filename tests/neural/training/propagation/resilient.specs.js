@@ -9,7 +9,7 @@ describe('ResilientPropagation', function () {
     });
 
     describe('Using default Resilient Type (iRPROPp)', function () {
-        it('XOR Dataset', function () {
+        test('XOR Dataset', function () {
             // train the neural network
             const dataset = Datasets.getXORDataSet();
             const network = NetworkUtil.createXORNetwork();
@@ -21,7 +21,7 @@ describe('ResilientPropagation', function () {
             expect(accuracy).toBeGreaterThan(74);
         });
 
-        it('Iris Flower Dataset using normalized data', function () {
+        test('Iris Flower Dataset using normalized data', function () {
             // train the neural network
             const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
@@ -36,7 +36,7 @@ describe('ResilientPropagation', function () {
     });
 
     describe('Using RPROP+ type', function () {
-        it('Iris Flower Dataset using normalized data with RPROP+ type', function () {
+        test('Iris Flower Dataset using normalized data with RPROP+ type', function () {
             // train the neural network
             const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
@@ -52,7 +52,7 @@ describe('ResilientPropagation', function () {
     });
 
     describe('Using RPROP- type', function () {
-        it('Iris Flower Dataset using normalized data with RPROP- type', function () {
+        test('Iris Flower Dataset using normalized data with RPROP- type', function () {
             // train the neural network
             const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
@@ -68,7 +68,7 @@ describe('ResilientPropagation', function () {
     });
 
     describe('Using iRPROP- type', function () {
-        it('Iris Flower Dataset using normalized data with iRPROP- type', function () {
+        test('Iris Flower Dataset using normalized data with iRPROP- type', function () {
             // train the neural network
             const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();
@@ -84,7 +84,7 @@ describe('ResilientPropagation', function () {
     });
 
     describe('Using ARPROP type', function () {
-        it('Iris Flower Dataset using normalized data with ARPROP type', function () {
+        test('Iris Flower Dataset using normalized data with ARPROP type', function () {
             // train the neural network
             const irisDataset = Datasets.getNormalizedIrisDataSet();
             const network = NetworkUtil.createIrisNetwork();

@@ -1,5 +1,6 @@
 const BasicTraining = require(PATHS.TRAINING + 'basic');
 const SimulatedAnnealing = require(PATHS.ML + 'simulatedAnnealing');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 /**
  * The cutoff for random data.
  */

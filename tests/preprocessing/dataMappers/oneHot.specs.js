@@ -7,7 +7,7 @@ describe('OneHot encoder', function () {
     });
 
     describe('fit_transform', function () {
-        it('should encode into a one hot array', function () {
+        test('should encode into a one hot array', function () {
             expect(oneHot.fit_transform([1, 2], '')).toEqual({
                 columns: ['_1', '_2'],
                 values: [[1, 0], [0, 1]]

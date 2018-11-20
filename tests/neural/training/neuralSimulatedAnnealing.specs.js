@@ -9,7 +9,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
 
     });
 
-    it('XOR Dataset', function () {
+    test('XOR Dataset', function () {
         // train the neural network
         const dataset = Datasets.getXORDataset();
         const network = NetworkUtil.createXORNetwork();
@@ -22,7 +22,7 @@ xdescribe('Neural Simulated Annealing Training', function () {
         expect(accuracy).toBeGreaterThan(90);
     });
 
-    it('Iris Flower Dataset', function () {
+    test('Iris Flower Dataset', function () {
         // train the neural network
         const dataset = Datasets.getIrisDataset();
         const network = NetworkUtil.createIrisNetwork();

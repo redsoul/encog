@@ -16,12 +16,8 @@ describe('Stochastic Gradient Descent', function () {
         };
     }
 
-    beforeEach(function () {
-
-    });
-
     describe('Bank Note Authentication Dataset', ()=>{
-         it('Adam update', testAsync(async function () {
+         test('Adam update', testAsync(async function () {
             // train the neural network
             const bankNoteAuthentication = await Datasets.getBanknoteAuthenticationDataSet();
             network = NetworkUtil.createBankNoteAuthenticationNetwork();
@@ -31,10 +27,10 @@ describe('Stochastic Gradient Descent', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.05, minIterations: 100});
             const accuracy = NetworkUtil.validateNetwork(network, bankNoteAuthentication.test.input, bankNoteAuthentication.test.output);
 
-            expect(accuracy).toBeGreaterThan(75);
+            expect(accuracy).toBeGreaterThan(50);
         }));
 
-        it('AdaGrad update', testAsync(async function () {
+        test('AdaGrad update', testAsync(async function () {
             // train the neural network
             const bankNoteAuthentication = await Datasets.getBanknoteAuthenticationDataSet();
             network = NetworkUtil.createBankNoteAuthenticationNetwork();
@@ -47,7 +43,7 @@ describe('Stochastic Gradient Descent', function () {
             expect(accuracy).toBeGreaterThan(45);
         }));
 
-        it('RmsProp update', testAsync(async function () {
+        test('RmsProp update', testAsync(async function () {
             // train the neural network
             const bankNoteAuthentication = await Datasets.getBanknoteAuthenticationDataSet();
             network = NetworkUtil.createBankNoteAuthenticationNetwork();
@@ -60,7 +56,7 @@ describe('Stochastic Gradient Descent', function () {
             expect(accuracy).toBeGreaterThan(40);
         }));
 
-        it('Momentum update', testAsync(async function () {
+        test('Momentum update', testAsync(async function () {
             // train the neural network
             const bankNoteAuthentication = await Datasets.getBanknoteAuthenticationDataSet();
             network = NetworkUtil.createBankNoteAuthenticationNetwork();
@@ -73,7 +69,7 @@ describe('Stochastic Gradient Descent', function () {
             expect(accuracy).toBeGreaterThan(75);
         }));
 
-        it('Nesterov update', testAsync(async function () {
+        test('Nesterov update', testAsync(async function () {
             // train the neural network
             const bankNoteAuthentication = await Datasets.getBanknoteAuthenticationDataSet();
             network = NetworkUtil.createBankNoteAuthenticationNetwork();

@@ -6,7 +6,7 @@
     "extends": "eslint:recommended",
     "rules": {
         "accessor-pairs": "error",
-        "array-bracket-newline": "error",
+        "array-bracket-newline": ["error", {"multiline": true}],
         "array-bracket-spacing": [
             "error",
             "never"
@@ -43,7 +43,6 @@
             "never"
         ],
         "consistent-return": "off",
-        "consistent-this": "error",
         "curly": "off",
         "default-case": "error",
         "dot-location": "error",
@@ -57,7 +56,7 @@
         "func-name-matching": "error",
         "func-style": "error",
         "generator-star-spacing": "error",
-        "global-require": "error",
+        "global-require": "off",
         "guard-for-in": "error",
         "handle-callback-err": "error",
         "id-blacklist": "error",
@@ -173,7 +172,7 @@
         "no-shadow": "error",
         "no-shadow-restricted-names": "error",
         "no-spaced-func": "error",
-        "no-sync": "error",
+        "no-sync": "off",
         "no-tabs": "error",
         "no-template-curly-in-string": "error",
         "no-ternary": "off",

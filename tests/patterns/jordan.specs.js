@@ -7,14 +7,14 @@ describe('Jordan Network', function () {
         JordanPattern = new Encog.Patterns.Jordan();
     });
 
-     it('Should throw and error when trying to add more than one hidden layer',function () {
+     test('Should throw and error when trying to add more than one hidden layer',function () {
         JordanPattern.addHiddenLayer(10);
         expect(()=> {
             JordanPattern.addHiddenLayer(10);
         }).toThrow(new NeuralNetworkError("A Jordan neural network should have only one hidden layer."))
     });
 
-     it('XOR through time Dataset', function () {
+     test('XOR through time Dataset', function () {
         const XORDataset = Encog.Utils.Datasets.getXORThroughTimeDataSet();
 
         JordanPattern.setInputLayer(1);

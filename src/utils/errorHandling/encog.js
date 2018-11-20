@@ -1,3 +1,5 @@
+const encogLog = require(PATHS.UTILS + 'encogLog');
+
 /**
  * General error class for Encog. All Encog errors should extend from this
  * class. Doing this ensures that they will be caught as Encog errors. This also
@@ -20,7 +22,7 @@ class EncogError extends Error {
         // Saving class name in the property of our custom error as a shortcut.
         this.name = this.constructor.name;
 
-        EncogLog.fatal(message).print();
+        encogLog.fatal(message).print();
     }
 }
 

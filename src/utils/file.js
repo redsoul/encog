@@ -1,6 +1,5 @@
-let fs = require("fs"); //must use let instead of const to be able to be mocked by rewire
-const requireAll = require('require-all');
-const Networks = requireAll(PATHS.NETWORKS);
+const fs = require("fs");
+const Networks = require('require-all')(PATHS.NETWORKS);
 const EncogError = require(PATHS.ERROR_HANDLING + 'encog');
 const _ = require('lodash');
 
@@ -25,11 +24,12 @@ class FileUtils {
      */
     static loadNetwork(filename) {
         const fileContent = fs.readFileSync(filename);
+        console.log(fileContent);
         const networkData = JSON.parse(fileContent);
         let newBasicNetwork;
         const validNetworkTypes = ['BasicNetwork', 'HopfieldNetwork'];
 
-        if (validNetworkTypes.indexOf(networkData.type) === -1) {
+        if (!networkData.type || validNetworkTypes.indexOf(networkData.type) === -1) {
             throw new EncogError('Not a valid network type');
         }
 

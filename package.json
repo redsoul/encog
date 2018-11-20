@@ -4,7 +4,7 @@
   "description": "Encog is a NodeJs ES6 framework based on the Encog Machine Learning Framework by Jeff Heaton, plus some the of basic data manipulation helpers.",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test",
+    "test": "jest",
     "postinstall": "node checkVersion.js"
   },
   "repository": {
@@ -56,14 +56,15 @@
     "lodash": "^4.17.10",
     "mathjs": "^5.0.0",
     "q": "^1.5.1",
-    "require-all": "^2.2.0",
+    "require-all": "3.0.0",
     "semver": "^5.5.0"
   },
   "devDependencies": {
-    "eslint": "^4.0.0-alpha.1",
-    "gulp": "^3.9.0",
-    "gulp-jasmine-phantom": "^3.0.0",
-    "rewire": "^2.5.2"
+    "eslint": "^4.19.1",
+    "gulp": "^4.0.0",
+    "gulp-eslint": "^3.0.1",
+    "jest": "^23.1.0",
+    "rewire": "4.0.1"
   },
   "engines": {
     "node": ">=8"

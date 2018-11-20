@@ -1,8 +1,16 @@
-var _ = require('lodash');
-var colors = require('colors/safe');
+const _ = require('lodash');
+const colors = require('colors/safe');
+
+let instance = null;
 
 class EncogLog {
     constructor(options) {
+        if (instance) {
+            return instance;
+        }
+
+        instance = this;
+
         this.levels = {
             fatal: 'fatal',
             error: 'error',
@@ -24,7 +32,7 @@ class EncogLog {
         this.levelsInheritance[this.levels.info] = [this.levels.warn, this.levels.error, this.levels.fatal];
         this.levelsInheritance[this.levels.debug] = [this.levels.info, this.levels.warn, this.levels.error, this.levels.fatal];
 
-        var defaultOptions = {
+        const defaultOptions = {
             logLevel: this.levels.debug,
             color: true,
             outputType: function (level) {
@@ -48,14 +56,16 @@ class EncogLog {
     _print(level) {
         for (let message of this.messages[level]) {
             let msg = this.options.outputType(level) + this.options.outputMessage(message);
+            // eslint-disable-next-line no-console
             console.log(this.levelsColors[level](msg));
         }
         this.messages[level] = [];
     }
 
     print() {
-        this._print(this.options.logLevel);
-        for (let level of this.levelsInheritance[this.options.logLevel]) {
+        const logLevel = __LOG_LEVEL__ || this.options.logLevel;
+        this._print(logLevel);
+        for (let level of this.levelsInheritance[logLevel]) {
             this._print(level);
         }
     }
@@ -86,4 +96,4 @@ class EncogLog {
     }
 }
 
-module.exports = EncogLog;
+module.exports = new EncogLog();

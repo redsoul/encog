@@ -3,6 +3,7 @@ const ErrorCalculation = require(PATHS.ERROR_CALCULATION + 'errorCalculation');
 const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
 const Adam = require(PATHS.SGD + 'update/adam');
 const CrossEntropyErrorFunction = require(PATHS.ERROR_FUNCTIONS + 'crossEntropy');
+const EncogLog = require(PATHS.UTILS + 'encogLog');
 
 class StochasticGradientDescent extends BasicTraining {
     constructor(network, input, output, updateRule = new Adam()) {

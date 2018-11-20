@@ -7,19 +7,19 @@ describe('BAM Pattern', function () {
         BamPattern = new Encog.Patterns.Bam();
     });
 
-     it('Should throw and error when trying to add more than one hidden layer', function () {
+     test('Should throw and error when trying to add more than one hidden layer', function () {
         expect(()=>BamPattern.addHiddenLayer(10)).toThrow()
     });
 
-     it('Should throw and error when trying to set the input layer', function () {
+     test('Should throw and error when trying to set the input layer', function () {
         expect(()=>BamPattern.setInputLayer(10)).toThrow()
     });
 
-     it('Should throw and error when trying to set the output layer', function () {
+     test('Should throw and error when trying to set the output layer', function () {
         expect(()=>BamPattern.setOutputLayer(10)).toThrow()
     });
 
-     it('XOR Dataset', function () {
+     test('XOR Dataset', function () {
         const xorDataset = Encog.Utils.Datasets.getXORDataSet();
 
         BamPattern.setF1Neurons(2);

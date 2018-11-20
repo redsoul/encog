@@ -3,13 +3,9 @@ describe('DataToolbox', function () {
     let DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
-    beforeEach(function () {
-
-    });
-
     describe('readTrainingCSV method', function () {
         describe('iris csv', function () {
-            it('ignore and output columns', function (done) {
+            test('ignore and output columns', function (done) {
                 DataToolbox.readTrainingCSV(
                     PATHS.DATA_FOLDER + 'iris.csv',
                     {
@@ -29,7 +25,7 @@ describe('DataToolbox', function () {
                 });
             });
 
-            it('input and output columns', function (done) {
+            test('input and output columns', function (done) {
                 DataToolbox.readTrainingCSV(
                     PATHS.DATA_FOLDER + 'iris.csv',
                     {
@@ -51,7 +47,7 @@ describe('DataToolbox', function () {
         });
 
         describe('custom data csv', function () {
-            it('ignore and output columns', function (done) {
+            test('ignore and output columns', function (done) {
                 DataToolbox.readTrainingCSV(
                     PATHS.DATA_FOLDER + 'customData.csv',
                     {
@@ -73,7 +69,7 @@ describe('DataToolbox', function () {
         });
 
         describe('headless custom data csv', function () {
-            it('load data without headers', function (done) {
+            test('load data without headers', function (done) {
                 DataToolbox.readTrainingCSV(
                     PATHS.DATA_FOLDER + 'headlessCustomData.csv',
                     {
@@ -90,7 +86,7 @@ describe('DataToolbox', function () {
     });
 
     describe('trainTestSplit', function () {
-        it('should use the default test size', function () {
+        test('should use the default test size', function () {
             const trainingSet = DataToolbox.trainTestSplit(_.range(100));
 
             expect(trainingSet.constructor.name).toBe('Object');
@@ -101,14 +97,14 @@ describe('DataToolbox', function () {
             expect(trainingSet.test.length).toBe(20);
         });
 
-        it('should use a given test size', function () {
+        test('should use a given test size', function () {
             const trainingSet = DataToolbox.trainTestSplit(_.range(100), .25);
 
             expect(trainingSet.train.length).toBe(75);
             expect(trainingSet.test.length).toBe(25);
         });
 
-        it('should throw an exception', function () {
+        test('should throw an exception', function () {
             expect(()=> {
                 DataToolbox.trainTestSplit(_.range(100), 5)
             }).toThrow(new NeuralNetworkError('Test size should be between 0 and 1'))
@@ -116,7 +112,7 @@ describe('DataToolbox', function () {
     });
 
     describe('sliceOutput', function () {
-        it('should slice an array', function () {
+        test('should slice an array', function () {
             expect(DataToolbox.sliceOutput([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]], 2))
                 .toEqual({
                     input: [[1, 2, 3], [6, 7, 8], [11, 12, 13]],
