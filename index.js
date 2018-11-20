@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
 global.PATHS = require('./paths.js');
-global.__LOG_LEVEL__ = 'debug';
 
 const requireAll = require('require-all');
 const requireDir = (dir)=> {

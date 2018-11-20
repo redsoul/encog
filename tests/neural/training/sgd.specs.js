@@ -40,7 +40,7 @@ describe('Stochastic Gradient Descent', function () {
             NetworkUtil.trainNetwork(train, {minError: 0.05, minIterations: 50, maxIterations:100});
             const accuracy = NetworkUtil.validateNetwork(network, bankNoteAuthentication.test.input, bankNoteAuthentication.test.output);
 
-            expect(accuracy).toBeGreaterThan(45);
+            expect(accuracy).toBeGreaterThan(40);
         }));
 
         test('RmsProp update', testAsync(async function () {
