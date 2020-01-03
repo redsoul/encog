@@ -1,7 +1,10 @@
 describe('ResilientPropagation', function () {
-    const ResilientPropagation = require(PATHS.PROPAGATION + 'resilient');
-    const NetworkUtil = require(PATHS.UTILS + 'network');
-    const Datasets = require(PATHS.UTILS + 'datasets');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const ResilientPropagation = Encog.Training.Propagation.Resilient;
+    const NetworkUtil = Encog.Utils.Network;
+    const Datasets = Encog.Utils.Datasets;
     const RPROPTypes = ResilientPropagation.getResilientTypes();
 
     beforeEach(function () {

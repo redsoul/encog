@@ -1,7 +1,10 @@
 describe('Levenberg Marquardt Training', function () {
-    const LevenbergMarquardt = require(PATHS.TRAINING + 'levenbergMarquardt');
-    const NetworkUtil = require(PATHS.UTILS + 'network');
-    const Datasets = require(PATHS.UTILS + 'datasets');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const LevenbergMarquardt = Encog.Training.LevenbergMarquardt;
+    const NetworkUtil = Encog.Utils.Network;
+    const Datasets = Encog.Utils.Datasets;
 
     test('Iris Flower Dataset', function () {
         // train the neural network

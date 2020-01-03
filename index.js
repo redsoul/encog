@@ -21,7 +21,12 @@ const Freeform = requireDir(PATHS.FREEFORM);
 const FreeformPropagation = requireDir(PATHS.FREEFORM_PROPAGATION);
 const Neural = requireDir(PATHS.NEURAL);
 const Patterns = requireDir(PATHS.PATTERNS);
-const Training = {Propagation: requireDir(PATHS.PROPAGATION), SGD:requireDir(PATHS.SGD)};
+const Training = {
+    Propagation: requireDir(PATHS.PROPAGATION), 
+    SGD:requireDir(PATHS.SGD),
+    LevenbergMarquardt: require(PATHS.TRAINING + 'levenbergMarquardt.js'),
+    NeuralSimulatedAnnealing: require(PATHS.TRAINING + 'neuralSimulatedAnnealing.js'),
+};
 const Strategies = requireDir(PATHS.STRATEGIES);
 const MathUtils = requireDir(PATHS.MATH_UTILS);
 const ErrorCalculation = requireDir(PATHS.ERROR_CALCULATION);

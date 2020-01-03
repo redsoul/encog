@@ -1,5 +1,8 @@
 describe('ArrayUtils', function () {
-    const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const ArrayUtils = Encog.Preprocessing.Array;
 
     beforeEach(function () {
     });

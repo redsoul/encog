@@ -1,5 +1,7 @@
 describe('BAM Pattern', function () {
-    const Encog = require('../../index');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
     const _ = require('lodash');
     let BamPattern;
 

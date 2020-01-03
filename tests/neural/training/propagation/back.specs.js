@@ -1,8 +1,10 @@
 describe('BackPropagation', function () {
-    const BackPropagation = require(PATHS.PROPAGATION + 'back');
-    const NetworkUtil = require(PATHS.UTILS + 'network');
-    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
-    const Datasets = require(PATHS.UTILS + 'datasets');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const BackPropagation = Encog.Training.Propagation.Back;
+    const NetworkUtil = Encog.Utils.Network;
+    const Datasets = Encog.Utils.Datasets;
     let network;
     let train;
 

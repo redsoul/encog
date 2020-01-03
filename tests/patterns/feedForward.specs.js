@@ -1,7 +1,8 @@
 describe('Feed Forward Network', function () {
-    const Encog = require('../../index');
-    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
-    const Datasets = require(PATHS.UTILS + 'datasets');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const Datasets = Encog.Utils.Datasets;
     let FeedForward;
 
     beforeEach(function () {

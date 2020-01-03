@@ -1,6 +1,9 @@
 describe('Hopfield Network', function () {
-    const HopfieldNetwork = require(PATHS.NETWORKS + 'hopfield');
-    const HopfieldPattern = require(PATHS.PATTERNS + 'hopfield');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const HopfieldNetwork = Encog.Networks.Hopfield;
+    const HopfieldPattern = Encog.Patterns.Hopfield;
     let network;
     let pattern;
 

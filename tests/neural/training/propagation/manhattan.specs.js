@@ -1,8 +1,10 @@
 describe('ManhattanPropagation', function () {
-    const ManhattanPropagation = require(PATHS.PROPAGATION + 'manhattan');
-    const NetworkUtil = require(PATHS.UTILS + 'network');
-    const Datasets = require(PATHS.UTILS + 'datasets');
-    const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const ManhattanPropagation = Encog.Training.Propagation.Manhattan;
+    const NetworkUtil = Encog.Utils.Network;
+    const Datasets = Encog.Utils.Datasets;
     let network;
     let train;
 

@@ -1,4 +1,7 @@
 describe('Matrix', function () {
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
     const Matrix = require(PATHS.MATRICES + 'matrix');
     const MatrixError = require(PATHS.ERROR_HANDLING + 'matrix');
 

@@ -1,11 +1,14 @@
 describe('DataEncoder', function () {
     const _ = require('lodash');
-    const DataEncoder = require(PATHS.PREPROCESSING + 'dataEncoder');
-    const OneHot = require(PATHS.DATA_MAPPERS + 'oneHot');
-    const MinMaxScaller = require(PATHS.DATA_MAPPERS + 'minMaxScaller');
-    const CustomBuckets = require(PATHS.DATA_MAPPERS + 'customBuckets');
-    const EqualLengthBuckets = require(PATHS.DATA_MAPPERS + 'equalLengthBuckets');
-    const LinearBuckets = require(PATHS.DATA_MAPPERS + 'linearBuckets');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const DataEncoder = Encog.Preprocessing.DataEncoder;
+    const OneHot = Encog.Preprocessing.DataMappers.OneHot;
+    const MinMaxScaller = Encog.Preprocessing.DataMappers.MinMaxScaller;
+    const CustomBuckets = Encog.Preprocessing.DataMappers.CustomBuckets;
+    const EqualLengthBuckets = Encog.Preprocessing.DataMappers.EqualLengthBuckets;
+    const LinearBuckets = Encog.Preprocessing.DataMappers.LinearBuckets;
 
     beforeEach(function () {
 

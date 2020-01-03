@@ -1,5 +1,7 @@
 describe('Jordan Network', function () {
-    const Encog = require('../../index');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
     let JordanPattern;
 

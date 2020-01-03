@@ -1,7 +1,10 @@
 describe('File Utils', function () {
-    const FileUtils = require(PATHS.UTILS + 'file');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const FileUtils = Encog.Utils.File;
     const fs = require("fs");
-    const NetworkUtil = require(PATHS.UTILS + 'network');
+    const NetworkUtil = Encog.Utils.Network;
     let network;
 
     describe('saveNetwork method', function () {

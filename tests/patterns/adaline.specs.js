@@ -1,5 +1,7 @@
 describe('ADALINE Network', function () {
-    const Encog = require('../../index');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
     let AdalinePattern;
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
@@ -7,7 +9,7 @@ describe('ADALINE Network', function () {
         AdalinePattern = new Encog.Patterns.Adaline();
     });
 
-     test('Should throw and error when trying to add hidden layers',function () {
+    test('Should throw and error when trying to add hidden layers',function () {
         expect(()=> {
             AdalinePattern.addHiddenLayer(10);
         }).toThrow(new NeuralNetworkError("An ADALINE network has no hidden layers."))

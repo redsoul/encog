@@ -12,6 +12,7 @@ class EncogLog {
         instance = this;
 
         this.levels = {
+            silent: 'silent',
             fatal: 'fatal',
             error: 'error',
             warn: 'warn',
@@ -26,6 +27,7 @@ class EncogLog {
         this.levelsColors[this.levels.debug] = colors.white;
 
         this.levelsInheritance = {};
+        this.levelsInheritance[this.levels.silent] = [];
         this.levelsInheritance[this.levels.fatal] = [];
         this.levelsInheritance[this.levels.error] = [this.levels.fatal];
         this.levelsInheritance[this.levels.warn] = [this.levels.error, this.levels.fatal];
@@ -33,7 +35,7 @@ class EncogLog {
         this.levelsInheritance[this.levels.debug] = [this.levels.info, this.levels.warn, this.levels.error, this.levels.fatal];
 
         const defaultOptions = {
-            logLevel: this.levels.debug,
+            logLevel: this.levels.info,
             color: true,
             outputType: function (level) {
                 return '[' + level + '] » ';
@@ -45,11 +47,12 @@ class EncogLog {
         };
         this.options = _.merge(defaultOptions, options);
         this.messages = {
-            debug: [],
-            info: [],
-            warn: [],
-            error: [],
-            fatal: []
+            [this.levels.silent]: [],
+            [this.levels.fatal]: [],
+            [this.levels.error]: [],
+            [this.levels.warn]: [],
+            [this.levels.info]: [],
+            [this.levels.debug]: []
         }
     }
 
@@ -63,7 +66,7 @@ class EncogLog {
     }
 
     print() {
-        const logLevel = __LOG_LEVEL__ || this.options.logLevel;
+        const logLevel = this.options.logLevel;
         this._print(logLevel);
         for (let level of this.levelsInheritance[logLevel]) {
             this._print(level);

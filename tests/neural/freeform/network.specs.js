@@ -1,12 +1,15 @@
 describe('Freeform Network', function () {
-    const FreeformNetwork = require(PATHS.FREEFORM + 'network');
-    const FreeformResilientPropagation = require(PATHS.FREEFORM + 'training/propagation/resilient');
-    const BasicNetwork = require(PATHS.NETWORKS + 'basic');
-    const BasicLayer = require(PATHS.LAYERS + 'basic');
-    const ActivationSigmoid = require(PATHS.ACTIVATION_FUNCTIONS + 'sigmoid');
-    const NetworkUtil = require(PATHS.UTILS + 'network');
-    const Datasets = require(PATHS.UTILS + 'datasets');
-    const ArrayUtils = require(PATHS.PREPROCESSING + 'array');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
+    const FreeformNetwork = Encog.Freeform.Network;
+    const FreeformResilientPropagation = Encog.Freeform.Training.Propagation;
+    const BasicNetwork = Encog.Networks.Basic;
+    const BasicLayer = Encog.Layers.Basic;
+    const ActivationSigmoid = Encog.ActivationFunctions.Sigmoid;
+    const NetworkUtil = Encog.Utils.Network;
+    const Datasets = Encog.Utils.Datasets;
+    const ArrayUtils = Encog.Preprocessing.Array;
 
 
     beforeEach(function () {

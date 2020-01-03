@@ -1,5 +1,8 @@
 describe('MinMaxScaller encoder', function () {
-    const MinMaxScaller = require(PATHS.DATA_MAPPERS + 'minMaxScaller');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
+    const MinMaxScaller = Encog.Preprocessing.DataMappers.MinMaxScaller;
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
     let minMaxScaller;
 

@@ -1,5 +1,8 @@
 describe('OneHot encoder', function () {
-    const OneHot = require(PATHS.DATA_MAPPERS + 'oneHot');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+    
+    const OneHot = Encog.Preprocessing.DataMappers.OneHot;
     let oneHot;
 
     beforeEach(function () {

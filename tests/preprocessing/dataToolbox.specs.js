@@ -1,6 +1,9 @@
 describe('DataToolbox', function () {
     const _ = require('lodash');
-    let DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    let DataToolbox = Encog.Preprocessing.DataToolbox;
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
     describe('readTrainingCSV method', function () {

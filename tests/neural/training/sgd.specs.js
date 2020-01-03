@@ -1,12 +1,15 @@
 describe('Stochastic Gradient Descent', function () {
-    const StochasticGradientDescent = require(PATHS.SGD + 'stochasticGradientDescent.js');
-    const AdamUpdate = require(PATHS.SGD + 'update/adam');
-    const AdaGradUpdate = require(PATHS.SGD + 'update/adaGrad');
-    const MomentumUpdate = require(PATHS.SGD + 'update/momentum');
-    const NesterovUpdate = require(PATHS.SGD + 'update/nesterov');
-    const RmsPropUpdate = require(PATHS.SGD + 'update/rmsProp');
-    const NetworkUtil = require(PATHS.UTILS + 'network');
-    const Datasets = require(PATHS.UTILS + 'datasets');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const StochasticGradientDescent = Encog.Training.SGD.StochasticGradientDescent;
+    const AdamUpdate = Encog.Training.SGD.Update.Adam;
+    const AdaGradUpdate = Encog.Training.SGD.Update.AdaGrad;
+    const MomentumUpdate = Encog.Training.SGD.Update.Momentum;
+    const NesterovUpdate = Encog.Training.SGD.Update.Nesterov;
+    const RmsPropUpdate = Encog.Training.SGD.Update.RmsProp;
+    const NetworkUtil = Encog.Utils.Network;
+    const Datasets = Encog.Utils.Datasets;
     let network;
     let train;
 

@@ -1,8 +1,11 @@
 describe('Basic Network', function () {
-    const NetworkUtil = require(PATHS.UTILS + 'network');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const NetworkUtil = Encog.Utils.Network;
     let network;
-    let JordanPattern = require(PATHS.PATTERNS + 'jordan');
-    let BasicNetwork = require(PATHS.NETWORKS + 'basic');
+    let JordanPattern = Encog.Patterns.Jordan;
+    let BasicNetwork = Encog.Networks.Basic;
     let jordanPattern;
 
     beforeEach(function () {

@@ -1,5 +1,8 @@
 describe('BiPolarNeuralData', function () {
-    const BiPolarNeuralData = require(PATHS.NEURAL + 'biPolarNeuralData');
+    const Encog = require(PATHS.BASE);
+    Encog.Log.options.logLevel = 'silent';
+
+    const BiPolarNeuralData = Encog.Neural.BiPolarNeuralData;
     const NeuralNetworkError = require(PATHS.ERROR_HANDLING + 'neuralNetwork');
 
     beforeEach(function () {
