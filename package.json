@@ -1,6 +1,6 @@
 {
   "name": "encog",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Encog is a NodeJs ES6 framework based on the Encog Machine Learning Framework by Jeff Heaton, plus some the of basic data manipulation helpers.",
   "main": "index.js",
   "scripts": {
