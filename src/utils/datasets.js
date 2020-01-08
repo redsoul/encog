@@ -1,9 +1,10 @@
 const _ = require('lodash');
 const DataToolbox = require(PATHS.PREPROCESSING + 'dataToolbox');
-const DataEncoder = require(PATHS.PREPROCESSING + 'dataEncoder');
-const OneHot = require(PATHS.DATA_MAPPERS + 'oneHot');
-const IntegerParser = require(PATHS.DATA_MAPPERS + 'integerParser');
-const MinMaxScaller = require(PATHS.DATA_MAPPERS + 'minMaxScaller');
+const DataEncoder = require('data-encoder');
+const DataMappers = require('data-encoder/data-mappers');
+const OneHot = DataMappers.OneHot;
+const IntegerParser = DataMappers.IntegerParser;
+const MinMaxScaller = DataMappers.MinMaxScaller;
 
 class DataSets {
     /**
@@ -59,7 +60,7 @@ class DataSets {
             'Petal.Width': new MinMaxScaller(),
             'Species': new OneHot(),
         };
-        const trainData = dataEncoder.fit_transform(irisDataset.train, mappings);
+        const trainData = dataEncoder.fitTransform(irisDataset.train, mappings);
         const testData = dataEncoder.transform(irisDataset.test, mappings);
 
         return {
@@ -89,7 +90,7 @@ class DataSets {
 
         const splittedDataset = DataToolbox.trainTestSplit(shuffledDataset);
 
-        const trainData = dataEncoder.fit_transform(splittedDataset.train, mappings);
+        const trainData = dataEncoder.fitTransform(splittedDataset.train, mappings);
         const testData = dataEncoder.transform(splittedDataset.test, mappings);
 
         return {

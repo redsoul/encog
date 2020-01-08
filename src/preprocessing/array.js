@@ -1,5 +1,5 @@
 const _ = require('lodash');
-class ArrayUtils {
+module.exports = class ArrayUtils {
     /**
      * Fill an array with a specific value.
      * @method fillArray
@@ -16,42 +16,33 @@ class ArrayUtils {
         }
     };
 
-    static __allocateArray(sz, defaultValue) {
-        let result = [];
-        while (sz > 0) {
-            result.push(defaultValue);
-            sz -= 1;
-        }
-        return result;
-    }
-
     /**
      * Create a new floating point array.
-     * @param sz {Number} The size of the array to create.
+     * @param size {Number} The size of the array to create.
      * @param defaultValue {Number} The default value
      * @return {Array}
      */
-    static newFloatArray(sz, defaultValue = 0.0) {
-        return ArrayUtils.__allocateArray(sz, defaultValue);
+    static newFloatArray(size, defaultValue = 0.0) {
+        return _.fill(Array(size), defaultValue);
     };
 
     /**
      * Create a new int array.
-     * @param sz {Number} The size of the array to create.
+     * @param size {Number} The size of the array to create.
      * @param defaultValue {Number} The default value
      * @return {Array}
      */
-    static newIntArray(sz, defaultValue = 0) {
-        return ArrayUtils.__allocateArray(sz, defaultValue);
+    static newIntArray(size, defaultValue = 0) {
+        return _.fill(Array(size), defaultValue);
     };
 
     /**
      * Create a new boolean point array.
-     * @param sz {Number} The size of the array to create.
+     * @param size {Number} The size of the array to create.
      * @return {Array}
      */
-    static newBooleanArray(sz) {
-        return ArrayUtils.__allocateArray(sz, false);
+    static newBooleanArray(size) {
+        return _.fill(Array(size), false);
     };
 
     /**
@@ -98,5 +89,3 @@ class ArrayUtils {
         return str;
     }
 }
-
-module.exports = ArrayUtils;
