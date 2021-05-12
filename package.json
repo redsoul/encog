@@ -55,7 +55,7 @@
     "data-encoder": "^1.1.0",
     "fast-csv": "^4.3.6",
     "lodash": "^4.17.10",
-    "mathjs": "^5.0.0",
+    "mathjs": "^7.5.1",
     "q": "^1.5.1",
     "require-all": "3.0.0",
     "semver": "^5.5.0"
